@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "git-a": "git add . && git commit -m 'anas' && git push origin anas",
+    "git-z": "git add . && git commit -m 'zyad' && git push origin zyad"
   },
   "dependencies": {
     "react": "^18.2.0",
