@@ -14,7 +14,7 @@ export default function Welcome() {
 }, [])
   return (
     <>
-      {render?(<div>Welcome</div>):(<></>)}
+      {render?(<div >Welcome</div>):(<></>)}
     </>
   )
 }
