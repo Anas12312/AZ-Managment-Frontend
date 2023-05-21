@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SignupForm from './SignupForm/SignupForm'
 import { useNavigate } from 'react-router-dom';
+import Link from '../../components/Link';
 
 export default function Signup() {
 
@@ -26,6 +27,7 @@ export default function Signup() {
             Logo
           </div>
           <SignupForm />
+          Already Have an Account? <Link text="Login" onClick={()=>nav("/login")}/>
         </>
     ) } 
     </>
