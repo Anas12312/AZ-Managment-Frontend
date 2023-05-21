@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Button from '../../../components/Button';
 import config from '../../../../config';
+import { useNavigate, } from 'react-router-dom';
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("")
+    const nav = useNavigate();
+
     const login = () => {
         fetch(config.BASE_URL + "/account/login", {
             method: "POST",
@@ -16,7 +19,13 @@ export default function LoginForm() {
         })
         .then((res) => res.json())
         .then((response) => {
-            console.log(response)
+            if(response.error) {
+                setError(response.error)
+            }else {
+                localStorage.setItem("token", response.token)
+                nav("/home")
+                setError("")
+            }
         })
     }
   return (
