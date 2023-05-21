@@ -11,11 +11,11 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element ={<NotFound />} />
-        <Route path="/" element= {<Welcome />} />
-        <Route path="/login" element= {<Login />} />
-        <Route path="/signup" element= {<Signup />} />
-        <Route path="/home" element= {<Home />} />
+        <Route path="*" Component ={NotFound} />
+        <Route path="/" Component= {Welcome} />
+        <Route path="/login" Component= {Login} />
+        <Route path="/signup" Component= {Signup} />
+        <Route path="/home" Component= {Home} />
       </Routes>
     </BrowserRouter>
   )
