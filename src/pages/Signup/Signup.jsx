@@ -23,7 +23,7 @@ export default function Signup() {
     <>
       { !isAuth && (
         <>
-          <div>
+          <div className="text-amber-400">
             Logo
           </div>
           <SignupForm />
