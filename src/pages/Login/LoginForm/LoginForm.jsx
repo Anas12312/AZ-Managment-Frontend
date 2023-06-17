@@ -1,12 +1,12 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import Button from '../../../components/Button';
 import config from '../../../../config';
 import { useNavigate, } from 'react-router-dom';
 import Link from '../../../components/Link';
-export default function LoginForm() {
+export default function LoginForm(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("")
+    
     const nav = useNavigate();
 
     const login = () => {
@@ -21,12 +21,14 @@ export default function LoginForm() {
         .then((res) => res.json())
         .then((response) => {
             if(response.error) {
-                setError(response.error)
+                props.setError(response.error)
             }else {
                 localStorage.setItem("token", response.token)
                 nav("/home")
-                setError("")
+                props.setError("")
             }
+        }).catch(err => {
+            props.setError("error")
         })
     }
   return (
