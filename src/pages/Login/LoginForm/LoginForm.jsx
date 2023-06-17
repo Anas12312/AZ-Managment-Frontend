@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Button from '../../../components/Button';
 import config from '../../../../config';
 import { useNavigate, } from 'react-router-dom';
+import Link from '../../../components/Link';
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,23 +30,23 @@ export default function LoginForm() {
         })
     }
   return (
-    <>
-        <div className='error'>
-            <h4>{error}</h4>
-        </div>
-        <div className='email'>
-            <input type='text' name='email' value={email} onChange={(e) => {
+    <div className='flex flex-col justify-center items-center border w-80  mt-35 p-5 rounded-md bg-secondary-2 text-black'>
+        <div className='w-full'>
+            <div><span className='text-sm ml-1'>Email</span></div>
+            <input  className='w-full my-1 h-8 py-1 px-2 border rounded-md bg-secondary-2'type='text' name='email' value={email} onChange={(e) => {
                 setEmail(e.target.value)
             }}></input>
         </div>
-        <div className='password'>
-            <input type='password' name='password' value={password} onChange={(e) => {
+        <div className='w-full my-3'>
+            <div><span className='text-sm ml-1'>Password</span></div>
+            <input className='w-full my-1 h-8 py-1 px-2 border rounded-md bg-secondary-2' type='password' name='password' value={password} onChange={(e) => {
                 setPassword(e.target.value)
             }}></input>
         </div>
-        <div className='login'>
-            <Button title="Login" onClick = {login} />
+        <div className='w-full'>
+            <Button className="w-full h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1" title="Sign In" onClick = {login} />
         </div>
-    </>
+        
+    </div>
   )
 }
