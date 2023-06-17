@@ -18,9 +18,15 @@ export default function Login() {
   return (
     <>
        {!isAuth && (
-        <div>
+        <div className='flex flex-col justify-center items-center h-screen w-screen bg-gradient-to-br via-primary-2 via-55% background-animate-1 from-background to-accent text-text'>
+        {/* <div className='error'>
+          <h4>wrong password</h4>
+        </div> */}
+          <div className='mb-5 text-2xl'><span>Login to AZ</span></div>
           <LoginForm />
-          Don't Have an Account? <Link text="Signup" onClick={()=>nav("/signup")}/>
+          <div className='flex mt-4 border w-80 h-16 justify-center items-center rounded-md bg-accent'>
+            <span className='text-sm'>Don't Have an Account? <Link text="Signup" onClick={()=>nav("/signup")}/></span>
+          </div>
         </div>
        )}
     </>

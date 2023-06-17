@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Link(props) {
   return (
-    <span style={{color: "blue"}} onClick={props.onClick}>
+    <span className='text-primary-1 hover:cursor-pointer hover:underline' onClick={props.onClick}>
         {props.text}
     </span>
   )
