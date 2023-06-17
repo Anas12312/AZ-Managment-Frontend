@@ -12,7 +12,7 @@ export default {
         'primary-1': '#513069',
         'primary-2': '#412357',
         'secondary-2': '#ffffff',
-        'secondary-3': '#dcd3e0',
+        'secondary-3': '#efedf0',
         'accent': '#0d0321',
         }
       }
