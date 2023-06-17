@@ -6,7 +6,7 @@ import Link from '../../components/Link';
 export default function Signup() {
 
   const [isAuth, setIsAuth] = useState(true);
-
+  const [error, setError] = useState("")
   const nav = useNavigate();
 
   useEffect(() => {
@@ -22,94 +22,32 @@ export default function Signup() {
   return (
     <>
       { !isAuth && (
-        <>
-          <button className='
-          hover:background-animate-1
-          text-white transition-all duration-300 ease-in-out delay-150 bg-gradient-to-r from-blue-600 to-violet-800 rounded-lg text-sm px-20 py-2.5 text-center m-2'> Test 1</button>
-          <div className='
-              bg-slate-950
-              p-5
-          '>
-            <div className='
-              bg-black
-              box-border h-32 w-32
-              m-10
-              bg-gradient-to-l
-              from-blue-700 from-20 
-              to-blue-500 to-10 
-              background-animate-2
-              rounded-full
-              shadow-lg shadow-black-600
-              inline-block
-            '>
-            </div>
-            <div className='
-              bg-black
-              box-border h-32 w-32
-              m-10
-              bg-gradient-to-tl
-              from-blue-500 from-20
-              via-red-700 via-70
-              to-slate-500 to-10
-              background-animate-1
-              rounded-full
-              shadow-lg shadow-black-600
-              inline-block
-            '>
-            </div>
-            <div className='
-              bg-black
-              box-border h-32 w-32
-              m-10
-              bg-gradient-to-tl
-              from-green-500 from-20
-              via-slate-500 via-70
-              to-blue-700 to-10
-              background-animate-1
-              rounded-full
-              shadow-lg shadow-black-600
-              inline-block
-            '>
-            </div>
-            <div className='
-              bg-black
-              box-border h-32 w-32
-              m-10
-              bg-gradient-to-tl
-              from-red-500 
-              via-blue-600
-              to-violet-500 
-              background-animate-1
-              rounded-full
-              shadow-lg shadow-black-600
-              inline-block
-            '>
-            </div>
-          </div>
-          <div className='
-              bg-slate-900
-              p-5
-          '>
-            <div className='
-              bg-black
-              box-border h-16 w-62
-              m-10
-              bg-gradient-to-r
-              from-blue-500 from-20
-              via-green-700 via-70
-              to-slate-500 to-10
-              background-animate
-              rounded-md
-              shadow-md shadow-slate-700
-            '></div>
-          </div>
+        <div className="flex flex-col justify-start pt-10 items-center h-screen w-screen bg-gradient-to-br via-primary-2 background-animate-1 from-background to-accent text-text">
+        
+        <div className='mb-5 text-xl flex flex-col justify-center items-center'>
+          <img src="../../../images/logo2.png" alt="" className='w-20 mb-6'/>
+          <span>Sign up to AZ</span>
+        </div>
 
-          <div className="text-amber-400">
-            Logo
+        {
+          error && 
+          <div className='relative flex mt-4 border border-red-700 w-80 h-16 justify-center items-center rounded-md bg-opacity-25 bg-red-500 my-5'>
+            <span>{error}</span>
+            <span className='hover:cursor-pointer absolute right-5 font-semibold' 
+            onClick={() => {
+              setError("")
+            }}
+            >X</span>
           </div>
-          <SignupForm />
-          Already Have an Account? <Link text="Login" onClick={()=>nav("/login")}/>
-        </>
+        }
+
+        <SignupForm setError={setError}/>
+
+        <div className='flex mt-4 border w-80 h-16 justify-center items-center rounded-md bg-opacity-5 bg-white'>
+            <span className='text-sm'>Already Have an Account?  <Link text="Login" onClick={()=>nav("/login")}/></span>
+        </div>
+
+        </div>
     ) } 
     </>
   )
