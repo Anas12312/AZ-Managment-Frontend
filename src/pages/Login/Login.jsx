@@ -5,6 +5,7 @@ import Link from '../../components/Link'
 
 export default function Login() {
   const [isAuth, setIsAuth] = useState(true)
+  const [error, setError] = useState("")
   const nav = useNavigate()
 
   useEffect(()=>{
@@ -23,11 +24,15 @@ export default function Login() {
             <img src="../../../images/logo2.png" alt="" className='w-20 mb-6'/>
             <span>Sign in to AZ</span>
           </div>
-          {/* <div className='error'>
-            <h4>wrong password</h4>
-          </div> */}
+
+          {
+            error && 
+            <div className='flex mt-4 border border-red-700 w-80 h-16 justify-center items-center rounded-md bg-opacity-25 bg-red-500 my-5'>
+              <span>{error}</span>
+            </div>
+          }
           
-          <LoginForm />
+          <LoginForm setError={setError}/>
           <div className='flex mt-4 border w-80 h-16 justify-center items-center rounded-md bg-opacity-5 bg-white'>
             <span className='text-sm'>Don't Have an Account? <Link text="Signup" onClick={()=>nav("/signup")}/></span>
           </div>
