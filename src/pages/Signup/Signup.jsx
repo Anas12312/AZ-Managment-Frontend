@@ -32,12 +32,12 @@ export default function Signup() {
         {
           error && 
           <div className='relative flex mt-4 border border-red-700 w-80 h-16 justify-center items-center rounded-md bg-opacity-25 bg-red-500 my-5'>
-            <span>{error}</span>
-            <span className='hover:cursor-pointer absolute right-5 font-semibold' 
+            <span className='text-sm'>{error}</span>
+            <div className='flex justify-center items-center h-3.5 w-3.5 pb-1 hover:cursor-pointer hover:bg-slate-700 absolute right-3 font-semibold border border-white' 
             onClick={() => {
               setError("")
             }}
-            >X</span>
+            >x</div>
           </div>
         }
 
