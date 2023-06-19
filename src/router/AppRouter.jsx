@@ -5,6 +5,7 @@ import Welcome from "../pages/Welcome/Welcome";
 import Signup from "../pages/Signup/Signup";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
+import Resources from "../pages/Resources/Resources";
 
 
 export default function AppRouter() {
@@ -16,6 +17,7 @@ export default function AppRouter() {
         <Route path="/login" Component= {Login} />
         <Route path="/signup" Component= {Signup} />
         <Route path="/home" Component= {Home} />
+        <Route path='/resources' Component={Resources} />
       </Routes>
     </BrowserRouter>
   )

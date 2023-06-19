@@ -14,6 +14,7 @@ export default {
         'secondary-2': '#ffffff',
         'secondary-3': '#efedf0',
         'accent': '#0d0321',
+        'accent-2': '#1d0a42'
         }
       }
     },

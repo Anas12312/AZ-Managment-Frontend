@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
 import config from '../../../config'
+import NavBar from '../../components/NavBar/NavBar'
+import SideBar from '../../components/SideBar/SideBar'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
   const [isAuth, setIsAuth] = useState(false)
-  const nav = useNavigate()
+  const nav = useNavigate();
   const logout = () => {
     const url = config.BASE_URL + "/account/logout"
     fetch(url, {
@@ -34,8 +35,12 @@ export default function Home() {
   return (
     <>
       {isAuth && (
-        <div>
-          <Button title="Logout" onClick={logout} />
+        <div className='flex h-screen w-screen flex-col'>
+          <NavBar />
+          <div className='flex flex-row h-full'>  
+              <SideBar />
+            <div className='w-full'>Home</div>
+          </div>
         </div>
       )}
     </>
