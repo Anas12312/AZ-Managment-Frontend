@@ -36,9 +36,9 @@ export default function Home() {
     <>
       {isAuth && (
         <div className='flex h-screen w-screen flex-col'>
-          <NavBar />
+          <NavBar selected={"home"}/>
           <div className='flex flex-row h-full'>  
-              <SideBar />
+              
             <div className='w-full'>Home</div>
           </div>
         </div>
