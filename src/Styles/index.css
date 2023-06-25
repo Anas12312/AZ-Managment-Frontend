@@ -23,6 +23,9 @@
           hover:bg-white hover:bg-opacity-20 hover:cursor-pointer text-white
           justify-start pl-5
    }
+   .card {
+    @apply h-60 w-96 rounded-lg bg-secondary-2 m-4 border border-slate-300 hover:shadow-md hover:cursor-pointer
+   }
 }
   @keyframes AnimationName-1 {
     0%,
