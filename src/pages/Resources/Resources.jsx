@@ -7,6 +7,7 @@ export default function Resources() {
     <div className='flex h-screen w-screen flex-col'>
         <NavBar selected={"files"}/>
         <div className='flex flex-row h-full'>  
+            <SideBar />
             <div className='w-full'>
               Res
             </div>

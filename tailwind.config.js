@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -15,6 +16,9 @@ export default {
         'secondary-3': '#efedf0',
         'accent': '#0d0321',
         'accent-2': '#1d0a42'
+        },
+        fontFamily: {
+          openSans: ['Open+Sans'],
         }
       }
     },

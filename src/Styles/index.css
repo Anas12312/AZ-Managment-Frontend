@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.side-bar-item {
+  font-family: 'Open Sans', sans-serif;
+}
 @layer components {
   .nav-bar-icon {
     @apply w-8 h-8 bg-opacity-20 bg-white rounded-full p-1
@@ -19,9 +22,10 @@
            bg-white bg-opacity-30
   }
   .side-bar-item {
-    @apply flex items-center p-3 h-8 text-lg bg-transparent
-          hover:bg-white hover:bg-opacity-20 hover:cursor-pointer text-white
-          justify-start pl-5
+    @apply flex items-center p-3 h-8 text-base bg-transparent font-normal
+          hover:bg-black hover:bg-opacity-20 hover:cursor-pointer text-black
+          w-4/5
+          justify-center rounded-md
    }
 }
   @keyframes AnimationName-1 {
