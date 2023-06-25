@@ -27,6 +27,9 @@
           w-4/5
           justify-center rounded-md
    }
+   .card {
+    @apply h-60 w-96 rounded-lg bg-secondary-2 m-4 border border-slate-300 hover:shadow-md hover:cursor-pointer
+   }
 }
   @keyframes AnimationName-1 {
     0%,
