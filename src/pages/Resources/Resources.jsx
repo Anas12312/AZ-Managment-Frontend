@@ -7,7 +7,9 @@ export default function Resources() {
     <div className='flex h-screen w-screen flex-col'>
         <NavBar selected={"files"}/>
         <div className='flex flex-row h-full'>  
-            <div className='w-full'>Resources</div>
+            <div className='w-full'>
+              Res
+            </div>
         </div>
     </div>
   )

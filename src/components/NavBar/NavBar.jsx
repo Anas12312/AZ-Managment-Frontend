@@ -28,19 +28,22 @@ export default function NavBar({selected}) {
     }, [])
   return (
     <div className='flex h-14 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
+        
         {/* LOGO */}
         <div className='hover:cursor-pointer fixed left-5 mb-5 text-xl flex flex-col justify-center items-center' onClick={() => {
             nav("/home")
         }}>
           <img src="../../../images/logo2.png" alt="" className='w-12 mt-5 ml-2'/>
         </div>
+        
         {/* Apps */}
         <div className='flex items-center'>
-            <div id="home" className="nav-bar-app" title="Logout" onClick={() => nav("/home")}>Home</div>
-            <div id="files" className="nav-bar-app" title="Logout" onClick={() => nav("/resources")}>Files</div>
-            <div id="notes" className="nav-bar-app" title="Logout">Notes</div>
-            <div id="tasks" className="nav-bar-app" title="Logout" onClick={logout}>Tasks</div>
+            <div id="home"  className="nav-bar-app"  onClick={() => nav("/home")}>Home</div>
+            <div id="files" className="nav-bar-app"  onClick={() => nav("/resources")}>Files</div>
+            <div id="notes" className="nav-bar-app" >Notes</div>
+            <div id="tasks" className="nav-bar-app" >Tasks</div>
         </div>
+
         {/* Right Icons */}
         <div className='fixed right-0 flex justify-around items-center p-2 w-36 '>
             <div className="nav-bar-icon" title="Logout"><FaBell /></div>
