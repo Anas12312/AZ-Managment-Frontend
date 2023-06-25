@@ -1,17 +1,16 @@
 import React from 'react'
 import SideBarItem from './SideBarItem/SideBarItem'
-import { FaCube } from 'react-icons/fa'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FaCube, FaStar, FaUser, FaFile, FaClock } from 'react-icons/fa'
 
 export default function SideBar() {
   return (
-    <div className='flex flex-col h-full w-80 bg-gradient-to-t from-primary-2 to-85% to-accent-2 text-white pt-20'>
-      <div className='flex justify-start items-center pt-3 font-bold text-xl'><span className='relative left-5'>Apps</span></div>
-      <div className='flex flex-col mt-3'>
-        <SideBarItem text={"Resources"} icon={<FaCube />} link={"/resources"} />
-        <SideBarItem text={"123123123"} icon={<FaCube />} link={""} />
-        <SideBarItem text={"123123123"} icon={<FaCube />} link={""} />
-        <SideBarItem text={"123123123"} icon={<FaCube />} link={""} />
-        <SideBarItem text={"123123123"} icon={<FaCube />} link={""} />
+    <div className='flex flex-col h-full w-80 pt-20 bg-gray-600 bg-opacity-10'>
+      <div className='relative flex flex-col mt-3 left-6'>
+        <SideBarItem text={"My Units"} icon={<FaFile />} link={"/resources"} />
+        <SideBarItem text={"Shared With Me"} icon={<FaUser />} link={""} />
+        <SideBarItem text={"Starred"} icon={<FaStar />} link={""} />
+        <SideBarItem text={"Recents"} icon={<FaClock />} link={""} />
       </div>
     </div>
   )
