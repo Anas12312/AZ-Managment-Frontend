@@ -4,6 +4,7 @@
 @tailwind utilities;
 .side-bar-item {
   font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 @layer components {
   .nav-bar-icon {
