@@ -8,6 +8,16 @@
           hover:cursor-pointer flex justify-center items-center
           hover:bg-opacity-30 text-white text-base
   }
+  .nav-bar-app {
+    @apply w-20 h-10 bg-opacity-20 bg-transparent rounded-md p-1
+          hover:cursor-pointer flex justify-center items-center
+          hover:bg-white mx-2
+          hover:bg-opacity-30 text-white text-lg
+  }
+  .nav-bar-app-selected {
+    @apply font-bold
+           bg-white bg-opacity-30
+  }
   .side-bar-item {
     @apply flex items-center p-3 h-8 text-lg bg-transparent
           hover:bg-white hover:bg-opacity-20 hover:cursor-pointer text-white

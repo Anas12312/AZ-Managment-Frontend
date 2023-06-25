@@ -5,9 +5,8 @@ import SideBar from '../../components/SideBar/SideBar'
 export default function Resources() {
   return (
     <div className='flex h-screen w-screen flex-col'>
-        <NavBar />
+        <NavBar selected={"files"}/>
         <div className='flex flex-row h-full'>  
-            <SideBar />
             <div className='w-full'>Resources</div>
         </div>
     </div>
