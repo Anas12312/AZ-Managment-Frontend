@@ -18,6 +18,26 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #513069;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b1656;
+}
 @layer components {
   .nav-bar-icon {
     @apply w-8 h-8 bg-opacity-20 bg-white rounded-full p-1

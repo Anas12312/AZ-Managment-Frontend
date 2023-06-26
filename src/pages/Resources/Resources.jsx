@@ -9,7 +9,7 @@ export default function Resources() {
   const [units, setUnits] = useState([]);
 
   const getAllUserUnits = async () => {
-    const res = await fetch(config.BASE_URL + "/units", {
+    const res = await fetch(config.BASE_URL + "/units?page=0&limit=10", {
       method: "GET",
       headers:  
       { 
@@ -26,11 +26,11 @@ export default function Resources() {
   }, [])
 
   return (
-    <div className='flex h-screen w-screen flex-col'>
+    <div className='flex h-screen w-screen flex-col overflow-hidden'>
         <NavBar selected={"files"}/>
-        <div className='flex flex-row h-full'>  
+        <div className='flex flex-row h-screen'>  
             <SideBar />
-            <div className='w-full'>
+            <div className='w-full overflow-auto max-h-screen pt-4 pb-10'>
               {units.map((unit, i) => (
                 <Card key={i} {...unit}/>
               ))}
