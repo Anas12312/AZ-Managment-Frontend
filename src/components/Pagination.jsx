@@ -17,7 +17,7 @@ export default function ({count, page, setPage}) {
                     <a href="#" className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                 </li>
                 {
-                    Array.from(Array((count/2)).keys()).map((ele, no)=> (
+                    Array.from(Array(parseInt(count/6)+1).keys()).map((ele, no)=> (
                         <li key={no+1} onClick={() => {setPage(no)}}>
                             <a href="#" id={no} className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{no+1}</a>
                         </li>))

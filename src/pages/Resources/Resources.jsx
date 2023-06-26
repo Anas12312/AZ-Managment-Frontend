@@ -8,12 +8,12 @@ import Pagination from '../../components/Pagination';
 export default function Resources() {
   
   const [units, setUnits] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
 
 
   const getAllUserUnits = async (page) => {
-    const res = fetch(config.BASE_URL + `/units?page=${page}&limit=2`, {
+    const res = fetch(config.BASE_URL + `/units?page=${page}&limit=6`, {
       method: "GET",
       headers:  
       { 
