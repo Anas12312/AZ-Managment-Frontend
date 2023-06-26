@@ -6,9 +6,9 @@ export default function SideBarItem(props) {
   return (
     <div onClick={()=>{
         nav(props.link)
-    }} className='side-bar-item'>
-        <div className='fixed left-9'>{props.icon}</div>
-        <div className='fixed left-16'>{props.text}</div>
+    }} className={props.selected?'side-bar-item side-bar-item-selected':'side-bar-item'}>
+        <div className='fixed left-6'>{props.icon}</div>
+        <div className='fixed left-12'>{props.text}</div>
     </div>
   )
 }
