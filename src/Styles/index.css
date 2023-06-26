@@ -71,7 +71,7 @@
             hover:shadow-slate-700
    }
    .card {
-    @apply h-60 w-96 rounded-lg bg-secondary-2 m-4 border border-slate-300 hover:shadow-md hover:cursor-pointer
+    @apply h-60 w-[370px] rounded-lg bg-secondary-2 m-4 border border-slate-300 hover:shadow-md hover:cursor-pointer
    }
    .card-header {
     @apply text-lg

@@ -11,6 +11,7 @@ export default function Resources() {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
 
+
   const getAllUserUnits = async (page) => {
     const res = fetch(config.BASE_URL + `/units?page=${page}&limit=2`, {
       method: "GET",
@@ -40,7 +41,7 @@ export default function Resources() {
         <div className='flex flex-row h-screen'>  
             <SideBar />
             <div className='w-full'>
-              <div className='w-full overflow-auto max-h-screen pt-4 pb-10 mb-10'>
+              <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                 {units.map((unit, i) => (
                   <Card key={i} {...unit}/>
                 ))}
