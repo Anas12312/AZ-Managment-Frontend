@@ -12,6 +12,7 @@ export default {
         'background': '#1c0826',
         'primary-1': '#513069',
         'primary-2': '#412357',
+        'primary-gray': '#c5bfc9',
         'secondary-2': '#ffffff',
         'secondary-3': '#efedf0',
         'accent': '#0d0321',
