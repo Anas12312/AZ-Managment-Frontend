@@ -5,7 +5,7 @@ import { FaCube, FaStar, FaUser, FaFile, FaClock, FaPlus } from 'react-icons/fa'
 
 export default function SideBar() {
   return (
-    <div className='flex flex-col h-full max-h-screen flex-grow w-80 pt-3 bg-gray-400 bg-opacity-10'>
+    <div className='flex flex-col h-full max-h-screen flex-grow w-72 pt-3 bg-gray-400 bg-opacity-10'>
       <div className='new-button'>
         <FaPlus /> New
       </div>

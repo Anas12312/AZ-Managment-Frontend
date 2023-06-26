@@ -10,7 +10,7 @@ export default function Resources() {
   const [units, setUnits] = useState([]);
 
   const getAllUserUnits = async () => {
-    const res = await fetch(config.BASE_URL + "/units?page=0&limit=2", {
+    const res = await fetch(config.BASE_URL + "/units?page=0&limit=6", {
       method: "GET",
       headers:  
       { 
@@ -32,7 +32,7 @@ export default function Resources() {
         <div className='flex flex-row h-screen'>  
             <SideBar />
             <div className='w-full'>
-              <div className='w-full overflow-auto max-h-screen pt-4 pb-10'>
+              <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                 {units.map((unit, i) => (
                   <Card key={i} {...unit}/>
                 ))}
