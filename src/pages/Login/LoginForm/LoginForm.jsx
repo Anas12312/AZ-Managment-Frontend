@@ -24,6 +24,7 @@ export default function LoginForm(props) {
                 props.setError(response.error)
             }else {
                 localStorage.setItem("token", response.token)
+                localStorage.setItem("user", JSON.stringify(response.user))
                 nav("/home")
                 props.setError("")
             }
