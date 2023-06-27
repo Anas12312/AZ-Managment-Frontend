@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 .side-bar-item {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
@@ -42,7 +45,7 @@
   .nav-bar-icon {
     @apply w-8 h-8 bg-opacity-20 bg-white rounded-full p-1
           hover:cursor-pointer flex justify-center items-center
-          hover:bg-opacity-30 text-white text-base
+          hover:bg-opacity-30 text-white text-base border
   }
   .nav-bar-app {
     @apply w-20 h-10 bg-opacity-20 bg-transparent rounded-md p-1
