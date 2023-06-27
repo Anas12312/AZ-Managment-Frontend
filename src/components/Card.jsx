@@ -7,7 +7,7 @@ export default function Card({id, coverUrl, name, username, description, ownerNa
         <div 
         id={id} 
         className=' w-full  h-1/2 rounded-t-lg' 
-        style={ coverUrl ? {backgroundImage:`url(${coverUrl})`, backgroundSize:'100% auto'} : {background:'#513069'}}
+        style={ !(coverUrl=='') && coverUrl ? {backgroundImage:`url(${coverUrl})`, backgroundSize:'100% auto'} : {background:'#513069'}}
         >
         </div>
         <div className='relative left-3 h-1/3 flex flex-col align-middle top-2'>
