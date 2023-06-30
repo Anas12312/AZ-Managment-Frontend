@@ -21,6 +21,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -85,6 +86,15 @@ body {
    }
    .card-text {
     @apply text-xs
+   }
+   .item {
+    @apply flex flex-row items-center border-b border-gray-400 w-full
+            px-10 py-3  bg-white text-sm
+            hover:bg-gray-200
+   }
+   .list-filter {
+    @apply flex flex-row items-center border-b border-gray-700 w-full
+            px-5 py-3 bg-white text-sm font-bold
    }
 }
   @keyframes AnimationName-1 {

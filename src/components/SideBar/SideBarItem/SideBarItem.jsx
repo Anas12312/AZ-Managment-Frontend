@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export default function SideBarItem(props) {
     const nav = useNavigate();
   return (
-    <div onClick={()=>{
+    <div id={props.id} onClick={()=>{
         nav(props.link)
     }} className={props.selected?'side-bar-item side-bar-item-selected':'side-bar-item'}>
         <div className='fixed left-6'>{props.icon}</div>
