@@ -33,10 +33,10 @@ export default function ViewUnit(props) {
         <SideBar />
         {!isLoading?(
               <div className='w-full'>
-                <div className='h-32'></div>
-                <div className='w-3/4 overflow max-h-screen pl-10 flex-col m-5 mr-0 h-[60%]'>
+                <div className='h-16'></div>
+                <div className='w-3/4 overflow max-h-screen pl-5 flex-col h-[75%]'>
                     <div className='list-filter'>
-                        <div className='relative -left-10'>Name</div>
+                        <div className='relative left-0`'>Name</div>
                         <div className='relative left-[20rem]'>Owner</div>
                         <div className='relative left-[30rem]'>Last Modified</div>
                         <div className='relative left-[38rem]'>File Size</div>

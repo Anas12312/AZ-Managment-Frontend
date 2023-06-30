@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react'
-import React, { useEffect } from 'react'
 import SideBarItem from './SideBarItem/SideBarItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaCube, FaStar, FaUser, FaFile, FaClock, FaPlus } from 'react-icons/fa'
@@ -38,13 +37,12 @@ export default function SideBar() {
         body: JSON.stringify(
           {
             name: unitName,
-            description:unitDescription,
-            coverUrl: "https://rare-gallery.com/mocahbig/393701-sentinel-olaf-splash-art-lol-skin-league-of-legends.jpg"
+            description:unitDescription
           }
         )
       }).then(res => res.json())
       .then(result => {
-        nav('/')
+        nav(`/unit/${result._id}`)
       })
   }
 
