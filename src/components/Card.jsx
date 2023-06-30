@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export default function Card({id, coverUrl, name, username, description, ownerName}) {
-    
+export default function Card({_id:id, coverUrl, name, username, description, ownerName}) {
+    const nav = useNavigate();
     return (
-    <div className='card'>
+    <div className='card' onClick={() => {
+        nav(`/unit/${id}`)
+    }}>
         <div 
         id={id} 
         className=' w-full  h-1/2 rounded-t-lg' 
