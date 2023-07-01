@@ -20,14 +20,28 @@ export default function SideBar() {
     setModalIsOpen(true);
   }
   const closeModal = () => {
+    setError(' ')
     setModalIsOpen(false);
   }
 
   //New Unit Modal State
   const [unitName, setUnitName] = useState('')
   const [unitDescription, setUnitDescription] = useState('')
-  
+  const [error, setError] = useState(' ')
+
   const createNewUnit = () => {
+      if(!unitName) {
+        setError('Please provide name for the unit')
+        const classList = document.getElementById('Unit-Name').classList;
+        classList.replace('border-primary-1', 'border-red-700')
+        classList.replace('border', 'border-2')
+
+        const nameLabel = document.getElementById('Unit-Name-Lable').classList;
+        nameLabel.add('text-red-700', 'font-bold')
+
+        return
+      }
+
       fetch(config.BASE_URL + '/units' , {
         method: 'POST',
         headers:  { 
@@ -40,9 +54,18 @@ export default function SideBar() {
             description:unitDescription
           }
         )
-      }).then(res => res.json())
+      }).then(res => {
+
+        return res.json()
+      })
       .then(result => {
+        if(result.error) {
+          setError(result.error)
+          return
+        }
         nav(`/unit/${result._id}`)
+      }).catch(error => {
+        console.log(error);
       })
   }
 
@@ -57,9 +80,10 @@ export default function SideBar() {
         onRequestClose={closeModal}
         shouldFocusAfterRender={false}
       >
+        <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
         <div className='w-full'>
-            <div><label htmlFor="Name" className='text-sm ml-1'>Name</label></div>
-            <input  id='Name' className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text' name='Name' 
+            <div><label htmlFor="Unit-Name" id='Unit-Name-Lable' className='text-sm ml-1'>Name</label></div>
+            <input  id='Unit-Name' className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text'
             onChange={(e) => {
               setUnitName(e.target.value)
             }}
@@ -67,8 +91,8 @@ export default function SideBar() {
         </div>
 
         <div className='w-full'>
-            <div><label htmlFor="Description" className='text-sm ml-1'>Description</label></div>
-            <textarea  id='Description'  className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text' name='Description'
+            <div><label htmlFor="Unit-Description" className='text-sm ml-1'>Description</label></div>
+            <textarea  id='Unit-Description'  className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text'
             onChange={(e) => {
               setUnitDescription(e.target.value)
             }} />
