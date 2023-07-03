@@ -93,8 +93,57 @@ body {
    .item {
     @apply flex flex-row items-center justify-between w-full
             px-10 py-5  text-base
-            hover:bg-gray-300 rounded-lg border
+             rounded-lg border
             transition-all duration-100 ease-linear
+   }
+   .node-purple {
+    @apply bg-purple-3
+   }
+   .item-purple {
+    @apply bg-purple-3 hover:bg-purple-1
+   }
+   .node-black {
+    @apply bg-black-3
+   }
+   .item-black {
+    @apply bg-black-3 hover:bg-black-1
+   }
+   .node-green {
+    @apply bg-green-3
+   }
+   .item-green {
+    @apply bg-green-3 hover:bg-green-1
+   }
+   .node-red {
+    @apply bg-red-3
+   }
+   .item-red {
+    @apply bg-red-3 hover:bg-red-3
+   }
+   .node-gray {
+    @apply bg-gray-3
+   }
+   .item-gray {
+    @apply bg-gray-3 hover:bg-gray-1
+   }
+   .node-pink {
+    @apply bg-pink-3
+   }
+   .item-pink {
+    @apply bg-pink-3 hover:bg-pink-1
+   }
+   .node-yellow {
+    @apply bg-yellow-3
+   }
+   .item-yellow {
+    @apply bg-yellow-3 hover:bg-yellow-1
+   }
+
+   .node-blue {
+    @apply bg-blue-3
+   }
+   .item-blue {
+    @apply bg-blue-3 hover:bg-blue-1
    }
    .item-detailed {
     @apply w-[98%] bg-white my-3 rounded-md p-2
@@ -107,6 +156,31 @@ body {
    .resource {
     @apply flex border-b-2 p-3 last:border-b-0 items-center cursor-move
    }
+   .resource-purple {
+    @apply bg-purple-2
+   }
+   .resource-blue {
+    @apply bg-blue-2
+   }
+   .resource-yellow {
+    @apply bg-yellow-2
+   }
+   .resource-pink {
+    @apply bg-pink-2
+   }
+   .resource-black {
+    @apply bg-black-2
+   }
+   .resource-gray {
+    @apply bg-gray-2
+   }
+   .resource-green {
+    @apply bg-green-2
+   }
+   .resource-red {
+    @apply bg-red-2
+   }
+
    .resource-option {
     @apply flex justify-center items-center p-2 text-base rounded-full
           hover:bg-gray-200 hover:cursor-pointer  transition-all duration-200 ease-linear
