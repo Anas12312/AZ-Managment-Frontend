@@ -166,6 +166,7 @@ export default function Item(props) {
             </div>
           )
         )}
+
       </Modal>
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
