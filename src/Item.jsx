@@ -107,8 +107,8 @@ export default function Item(props) {
           )
         )}
       </Modal>
-      <div className='node-container'>
-        <div className='item' onClick={() => {
+      <div className={`node-container bg-${props.color}-1`}>
+        <div className={`item bg-${props.color}-1`} onClick={() => {
             getItemData();
             setExpand(!expand)
           }}>
