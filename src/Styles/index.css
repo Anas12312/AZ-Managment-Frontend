@@ -88,11 +88,11 @@ body {
     @apply text-xs
    }
    .node-container {
-    @apply flex flex-col bg-gray-200 items-center rounded-lg  mb-6
+    @apply flex flex-col items-center rounded-lg  mb-6
    }
    .item {
     @apply flex flex-row items-center justify-between w-full
-            px-10 py-5  bg-gray-200 text-base
+            px-10 py-5  text-base
             hover:bg-gray-300 rounded-lg border
             transition-all duration-100 ease-linear
    }
