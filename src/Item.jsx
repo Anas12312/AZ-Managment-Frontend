@@ -106,7 +106,7 @@ export default function Item(props) {
             </div>
           )
         )}
-      </Modal>
+      </Modal>  
       <div className={`node-container bg-${props.color}-1`}>
         <div className={`item bg-${props.color}-1`} onClick={() => {
             getItemData();
