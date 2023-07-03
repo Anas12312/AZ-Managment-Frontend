@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaArrowDown, FaArrowUp, FaLink, FaImage, FaFile, FaPencilAlt, FaTrash, FaEye, FaPlus, FaFileAlt } from 'react-icons/fa'
 import Modal from 'react-modal';
 import config from '../config';
@@ -11,6 +11,66 @@ export default function Item(props) {
   const [deletingId, setDeletingId] = useState(null);
   const [deleteResponse, setDeleteResponse] = useState('');
   const [deleteStatus, setDeleteStatus] = useState(200);
+  const getNodeColor = () => {
+    switch(props.color) {
+      case "purple":
+        return `node-container node-purple`
+      case "green":
+        return `node-container node-green`
+      case "pink":
+        return `node-container node-pink`
+      case "gray":
+        return `node-container node-gray`
+      case "yellow":
+        return `node-container node-yellow`
+      case "black":
+        return `node-container node-black`
+      case "blue":
+        return `node-container node-blue`
+      default:
+        return `node-container`
+  }
+  }
+  const getItemColor = () => {
+    switch(props.color) {
+      case "purple":
+        return `item item-purple`
+      case "green":
+        return `item item-green`
+      case "pink":
+        return `item item-pink`
+      case "gray":
+        return `item item-gray`
+      case "yellow":
+        return `item item-yellow`
+      case "black":
+        return `item item-black`
+      case "blue":
+        return `item item-blue`
+      default:
+        return `item`
+    }
+  } 
+  const getResourceColor = () => {
+    switch(props.color) {
+      case "purple":
+        return `resource resource-purple`
+      case "green":
+        return `resource resource-green`
+      case "pink":
+        return `resource resource-pink`
+      case "gray":
+        return `resource resource-gray`
+      case "yellow":
+        return `resource resource-yellow`
+      case "black":
+        return `resource resource-black`
+      case "blue":
+        return `resource resource-blue`
+      default:
+        return `resource`
+    }
+  } 
   const openModal = () => {
     setModalIsOpen(true);
   }
@@ -107,8 +167,8 @@ export default function Item(props) {
           )
         )}
       </Modal>
-      <div className={`node-container bg-${props.color}-1`}>
-        <div className={`item bg-${props.color}-1`} onClick={() => {
+      <div id={props._id} className={getNodeColor()}>
+        <div className={getItemColor()} onClick={() => {
             getItemData();
             setExpand(!expand)
           }}>
@@ -126,7 +186,7 @@ export default function Item(props) {
                 ItemData.map((resource, index) => {
                   if(resource.type === "LINK") {
                     return (
-                      <div key={index} id={resource._id} className='resource' draggable>
+                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaLink /></div>
                         <div className='w-[50%] mr-2' >{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -159,7 +219,7 @@ export default function Item(props) {
                     )
                   }else if(resource.type === "TEXT") {
                     return (
-                      <div key={index} id={resource._id} className='resource' draggable>
+                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaFileAlt /></div>
                         <div className='w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -193,7 +253,7 @@ export default function Item(props) {
                     )
                   }else if(resource.type === "IMAGE") {
                     return (
-                      <div key={index} id={resource._id} className='resource' draggable>
+                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaImage /></div>
                         <div className=' w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -228,7 +288,7 @@ export default function Item(props) {
                   }
                 })
               ):(
-                <div>wow such empty</div>
+                <div className='w-full flex justify-center items-center'>wow such empty, Click + to add resources</div>
               )}
             </div>
           ):(
