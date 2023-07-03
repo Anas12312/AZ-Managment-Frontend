@@ -17,10 +17,14 @@ export default {
         'secondary-3': '#efedf0',
         'accent': '#0d0321',
         'accent-2': '#1d0a42'
-        },
-        fontFamily: {
-          openSans: ['Open+Sans'],
-        }
+      },
+      fontFamily: {
+        openSans: ['Open+Sans'],
+      },
+      animation: {
+        bounce200: 'bounce 1s infinite 200ms',
+        bounce400: 'bounce 1s infinite 400ms',
+      },
       }
     },
   plugins: [],

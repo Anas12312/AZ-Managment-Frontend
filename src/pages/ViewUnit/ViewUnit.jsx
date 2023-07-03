@@ -11,7 +11,7 @@ export default function ViewUnit(props) {
     const [isLoading, setIsLoading] = useState(true);
     const nav = useNavigate()
     useEffect(() => {
-        fetch(config.BASE_URL + `/nodes/${params.id}`, {
+        fetch(config.BASE_URL + `/units/${params.id}`, {
             method: "GET",
             headers:  
             { 
@@ -34,13 +34,7 @@ export default function ViewUnit(props) {
         {!isLoading?(
               <div className='w-full'>
                 <div className='h-16'></div>
-                <div className='w-3/4 overflow max-h-screen pl-5 flex-col h-[75%]'>
-                    <div className='list-filter'>
-                        <div className='relative left-0`'>Name</div>
-                        <div className='relative left-[20rem]'>Owner</div>
-                        <div className='relative left-[30rem]'>Last Modified</div>
-                        <div className='relative left-[38rem]'>File Size</div>
-                    </div>
+                <div className='w-[97%] overflow max-h-screen pl-5 flex-col h-[75%]'>
                     <div className='overflow-auto h-full'>
                         {data.nodes.map((node, i) => (
                             <Item key={i} {...node}/>
