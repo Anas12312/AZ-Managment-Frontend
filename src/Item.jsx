@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FaArrowDown, FaArrowUp, FaLink, FaImage, FaFile, FaPencilAlt, FaTrash, FaEye, FaPlus, FaFileAlt } from 'react-icons/fa'
 import Modal from 'react-modal';
 import config from '../config';
+import EditNodeModal from './modals/EditNodeModal';
+import NewResourceModal from './modals/NewResourceModal';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +13,13 @@ export default function Item(props) {
   const [deletingId, setDeletingId] = useState(null);
   const [deleteResponse, setDeleteResponse] = useState('');
   const [deleteStatus, setDeleteStatus] = useState(200);
+
+  //Edit Modal
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  //Add Resource
+  const [isAddResModalOpen, setIsAddResModalOpen] = useState(false);
+
   const getNodeColor = () => {
     switch(props.color) {
       case "purple":
@@ -168,6 +177,9 @@ export default function Item(props) {
         )}
 
       </Modal>
+      <NewResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id}/>
+      <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
+
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
             getItemData();
@@ -177,11 +189,14 @@ export default function Item(props) {
           
           <div className='flex'>
             {expand&&
-              (<div className='node-option' onClick={(e) => {
-              
-              }}><FaPlus /></div>)}
+              (<div className='node-option' onClick={() => {setIsAddResModalOpen(true)}}><FaPlus /></div>)}
             <div className='node-option'><FaTrash /></div>
-            <div className='node-option'><FaPencilAlt /></div>
+            
+
+            <div className='node-option' 
+            onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
+            
+            
             <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
           </div>
           </div>
