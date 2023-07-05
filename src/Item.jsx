@@ -174,11 +174,12 @@ export default function Item(props) {
             setExpand(!expand)
           }}>
           <div className='relative -left-4 font-bold flex items-center w-1/3'> {props.name?<div className='relative left-4'>{props.name}</div>:"-"}</div>
-          {expand&&
-              (<div className='relative -right-[21rem] rounded-full hover:bg-gray-100 p-1 hover:cursor-pointer' onClick={(e) => {
+          
+          <div className='flex'>
+            {expand&&
+              (<div className='node-option' onClick={(e) => {
               
               }}><FaPlus /></div>)}
-          <div className='flex'>
             <div className='node-option'><FaTrash /></div>
             <div className='node-option'><FaPencilAlt /></div>
             <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
