@@ -178,8 +178,12 @@ export default function Item(props) {
               (<div className='relative -right-[21rem] rounded-full hover:bg-gray-100 p-1 hover:cursor-pointer' onClick={(e) => {
               
               }}><FaPlus /></div>)}
-          <div>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>
-        </div>
+          <div className='flex'>
+            <div className='node-option'><FaTrash /></div>
+            <div className='node-option'><FaPencilAlt /></div>
+            <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
+          </div>
+          </div>
         {expand&&
           (!isLoading? (
             <div className='item-detailed'>
