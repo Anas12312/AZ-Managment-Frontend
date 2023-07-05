@@ -97,9 +97,6 @@ export default function ViewUnit(props) {
                 </div>
                 <div className='w-[97%] overflow max-h-screen pl-5 flex-col h-[75%]'>
                     <div className='overflow-auto h-full'>
-                        {data.nodes.map((node, i) => (
-                            <Item key={i} {...node} update={update}/>
-                        ))}
                         <LoadNodesContext.Provider value={rerenderNote}>
                           {data.nodes.map((node, i) => (
                               <Item key={i} {...node}/>
