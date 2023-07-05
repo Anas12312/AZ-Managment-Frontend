@@ -13,11 +13,8 @@ export default function Item(props) {
   const [deletingId, setDeletingId] = useState(null);
   const [deleteResponse, setDeleteResponse] = useState('');
   const [deleteStatus, setDeleteStatus] = useState(200);
-
-  //Edit Modal
+  const [deletingType, setDeletingType] = useState(1);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  //Add Resource
   const [isAddResModalOpen, setIsAddResModalOpen] = useState(false);
 
   const getNodeColor = () => {
@@ -80,7 +77,12 @@ export default function Item(props) {
         return `resource`
     }
   } 
-  const openModal = () => {
+  const openModal = (type) => {
+    if(type === 1){
+      setDeletingType(1);
+    }else if(type === 2){
+      setDeletingType(2);
+    }
     setModalIsOpen(true);
   }
   const closeModal = () => {
@@ -91,7 +93,6 @@ export default function Item(props) {
   }
   const closeModal2 = () => {
     setModal2IsOpen(false);
-    getItemData()
   }
   const deleteResource = async (deletingId) => {
     fetch(config.BASE_URL + `/resource/${deletingId}`, {
@@ -107,8 +108,33 @@ export default function Item(props) {
     })
     .then((response)=>{
       setDeleteResponse(response)
+      getItemData()
       closeModal();
       openModal2();
+    }).catch((err)=>{
+      setDeleteResponse(err)
+      getItemData()
+      closeModal();
+      openModal2();
+    }); 
+  }
+  const deleteNode = async (deletingId) => {
+    fetch(config.BASE_URL + `/nodes/${deletingId}`, {
+      method: "DELETE",
+      headers:  
+      { 
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    }).then((res) => {
+      setDeleteStatus(res.status)
+      return res.json()
+    })
+    .then((response)=>{
+      setDeleteResponse(response)
+      closeModal();
+      openModal2();
+      props.update()
     }).catch((err)=>{
       setDeleteResponse(err)
       closeModal();
@@ -118,6 +144,7 @@ export default function Item(props) {
   let circleCommonClasses = 'h-2 w-2 bg-primary-1   rounded-full';
   const rootEl = document.getElementById('root');
   const getItemData = async() => {
+    setIsLoading(true)
     fetch(config.BASE_URL + `/nodes/${props._id}`, {
       method: "GET",
       headers:  
@@ -148,7 +175,13 @@ export default function Item(props) {
         </div>
         <div className='flex justify-between w-[50%] mb-7 items-center'>
           <div className='bg-primary-1 text-white p-2 hover:cursor-pointer hover:bg-primary-2 rounded-md shadow-lg'
-              onClick={()=>{deleteResource(deletingId)}}>Delete</div>
+              onClick={()=>{
+                if(deletingType === 1) {
+                  deleteNode(deletingId)
+                }else if(deletingType === 2) {
+                  deleteResource(deletingId)
+                }
+              }}>Delete</div>
           <div className='bg-white text-black p-2 hover:cursor-pointer hover:bg-gray-300 rounded-md'
                 onClick={()=>{closeModal()}}>Cancel</div>
         </div>
@@ -188,15 +221,16 @@ export default function Item(props) {
           <div className='relative -left-4 font-bold flex items-center w-1/3'> {props.name?<div className='relative left-4'>{props.name}</div>:"-"}</div>
           
           <div className='flex'>
-            {expand&&
-              (<div className='node-option' onClick={() => {setIsAddResModalOpen(true)}}><FaPlus /></div>)}
-            <div className='node-option'><FaTrash /></div>
-            
+          <div className='node-option' onClick={(e) => {
+              
+            }}><FaPlus /></div>
+            <div className='node-option' onClick={() => {
+              setDeletingId(props._id)
+              openModal(1);
+            }}><FaTrash /></div>
+            <div className='node-option'>
+              onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
 
-            <div className='node-option' 
-            onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
-            
-            
             <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
           </div>
           </div>
@@ -233,7 +267,7 @@ export default function Item(props) {
                           <div className='resource-option'><FaPencilAlt /></div>
                           <div className='resource-option' onClick={()=>{
                             setDeletingId(resource._id)
-                            openModal()
+                            openModal(2)
                           }}><FaTrash /></div>
                         </div>
                       </div>
@@ -267,7 +301,7 @@ export default function Item(props) {
                           <div className='resource-option'><FaPencilAlt /></div>
                           <div className='resource-option' onClick={()=>{
                             setDeletingId(resource._id)
-                            openModal()
+                            openModal(2)
                           }}><FaTrash /></div>
                         </div>
                       </div>
@@ -301,7 +335,7 @@ export default function Item(props) {
                           <div className='resource-option'><FaPencilAlt /></div>
                           <div className='resource-option' onClick={()=>{
                             setDeletingId(resource._id)
-                            openModal()
+                            openModal(2)
                           }}><FaTrash /></div>
                         </div>
                       </div>
