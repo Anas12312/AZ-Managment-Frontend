@@ -18,11 +18,11 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
 
   const selectColor = (e) => {
     
-    if(nodeColor) document.getElementById(nodeColor).classList.remove('border-2', 'border-slate-200')
+    if(nodeColor) document.getElementById(nodeColor).classList.remove('border-2', 'border-black')
 
     setNodeColor(e.target.id)
 
-    e.target.classList.add('border-2', 'border-slate-200');
+    e.target.classList.add('border-2', 'border-black');
     
   }
 
@@ -92,14 +92,16 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
 
         <div className='w-full'>
           <div><label htmlFor="Node-Color" className='text-sm ml-1'>Color</label></div>
-          <div className='flex flex-row justify-center items-center border border-slate-600 rounded-md w-fit'>
-              <div id='yellow' onClick={selectColor} className='bg-red-700 hover:bg-opacity-80 h-10 w-10 rounded-l-sm'></div>
-              <div id='green'  onClick={selectColor} className='bg-blue-700 hover:bg-opacity-80 h-10 w-10'></div>
-              <div id='pink'   onClick={selectColor} className='bg-green-700 hover:bg-opacity-80 h-10 w-10'></div>
-              <div id='purple' onClick={selectColor} className='bg-yellow-700 hover:bg-opacity-80 h-10 w-10'></div>
-              <div id='blue'   onClick={selectColor} className='bg-blue-700 hover:bg-opacity-80 h-10 w-10'></div>
-              <div id='grey'   onClick={selectColor} className='bg-green-700 hover:bg-opacity-80 h-10 w-10'></div>
-              <div id='black'  onClick={selectColor} className='bg-yellow-700 hover:bg-opacity-80 h-10 w-10'></div>
+          <div className='w-full flex justify-center items-center'>
+              <div className='flex justify-center items-center border-slate-600 border rounded-sm'>
+                <div id='yellow' onClick={selectColor} className='bg-yellow-3 hover:bg-opacity-80 h-10 w-10'></div>
+                <div id='green'  onClick={selectColor} className='bg-green-3 hover:bg-opacity-80 h-10 w-10'></div>
+                <div id='pink'   onClick={selectColor} className='bg-pink-3 hover:bg-opacity-80 h-10 w-10'></div>
+                <div id='purple' onClick={selectColor} className='bg-purple-3  hover:bg-opacity-80 h-10 w-10'></div>
+                <div id='blue'   onClick={selectColor} className='bg-blue-3 over:bg-opacity-80 h-10 w-10'></div>
+                <div id='gray'   onClick={selectColor} className='bg-gray-3 hover:bg-opacity-80 h-10 w-10'></div>
+                <div id='black'  onClick={selectColor} className='bg-black-3  hover:bg-opacity-80 h-10 w-10'></div>
+              </div>
           </div>
         </div>
 

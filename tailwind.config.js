@@ -38,7 +38,6 @@ export default {
         'black-1': '#494745',
         'black-2': '#696969',
         'black-3': '#767676',
-
       },
       fontFamily: {
         openSans: ['Open+Sans'],

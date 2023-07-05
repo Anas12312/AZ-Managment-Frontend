@@ -228,7 +228,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img className="object-contain w-full h-full rounded-full" src={resource.createdByImageUrl} />
+                              <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
                             </div>
                           ):(
                             <div className='w-full h-full flex justify-center
