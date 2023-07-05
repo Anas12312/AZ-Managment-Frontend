@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 
-export default function NewResourceModal({isOpen, setIsOpen, nodeId, getItemData}) {
+export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId}) {
 
 
     const [name, setName] = useState('')
