@@ -3,7 +3,8 @@ import { FaArrowDown, FaArrowUp, FaLink, FaImage, FaFile, FaPencilAlt, FaTrash, 
 import Modal from 'react-modal';
 import config from '../config';
 import EditNodeModal from './modals/EditNodeModal';
-import NewResourceModal from './modals/NewResourceModal';
+import NewLinkResourceModal from './modals/NewLinkResourceModal';
+import NewTextResourceModal from './modals/NewTextResourceModal';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -177,9 +178,9 @@ export default function Item(props) {
         )}
 
       </Modal>
-      <NewResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id}/>
+      <NewLinkResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id} />
+      <NewTextResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
-
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
             getItemData();
