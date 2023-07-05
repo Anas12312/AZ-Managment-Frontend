@@ -5,7 +5,6 @@ import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 
 export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId}) {
 
-    const updateNode = useContext(LoadNodesContext);
 
     const [name, setName] = useState('')
     const [embedName, setEmbedName] = useState('')
@@ -61,8 +60,8 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId}) {
             )
         }).then(res => res.json())
         .then(result => {
-            updateNode()
             closeNewResModal()
+            getItemData()
         }).catch(err => {
             console.log(err);
         })
