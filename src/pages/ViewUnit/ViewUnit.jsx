@@ -29,7 +29,7 @@ export default function ViewUnit(props) {
         { 
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem('token')
-        }
+        } 
       }).then((res) => res.json())
       .then((response)=>{
         setIsLoading(false)

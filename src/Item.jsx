@@ -5,6 +5,7 @@ import config from '../config';
 import EditNodeModal from './modals/EditNodeModal';
 import NewLinkResourceModal from './modals/NewLinkResourceModal';
 import NewTextResourceModal from './modals/NewTextResourceModal';
+import NewImageResourceModel from './modals/NewImageResourceModel';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,8 +16,13 @@ export default function Item(props) {
   const [deleteResponse, setDeleteResponse] = useState('');
   const [deleteStatus, setDeleteStatus] = useState(200);
   const [deletingType, setDeletingType] = useState(1);
+
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddResModalOpen, setIsAddResModalOpen] = useState(false);
+
+  const [isAddTextResModalOpen, setIsAddTextResModalOpen] = useState(false);
+  const [isAddLinkResModalOpen, setIsAddLinkResModalOpen] = useState(false)
+  const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
 
   const getNodeColor = () => {
     switch(props.color) {
@@ -211,9 +217,12 @@ export default function Item(props) {
         )}
 
       </Modal>
-      <NewLinkResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id} />
-      <NewTextResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id} />
+
+      <NewLinkResourceModal  getItemData={getItemData} isOpen={isAddLinkResModalOpen}  setIsOpen={setIsAddLinkResModalOpen}  nodeId={props._id} />
+      <NewTextResourceModal  getItemData={getItemData} isOpen={isAddTextResModalOpen}  setIsOpen={setIsAddTextResModalOpen}  nodeId={props._id} />
+      <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
+      
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
             getItemData();
@@ -223,7 +232,7 @@ export default function Item(props) {
           
           <div className='flex'>
           <div className='node-option' onClick={(e) => {
-              setIsAddResModalOpen(true)
+              setIsAddTextResModalOpen(true)
             }}><FaPlus /></div>
             <div className='node-option' onClick={() => {
               setDeletingId(props._id)

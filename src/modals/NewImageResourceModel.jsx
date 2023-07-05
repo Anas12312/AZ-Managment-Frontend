@@ -1,35 +1,18 @@
 import React from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
-import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form';
 
-export default function NewImageResourceModel({isOpen, setIsOpen, nodeId}) {
-
-    const updateNode = useContext(LoadNodesContext);
+export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getItemData}) {
 
     const [name, setName] = useState('')
-    const [file, setFile] = useState<File>(null);
+    const [url, setUrl] = useState('')
+    const {register, handleSubmit} = useForm()
     const [error, setError] = useState('')
 
     const closeNewResModal = () => {
         setIsOpen(false);
-    }
-
-    const uploadImage = () => {
-        fetch(config.BASE_URL + '/upload' , {
-            method:"POST",
-            headers:  { 
-                "Content-Type": "multipart/form-data",
-                "Authorization": "Bearer " + localStorage.getItem('token')
-            },
-            body: new FormData().append('file', file)
-        }).then(res => res.json())
-        .then(result => {
-            return config.BASE_URL + result.message
-        }).catch(err => {
-            console.log(err);
-            return null;
-        })
     }
 
     const addResource = (nodeId, imageUrl) => {
@@ -84,23 +67,23 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId}) {
             <input  id='Res-Text'  className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
             type='file'
             accept='.jpg, .jpeg, .png'
-            onChange={(e) => {
-                if (e.target.files) {
-                    if(!e.target.files[0]) {
-                        setError('Please Add file')
-                        return;
-                    }
-                    setFile(e.target.files[0]);
-                  }
-            }} />
+            onSubmit={handleSubmit(async (data) => {
+                const formData = new FormData();
+                formData.append("file", data.file[0]);
+        
+                const res = await fetch(config.BASE_URL + '/upload', {
+                    method: "POST",
+                    body: formData,
+                }).then((res) => res.json());
+                setUrl( config.BASE_URL + res.message)
+            })} 
+            {...register("file")}/>
         </div>
 
         <div className='w-full'>
             <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
               onClick={() => {
-                if(name && file) {
-                    const url = uploadImage()
-
+                if(name ) {
                     if(!url) {
                         setError('Please Add file')
                         return
