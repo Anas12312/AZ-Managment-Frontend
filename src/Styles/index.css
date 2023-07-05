@@ -185,6 +185,10 @@ body {
     @apply flex justify-center items-center p-2 text-base rounded-full
           hover:bg-gray-200 hover:cursor-pointer  transition-all duration-200 ease-linear
    }
+   .node-option {
+    @apply flex justify-center items-center p-2 text-base rounded-full
+          hover:bg-gray-400 hover:cursor-pointer  transition-all duration-200 ease-linear
+   }
 
 }
   @keyframes AnimationName-1 {
