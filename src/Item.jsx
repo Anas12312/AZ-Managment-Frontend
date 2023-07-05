@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FaArrowDown, FaArrowUp, FaLink, FaImage, FaFile, FaPencilAlt, FaTrash, FaEye, FaPlus, FaFileAlt } from 'react-icons/fa'
 import Modal from 'react-modal';
 import config from '../config';
+import EditNodeModal from './modals/EditNodeModal';
+import NewResourceModal from './modals/NewResourceModal';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +14,9 @@ export default function Item(props) {
   const [deleteResponse, setDeleteResponse] = useState('');
   const [deleteStatus, setDeleteStatus] = useState(200);
   const [deletingType, setDeletingType] = useState(1);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddResModalOpen, setIsAddResModalOpen] = useState(false);
+
   const getNodeColor = () => {
     switch(props.color) {
       case "purple":
@@ -205,6 +210,9 @@ export default function Item(props) {
         )}
 
       </Modal>
+      <NewResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id}/>
+      <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
+
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
             getItemData();
@@ -220,7 +228,9 @@ export default function Item(props) {
               setDeletingId(props._id)
               openModal(1);
             }}><FaTrash /></div>
-            <div className='node-option'><FaPencilAlt /></div>
+            <div className='node-option'>
+              onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
+
             <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
           </div>
           </div>

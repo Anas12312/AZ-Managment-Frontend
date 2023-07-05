@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
 import config from '../../../config';
@@ -7,6 +7,10 @@ import Item from '../../Item';
 import { FaPlus } from 'react-icons/fa';
 import NewNodeModal from '../../modals/NewNodeModal';
 import LoadingItem from '../../components/LoadingItem'
+
+const LoadNodesContext = createContext(null);
+
+export {LoadNodesContext};
 
 export default function ViewUnit(props) {
     const params = useParams();
@@ -41,6 +45,10 @@ export default function ViewUnit(props) {
     useEffect(() => {
         loadNodes(params.id)
     },[])
+
+    const rerenderNote = () => {
+      loadNodes(params.id)
+    }
 
     const [isOpenNewNode, setIsOpenNewNode] = useState(false);
     const openNewNodeModal = () => {
@@ -92,6 +100,11 @@ export default function ViewUnit(props) {
                         {data.nodes.map((node, i) => (
                             <Item key={i} {...node} update={update}/>
                         ))}
+                        <LoadNodesContext.Provider value={rerenderNote}>
+                          {data.nodes.map((node, i) => (
+                              <Item key={i} {...node}/>
+                          ))}
+                        </LoadNodesContext.Provider>
                     </div>
                 </div>
             </div>
