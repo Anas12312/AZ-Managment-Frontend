@@ -3,9 +3,8 @@ import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 
-export default function NewResourceModal({isOpen, setIsOpen, nodeId}) {
+export default function NewResourceModal({isOpen, setIsOpen, nodeId, getItemData}) {
 
-    const updateNode = useContext(LoadNodesContext);
 
     const [name, setName] = useState('')
     const [embedName, setEmbedName] = useState('')
@@ -61,8 +60,8 @@ export default function NewResourceModal({isOpen, setIsOpen, nodeId}) {
             )
         }).then(res => res.json())
         .then(result => {
-            updateNode()
             closeNewResModal()
+            getItemData()
         }).catch(err => {
             console.log(err);
         })

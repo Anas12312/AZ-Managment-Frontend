@@ -210,7 +210,7 @@ export default function Item(props) {
         )}
 
       </Modal>
-      <NewResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id}/>
+      <NewResourceModal isOpen={isAddResModalOpen} setIsOpen={setIsAddResModalOpen} nodeId={props._id} getItemData={getItemData} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
 
       <div id={props._id} className={getNodeColor()}>
@@ -222,13 +222,13 @@ export default function Item(props) {
           
           <div className='flex'>
           <div className='node-option' onClick={(e) => {
-              
+              setIsAddResModalOpen(true)
             }}><FaPlus /></div>
             <div className='node-option' onClick={() => {
               setDeletingId(props._id)
               openModal(1);
             }}><FaTrash /></div>
-            <div className='node-option'>
+            <div className='node-option'
               onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
 
             <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
