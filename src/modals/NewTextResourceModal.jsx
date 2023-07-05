@@ -2,10 +2,9 @@ import React from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
-
+import { useState } from 'react'
 export default function NewTextResourceModal({isOpen, setIsOpen, nodeId}) {
-  
-    const updateNode = useContext(LoadNodesContext);
+
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
@@ -33,7 +32,6 @@ export default function NewTextResourceModal({isOpen, setIsOpen, nodeId}) {
             )
         }).then(res => res.json())
         .then(result => {
-            updateNode()
             closeNewResModal()
         }).catch(err => {
             console.log(err);
