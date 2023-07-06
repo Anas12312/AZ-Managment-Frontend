@@ -6,6 +6,7 @@ import EditNodeModal from './modals/EditNodeModal';
 import NewLinkResourceModal from './modals/NewLinkResourceModal';
 import NewTextResourceModal from './modals/NewTextResourceModal';
 import NewImageResourceModel from './modals/NewImageResourceModel';
+import DropDownButton from './components/DropDownButton';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ export default function Item(props) {
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
 
   const getNodeColor = () => {
-    switch(props.color) {
+    switch (props.color) {
       case "purple":
         return `node-container node-purple`
       case "green":
@@ -42,10 +43,10 @@ export default function Item(props) {
         return `node-container node-blue`
       default:
         return `node-container`
-  }
+    }
   }
   const getItemColor = () => {
-    switch(props.color) {
+    switch (props.color) {
       case "purple":
         return `item item-purple`
       case "green":
@@ -63,9 +64,9 @@ export default function Item(props) {
       default:
         return `item`
     }
-  } 
+  }
   const getResourceColor = () => {
-    switch(props.color) {
+    switch (props.color) {
       case "purple":
         return `resource resource-purple`
       case "green":
@@ -83,11 +84,11 @@ export default function Item(props) {
       default:
         return `resource`
     }
-  } 
+  }
   const openModal = (type) => {
-    if(type === 1){
+    if (type === 1) {
       setDeletingType(1);
-    }else if(type === 2){
+    } else if (type === 2) {
       setDeletingType(2);
     }
     setModalIsOpen(true);
@@ -104,8 +105,8 @@ export default function Item(props) {
   const deleteResource = async (deletingId) => {
     fetch(config.BASE_URL + `/resource/${deletingId}`, {
       method: "DELETE",
-      headers:  
-      { 
+      headers:
+      {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
@@ -113,23 +114,23 @@ export default function Item(props) {
       setDeleteStatus(res.status)
       return res.json()
     })
-    .then((response)=>{
-      setDeleteResponse(response)
-      getItemData()
-      closeModal();
-      openModal2();
-    }).catch((err)=>{
-      setDeleteResponse(err)
-      getItemData()
-      closeModal();
-      openModal2();
-    }); 
+      .then((response) => {
+        setDeleteResponse(response)
+        getItemData()
+        closeModal();
+        openModal2();
+      }).catch((err) => {
+        setDeleteResponse(err)
+        getItemData()
+        closeModal();
+        openModal2();
+      });
   }
   const deleteNode = async (deletingId) => {
     fetch(config.BASE_URL + `/nodes/${deletingId}`, {
       method: "DELETE",
-      headers:  
-      { 
+      headers:
+      {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
@@ -137,38 +138,38 @@ export default function Item(props) {
       setDeleteStatus(res.status)
       return res.json()
     })
-    .then((response)=>{
-      setDeleteResponse(response)
-      closeModal();
-      openModal2();
-      props.update()
-    }).catch((err)=>{
-      setDeleteResponse(err)
-      closeModal();
-      openModal2();
-    }); 
+      .then((response) => {
+        setDeleteResponse(response)
+        closeModal();
+        openModal2();
+        props.update()
+      }).catch((err) => {
+        setDeleteResponse(err)
+        closeModal();
+        openModal2();
+      });
   }
   let circleCommonClasses = 'h-2 w-2 bg-primary-1   rounded-full';
   const rootEl = document.getElementById('root');
-  const getItemData = async() => {
+  const getItemData = async () => {
     setIsLoading(true)
     fetch(config.BASE_URL + `/nodes/${props._id}`, {
       method: "GET",
-      headers:  
-      { 
+      headers:
+      {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
     }).then((res) => res.json())
-    .then((response)=>{
-      setIsLoading(false)
-      setItemData(response.resources)
-    }).catch((err)=>{
-      alert(err)
-      nav(-1)
-    }); 
+      .then((response) => {
+        setIsLoading(false)
+        setItemData(response.resources)
+      }).catch((err) => {
+        alert(err)
+        nav(-1)
+      });
   }
-  
+
   return (
     <div>
       <Modal
@@ -182,15 +183,15 @@ export default function Item(props) {
         </div>
         <div className='flex justify-between w-[50%] mb-7 items-center'>
           <div className='bg-primary-1 text-white p-2 hover:cursor-pointer hover:bg-primary-2 rounded-md shadow-lg'
-              onClick={()=>{
-                if(deletingType === 1) {
-                  deleteNode(deletingId)
-                }else if(deletingType === 2) {
-                  deleteResource(deletingId)
-                }
-              }}>Delete</div>
+            onClick={() => {
+              if (deletingType === 1) {
+                deleteNode(deletingId)
+              } else if (deletingType === 2) {
+                deleteResource(deletingId)
+              }
+            }}>Delete</div>
           <div className='bg-white text-black p-2 hover:cursor-pointer hover:bg-gray-300 rounded-md'
-                onClick={()=>{closeModal()}}>Cancel</div>
+            onClick={() => { closeModal() }}>Cancel</div>
         </div>
       </Modal>
       <Modal
@@ -200,16 +201,16 @@ export default function Item(props) {
         shouldFocusAfterRender={false}
         onRequestClose={closeModal2}
       >
-        {deleteStatus == 200?(
+        {deleteStatus == 200 ? (
           <div className='w-full h-full bg-green-200 border border-green-400 flex justify-center items-center bg-opacity-50'>
             Deleted Successfully!
           </div>
-        ):(
-          deleteResponse?(
+        ) : (
+          deleteResponse ? (
             <div className='w-full h-full bg-red-200 border border-red-400 flex justify-center items-center bg-opacity-50'>
               Resource Not Found!
             </div>
-          ):(
+          ) : (
             <div className='w-full h-full bg-red-200 border border-red-400 flex justify-center items-center bg-opacity-50'>
               An Error Occured Try Again Later
             </div>
@@ -218,50 +219,54 @@ export default function Item(props) {
 
       </Modal>
 
-      <NewLinkResourceModal  getItemData={getItemData} isOpen={isAddLinkResModalOpen}  setIsOpen={setIsAddLinkResModalOpen}  nodeId={props._id} />
-      <NewTextResourceModal  getItemData={getItemData} isOpen={isAddTextResModalOpen}  setIsOpen={setIsAddTextResModalOpen}  nodeId={props._id} />
+      <NewLinkResourceModal getItemData={getItemData} isOpen={isAddLinkResModalOpen} setIsOpen={setIsAddLinkResModalOpen} nodeId={props._id} />
+      <NewTextResourceModal getItemData={getItemData} isOpen={isAddTextResModalOpen} setIsOpen={setIsAddTextResModalOpen} nodeId={props._id} />
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
-      <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}/>
-      
+      <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
+
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
-            getItemData();
-            setExpand(!expand)
-          }}>
-          <div className='relative -left-4 font-bold flex items-center w-1/3'> {props.name?<div className='relative left-4'>{props.name}</div>:"-"}</div>
-          
+          getItemData();
+          setExpand(!expand)
+        }}>
+          <div className='relative -left-4 font-bold flex items-center w-1/3'> {props.name ? <div className='relative left-4'>{props.name}</div> : "-"}</div>
+
           <div className='flex'>
-          <div className='node-option' onClick={(e) => {
-              setIsAddTextResModalOpen(true)
-            }}><FaPlus /></div>
+
+            <DropDownButton options={[
+              { innerText: 'Link',  action: ()=>{setIsAddLinkResModalOpen(true)}  },
+              { innerText: 'Text',  action: ()=>{setIsAddTextResModalOpen(true)}  },
+              { innerText: 'Image', action: ()=>{setIsAddImageResModalOpen(true)} }
+            ]} />
+            
             <div className='node-option' onClick={() => {
               setDeletingId(props._id)
               openModal(1);
             }}><FaTrash /></div>
             <div className='node-option'
-              onClick={() => {setIsEditModalOpen(true)}}><FaPencilAlt /></div>
+              onClick={() => { setIsEditModalOpen(true) }}><FaPencilAlt /></div>
 
-            <div className='node-option'>{expand?(<FaArrowDown />):(<FaArrowUp />)}</div>  
+            <div className='node-option'>{expand ? (<FaArrowDown />) : (<FaArrowUp />)}</div>
           </div>
-          </div>
-        {expand&&
-          (!isLoading? (
+        </div>
+        {expand &&
+          (!isLoading ? (
             <div className='item-detailed'>
-              {ItemData.length > 0? (
+              {ItemData.length > 0 ? (
                 ItemData.map((resource, index) => {
-                  if(resource.type === "LINK") {
+                  if (resource.type === "LINK") {
                     return (
                       <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaLink /></div>
                         <div className='w-[50%] mr-2' >{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
-                          {resource.createdBy.imgUrl?(
+                          {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
                               <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
                             </div>
-                          ):(
+                          ) : (
                             <div className='w-full h-full flex justify-center
                                             items-center bg-primary-1 rounded-full
                                             text-xl text-white'>
@@ -275,26 +280,26 @@ export default function Item(props) {
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
                           <div className='resource-option'><FaPencilAlt /></div>
-                          <div className='resource-option' onClick={()=>{
+                          <div className='resource-option' onClick={() => {
                             setDeletingId(resource._id)
                             openModal(2)
                           }}><FaTrash /></div>
                         </div>
                       </div>
                     )
-                  }else if(resource.type === "TEXT") {
+                  } else if (resource.type === "TEXT") {
                     return (
                       <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaFileAlt /></div>
                         <div className='w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
-                          {resource.createdBy.imgUrl?(
+                          {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
                               <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
                             </div>
-                          ):(
+                          ) : (
                             <div className='w-full h-full flex justify-center
                                             items-center bg-primary-1 rounded-full
                                             text-xl 
@@ -309,26 +314,26 @@ export default function Item(props) {
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
                           <div className='resource-option'><FaPencilAlt /></div>
-                          <div className='resource-option' onClick={()=>{
+                          <div className='resource-option' onClick={() => {
                             setDeletingId(resource._id)
                             openModal(2)
                           }}><FaTrash /></div>
                         </div>
                       </div>
                     )
-                  }else if(resource.type === "IMAGE") {
+                  } else if (resource.type === "IMAGE") {
                     return (
                       <div key={index} id={resource._id} className={getResourceColor()} draggable>
                         <div className='mx-3'><FaImage /></div>
                         <div className=' w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
-                          {resource.createdBy.imgUrl?(
+                          {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
                               <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
                             </div>
-                          ):(
+                          ) : (
                             <div className='w-full h-full flex justify-center
                                             items-center bg-primary-1 rounded-full
                                             text-xl 
@@ -343,7 +348,7 @@ export default function Item(props) {
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
                           <div className='resource-option'><FaPencilAlt /></div>
-                          <div className='resource-option' onClick={()=>{
+                          <div className='resource-option' onClick={() => {
                             setDeletingId(resource._id)
                             openModal(2)
                           }}><FaTrash /></div>
@@ -352,19 +357,19 @@ export default function Item(props) {
                     )
                   }
                 })
-              ):(
+              ) : (
                 <div className='w-full flex justify-center items-center'>wow such empty, Click + to add resources</div>
               )}
             </div>
-          ):(
+          ) : (
             <div className='item-detailed-loading'>
               <div className='flex'>
                 <div className={`${circleCommonClasses} mr-1 animate-bounce`}></div>
                 <div
-                    className={`${circleCommonClasses} mr-1 animate-bounce200`}
+                  className={`${circleCommonClasses} mr-1 animate-bounce200`}
                 ></div>
                 <div className={`${circleCommonClasses} animate-bounce400`}></div>
-            </div>
+              </div>
             </div>
           ))
         }
