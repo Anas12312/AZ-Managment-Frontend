@@ -23,6 +23,14 @@ export default function MyUnits() {
     }).then((res) => res.json())
     .then((response)=>{
       setIsLoading(false)
+      const starredUnits = response.starred
+      response.units.forEach((unit) => {
+        if(starredUnits.includes(unit._id)) {
+          unit.starred = true
+        }else {
+          unit.starred = false
+        }
+      })
       setUnits(response.units);
       setCount(response.count);
     }).catch((err)=>{

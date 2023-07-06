@@ -1,10 +1,57 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
-
-export default function Card({_id:id, coverUrl, name, username, description, ownerName}) {
+import config from '../../config';
+export default function Card({_id:id, coverUrl, name, username, description, ownerName, starred}) {
     const nav = useNavigate();
+    const [starLoading, setStarLoading] = useState(false)
+    const [starredd, setStarredd] = useState(starred)
+    const star = (id) => {
+        if(starLoading) return
+        setStarLoading(true)
+        fetch(config.BASE_URL + `/units/star/${id}`, {
+            method: "PUT",
+            headers:  
+            { 
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then((res) => res.json())
+        .then((response)=>{
+            const Star = document.getElementById(`star-${id}`)
+            Star.classList.remove('unstarred')
+            Star.classList.add('starred')
+            setStarredd(true)
+            setStarLoading(false)
+        }).catch((err)=>{
+            setStarLoading(false)
+            alert(err);
+        });
+    }
+    const unstar = (id) => {
+        if(starLoading) return
+        setStarLoading(true)
+        fetch(config.BASE_URL + `/units/unstar/${id}`, {
+            method: "PUT",
+            headers:  
+            { 
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then((res) => res.json())
+        .then((response)=>{
+            const Star = document.getElementById(`star-${id}`)
+            Star.classList.remove('starred')
+            Star.classList.add('unstarred')
+            setStarredd(false)
+            setStarLoading(false)
+        }).catch((err)=>{
+            setStarLoading(false)
+            alert(err);
+        });
+    }
     return (
-    <div className='card' onClick={() => {
+    <div className='card' onClick={(e) => {
         nav(`/unit/${id}`)
     }}>
         <div 
@@ -14,10 +61,21 @@ export default function Card({_id:id, coverUrl, name, username, description, own
         >
         </div>
         <div className='relative left-3 h-1/3 flex flex-col align-middle top-2'>
-            <div className='w-11/12 mt-2'>
-                <span className='card-header'>
+            <div className='w-11/12 mt-2 flex justify-between'>
+                <div className='card-header'>
                     {name}
-                </span>
+                </div>
+                <div id={`star-${id}`} className={starred?"starred":"unstarred"} onClick={(e) => {
+                    console.log('click')
+                    e.stopPropagation()
+                    if(starredd) {
+                        unstar(id)
+                    }else {
+                        star(id)
+                    }
+                }}>
+                    <FaStar />
+                </div>
             </div>
             <div className='w-11/12'>
                 <span className='card-text'>
