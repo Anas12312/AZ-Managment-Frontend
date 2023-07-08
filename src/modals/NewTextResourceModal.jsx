@@ -10,7 +10,6 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
     const [error, setError] = useState('')
 
     useEffect(() => {
-      console.log("anas")
       setName(oldName)
       setText(oldText)
     }, [oldName])

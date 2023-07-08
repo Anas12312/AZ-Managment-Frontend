@@ -3,11 +3,12 @@ import { FaArrowDown, FaArrowUp, FaLink, FaImage, FaFile, FaPencilAlt, FaTrash, 
 import Modal from 'react-modal';
 import config from '../config';
 import EditNodeModal from './modals/EditNodeModal';
-import NewLinkResourceModal from './modals/NewLinkResourceModal';
+import LinkResourceModal from './modals/NewLinkResourceModal';
 import TextResourceModal from './modals/NewTextResourceModal';
 import NewImageResourceModel from './modals/NewImageResourceModel';
 import DropDownButton from './components/DropDownButton';
 import ViewImage from './modals/ViewImage';
+import ViewText from './modals/ViewText';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +25,27 @@ export default function Item(props) {
 
   const [selectedResource, setSelectedResource] = useState(1);
 
+  //Link
+  const [isLinkResAddModalOpen, setIsLinkResAddModalOpen] = useState(false)
+  const [isLinkResEditModalOpen, setIsLinkResEditModalOpen] = useState(false)
+
+  const openLinkModal = (isEdit, res) => {
+    if(isEdit) {
+      setSelectedResource({
+        ...res,
+        link: res.data.link
+      })
+      setIsLinkResEditModalOpen(true);
+    }else {
+      setIsLinkResAddModalOpen(true)
+    }
+  }
+
+
+  //Text
+  const [viewedText, setViewedText] = useState();
+  const [isViewTextOpen, setIsViewTextOpen] = useState(false);
+
   const [isTextResAddModalOpen, setIsTextResAddModalOpen] = useState(false);
   const [isTextResEditModalOpen, setIsTextResEditModalOpen] = useState(false);
 
@@ -34,13 +56,12 @@ export default function Item(props) {
         text: res.data.text
       })
       setIsTextResEditModalOpen(true);
-      console.log(3);
     }else {
       setIsTextResAddModalOpen(true)
     }
   }
 
-  const [isAddLinkResModalOpen, setIsAddLinkResModalOpen] = useState(false)
+  
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
   const [isViewImageOpen, setIsViewImageOpen] = useState(false)
   const [viewedImage, setViewedImage] = useState("")
@@ -238,7 +259,21 @@ export default function Item(props) {
 
       </Modal>
 
-      <NewLinkResourceModal getItemData={getItemData} isOpen={isAddLinkResModalOpen} setIsOpen={setIsAddLinkResModalOpen} nodeId={props._id} />
+      {/* Link Modals */}
+      <LinkResourceModal 
+        isEdit={false}
+        nodeId={props._id} 
+        getItemData={getItemData} 
+        isOpen={isLinkResAddModalOpen} 
+        setIsOpen={setIsLinkResAddModalOpen} 
+      />
+      <LinkResourceModal
+        isEdit={true}
+        {...selectedResource}
+        getItemData={getItemData} 
+        isOpen={isLinkResEditModalOpen} 
+        setIsOpen={setIsLinkResEditModalOpen} 
+      />
       
       {/* Text Modals */}
       <TextResourceModal 
@@ -255,6 +290,7 @@ export default function Item(props) {
         isOpen={isTextResEditModalOpen} 
         setIsOpen={setIsTextResEditModalOpen} 
       />
+      <ViewText isOpen={isViewTextOpen} setIsOpen={setIsViewTextOpen} text={viewedText}/>
       
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
@@ -269,7 +305,7 @@ export default function Item(props) {
           <div className='flex'>
 
             <DropDownButton options={[
-              { innerText: 'Link',  action: ()=>{setIsAddLinkResModalOpen(true)}  },
+              { innerText: 'Link',  action: ()=>{setIsLinkResAddModalOpen(true)}  },
               { innerText: 'Text',  action: ()=>{openTextModal(false, null)}  },
               { innerText: 'Image', action: ()=>{setIsAddImageResModalOpen(true)} }
             ]} />
@@ -291,7 +327,15 @@ export default function Item(props) {
                 ItemData.map((resource, index) => {
                   if (resource.type === "LINK") {
                     return (
-                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
+                      <div 
+                        onClick={() => {
+                          window.open(resource.data.link)
+                        }}
+                        key={index}
+                        id={resource._id} 
+                        className={getResourceColor()} 
+                        draggable>
+
                         <div className='mx-3'><FaLink /></div>
                         <div className='w-[50%] mr-2' >{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -314,7 +358,10 @@ export default function Item(props) {
                         </div>
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
-                          <div className='resource-option'><FaPencilAlt /></div>
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
+                            openLinkModal(true, resource);
+                          }}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={() => {
                             setDeletingId(resource._id)
                             openModal(2)
@@ -324,7 +371,12 @@ export default function Item(props) {
                     )
                   } else if (resource.type === "TEXT") {
                     return (
-                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
+                      <div key={index} id={resource._id} className={getResourceColor()} draggable
+                        onClick={() => {
+                          setViewedText(resource.data.text);
+                          setIsViewTextOpen(true);
+                        }}
+                      >
                         <div className='mx-3'><FaFileAlt /></div>
                         <div className='w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -348,7 +400,8 @@ export default function Item(props) {
                         </div>
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
-                          <div className='resource-option' onClick={() => {
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
                             openTextModal(true, resource)
                           }}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={(e) => {
