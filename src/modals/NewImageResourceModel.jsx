@@ -59,7 +59,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
                   name: name,
                   type: 'IMAGE',
                   data: {
-                    imageUrl: imageUrl
+                    imageUrl: config.BASE_URL + imageUrl
                   }
                 }
             )
@@ -121,7 +121,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
               onClick={() => {
                 if(name) {
                     handleSubmission();
-                    addResource(nodeId, config.BASE_URL + url);
+                    addResource(nodeId, url);
                 }
                 else {
                     setError('Please provide name or image for the resource')
