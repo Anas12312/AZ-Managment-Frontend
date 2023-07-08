@@ -29,7 +29,10 @@ export default function Item(props) {
 
   const openTextModal = (isEdit, res) => {
     if(isEdit) {
-      setSelectedResource(res)
+      setSelectedResource({
+        ...res,
+        text: res.data.text
+      })
       setIsTextResEditModalOpen(true);
       console.log(3);
     }else {
@@ -40,7 +43,7 @@ export default function Item(props) {
   const [isAddLinkResModalOpen, setIsAddLinkResModalOpen] = useState(false)
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
   const [isViewImageOpen, setIsViewImageOpen] = useState(false)
-  const [viewedImage, setViewedImage] = useState("http://localhost:3000/file/6519100a-5f15-4c5c-81b2-96342bc24628.jpg")
+  const [viewedImage, setViewedImage] = useState("")
   const getNodeColor = () => {
     switch (props.color) {
       case "purple":
@@ -247,7 +250,7 @@ export default function Item(props) {
       />
       <TextResourceModal 
         isEdit={true} 
-        res={selectedResource} 
+        {...selectedResource}
         getItemData={getItemData} 
         isOpen={isTextResEditModalOpen} 
         setIsOpen={setIsTextResEditModalOpen} 
@@ -345,8 +348,11 @@ export default function Item(props) {
                         </div>
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
-                          <div className='resource-option' onClick={() => {openTextModal(true, resource)}}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={() => {
+                            openTextModal(true, resource)
+                          }}><FaPencilAlt /></div>
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
                             setDeletingId(resource._id)
                             openModal(2)
                           }}><FaTrash /></div>
