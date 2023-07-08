@@ -15,9 +15,6 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
     }, [oldName])
 
     const closeNewResModal = () => {
-      setName('')
-      setText('')
-      setError('')
       setIsOpen(false);
     }
 
@@ -62,10 +59,9 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
                 }
               }
           )
-      }).then(res => res.json())
-      .then(result => {
-          getItemData()
-          closeNewResModal()
+      }).then(()=> {
+        getItemData()
+        closeNewResModal()
       }).catch(err => {
           console.log(err);
       })

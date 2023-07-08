@@ -23,12 +23,13 @@ export default function DropDownButton({ innerText, options }) {
                     {
                         options.map((option, i) => {
                             return (
-                                <li id={i}>
+                                <li id={i} key={i}>
                                     <span 
                                         id={option.innerText}
                                         onClick={(e) => {
-                                            toggileDropDownHidden()
+                                            setDropDownHidden(!dropDownHidden);
                                             option.action()
+                                            e.stopPropagation()
                                         }}
                                         className="block px-4 py-2 hover:bg-gray-100  "
                                     >{option.innerText}</span>
