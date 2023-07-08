@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import config from '../config';
 import EditNodeModal from './modals/EditNodeModal';
 import NewLinkResourceModal from './modals/NewLinkResourceModal';
-import NewTextResourceModal from './modals/NewTextResourceModal';
+import TextResourceModal from './modals/NewTextResourceModal';
 import NewImageResourceModel from './modals/NewImageResourceModel';
 import DropDownButton from './components/DropDownButton';
 import ViewImage from './modals/ViewImage';
@@ -21,7 +21,22 @@ export default function Item(props) {
 
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddTextResModalOpen, setIsAddTextResModalOpen] = useState(false);
+
+  const [selectedResource, setSelectedResource] = useState(1);
+
+  const [isTextResAddModalOpen, setIsTextResAddModalOpen] = useState(false);
+  const [isTextResEditModalOpen, setIsTextResEditModalOpen] = useState(false);
+
+  const openTextModal = (isEdit, res) => {
+    if(isEdit) {
+      setSelectedResource(res)
+      setIsTextResEditModalOpen(true);
+      console.log(3);
+    }else {
+      setIsTextResAddModalOpen(true)
+    }
+  }
+
   const [isAddLinkResModalOpen, setIsAddLinkResModalOpen] = useState(false)
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
   const [isViewImageOpen, setIsViewImageOpen] = useState(false)
@@ -152,7 +167,7 @@ export default function Item(props) {
   }
   let circleCommonClasses = 'h-2 w-2 bg-primary-1   rounded-full';
   const rootEl = document.getElementById('root');
-  const getItemData = async () => {
+  const getItemData = async (e) => {
     setIsLoading(true)
     fetch(config.BASE_URL + `/nodes/${props._id}`, {
       method: "GET",
@@ -221,7 +236,23 @@ export default function Item(props) {
       </Modal>
 
       <NewLinkResourceModal getItemData={getItemData} isOpen={isAddLinkResModalOpen} setIsOpen={setIsAddLinkResModalOpen} nodeId={props._id} />
-      <NewTextResourceModal getItemData={getItemData} isOpen={isAddTextResModalOpen} setIsOpen={setIsAddTextResModalOpen} nodeId={props._id} />
+      
+      {/* Text Modals */}
+      <TextResourceModal 
+        isEdit={false} 
+        nodeId={props._id} 
+        getItemData={getItemData} 
+        isOpen={isTextResAddModalOpen} 
+        setIsOpen={setIsTextResAddModalOpen}
+      />
+      <TextResourceModal 
+        isEdit={true} 
+        res={selectedResource} 
+        getItemData={getItemData} 
+        isOpen={isTextResEditModalOpen} 
+        setIsOpen={setIsTextResEditModalOpen} 
+      />
+      
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
       <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} imgUrl={viewedImage}/>
@@ -236,7 +267,7 @@ export default function Item(props) {
 
             <DropDownButton options={[
               { innerText: 'Link',  action: ()=>{setIsAddLinkResModalOpen(true)}  },
-              { innerText: 'Text',  action: ()=>{setIsAddTextResModalOpen(true)}  },
+              { innerText: 'Text',  action: ()=>{openTextModal(false, null)}  },
               { innerText: 'Image', action: ()=>{setIsAddImageResModalOpen(true)} }
             ]} />
             
@@ -314,7 +345,7 @@ export default function Item(props) {
                         </div>
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
-                          <div className='resource-option'><FaPencilAlt /></div>
+                          <div className='resource-option' onClick={() => {openTextModal(true, resource)}}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={() => {
                             setDeletingId(resource._id)
                             openModal(2)

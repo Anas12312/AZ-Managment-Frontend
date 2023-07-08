@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 import { useState } from 'react'
-export default function NewTextResourceModal({isOpen, setIsOpen, nodeId, getItemData}) {
+export default function TextResourceModal({isOpen, setIsOpen, nodeId, getItemData, isEdit, res}) {
 
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [error, setError] = useState('')
 
+    useEffect(() => {
+      console.log('a7a');
+      console.log(res);
+      
+      if(isEdit && res) {
+        setName(res.name)
+        setText(res.text)
+      }
+    }, [])
+
     const closeNewResModal = () => {
-        setIsOpen(false);
+      setName('')
+      setText('')
+      setError('')
+      setIsOpen(false);
     }
 
     const addResource = (nodeId) => {
@@ -39,6 +52,31 @@ export default function NewTextResourceModal({isOpen, setIsOpen, nodeId, getItem
         })
     }
 
+    const editResource = (resId) => {
+      fetch(config.BASE_URL + '/resource/' + resId , {
+          method:"PUT",
+          headers:  { 
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem('token')
+          },
+          body: JSON.stringify(
+              {
+                name: name,
+                type: 'TEXT',
+                data: {
+                  text: text
+                }
+              }
+          )
+      }).then(res => res.json())
+      .then(result => {
+          getItemData()
+          closeNewResModal()
+      }).catch(err => {
+          console.log(err);
+      })
+  }
+
   return (
     <div>
         <Modal
@@ -56,6 +94,7 @@ export default function NewTextResourceModal({isOpen, setIsOpen, nodeId, getItem
             id='Res-Name'
              className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
              type='text'
+             value={name}
              onChange={(e) => {
                 setName(e.target.value)
              }}
@@ -64,7 +103,11 @@ export default function NewTextResourceModal({isOpen, setIsOpen, nodeId, getItem
 
         <div className='w-full'>
             <div><label htmlFor="Res-Text" className='text-sm ml-1'>Text</label></div>
-            <textarea  id='Res-Text'  className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text'
+            <textarea  
+              id='Res-Text'
+              className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
+              type='text'
+              value={text}
             onChange={(e) => {
               setText(e.target.value)
             }} />
@@ -74,7 +117,7 @@ export default function NewTextResourceModal({isOpen, setIsOpen, nodeId, getItem
             <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
               onClick={() => {
                 if(name && text) {
-                    addResource(nodeId)
+                    isEdit ? editResource(res._id) : addResource(nodeId)
                 }
                 else {
                     setError('Please provide name or text for the resource')
