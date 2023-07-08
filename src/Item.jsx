@@ -7,6 +7,7 @@ import NewLinkResourceModal from './modals/NewLinkResourceModal';
 import NewTextResourceModal from './modals/NewTextResourceModal';
 import NewImageResourceModel from './modals/NewImageResourceModel';
 import DropDownButton from './components/DropDownButton';
+import ViewImage from './modals/ViewImage';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,11 +21,11 @@ export default function Item(props) {
 
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
   const [isAddTextResModalOpen, setIsAddTextResModalOpen] = useState(false);
   const [isAddLinkResModalOpen, setIsAddLinkResModalOpen] = useState(false)
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
-
+  const [isViewImageOpen, setIsViewImageOpen] = useState(false)
+  const [viewedImage, setViewedImage] = useState("http://localhost:3000/file/6519100a-5f15-4c5c-81b2-96342bc24628.jpg")
   const getNodeColor = () => {
     switch (props.color) {
       case "purple":
@@ -223,7 +224,7 @@ export default function Item(props) {
       <NewTextResourceModal getItemData={getItemData} isOpen={isAddTextResModalOpen} setIsOpen={setIsAddTextResModalOpen} nodeId={props._id} />
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
-
+      <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} imgUrl={viewedImage}/>
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
           getItemData();
@@ -323,7 +324,10 @@ export default function Item(props) {
                     )
                   } else if (resource.type === "IMAGE") {
                     return (
-                      <div key={index} id={resource._id} className={getResourceColor()} draggable>
+                      <div key={index} id={resource._id} className={getResourceColor()} draggable onClick={() => {
+                        setViewedImage(resource.data.imageUrl)
+                        setIsViewImageOpen(true);
+                      }}>
                         <div className='mx-3'><FaImage /></div>
                         <div className=' w-[50%] mr-2'>{resource.name}</div>
                         <div className='flex items-center justify-start w-[30%] relative'>
@@ -348,7 +352,8 @@ export default function Item(props) {
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
                           <div className='resource-option'><FaPencilAlt /></div>
-                          <div className='resource-option' onClick={() => {
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
                             setDeletingId(resource._id)
                             openModal(2)
                           }}><FaTrash /></div>

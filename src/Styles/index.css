@@ -167,7 +167,7 @@ body {
             flex justify-center items-center
    }
    .resource {
-    @apply flex border-b-2 p-3 last:border-b-0 items-center cursor-move
+    @apply flex border-b-2 p-3 last:border-b-0 items-center cursor-pointer
    }
    .resource-purple {
     @apply bg-purple-2
