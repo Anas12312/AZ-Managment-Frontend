@@ -2,6 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.image {
+  cursor: pointer 25 15 auto;
+
+}
 body {
   font-family: 'Open Sans', sans-serif;
 }
