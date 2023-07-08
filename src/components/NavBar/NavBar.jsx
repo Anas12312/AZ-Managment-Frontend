@@ -32,14 +32,8 @@ export default function NavBar({selected}) {
         ele.classList.add("nav-bar-app-selected")
       }
       document.addEventListener("click", (e)=> {
-        const notificationsElements = e.target.id === 'notifications' || e.target.id === 'notifications-btn' || e.target.parentNode.id === 'notifications-btn' || e.target.parentNode.parentNode.id === 'notifications-btn' || e.target.parentNode.parentNode.parentNode.id === 'notifications-btn';
-        const profileElements = e.target.id === 'profile' || e.target.id === 'profile-btn' || e.target.parentNode.id === 'profile-btn' || e.target.parentNode.parentNode.id === 'profile-btn' || e.target.parentNode.parentNode.parentNode.id === 'profile-btn';
-        if(!notificationsElements) {
-          setShowNotifications(false)
-        }
-        if(!profileElements) {
-          setShowProfile(false)
-        }
+        setShowNotifications(false)
+        setShowProfile(false)
       })
     }, [])
   return (
@@ -62,25 +56,40 @@ export default function NavBar({selected}) {
 
         {/* Right Icons */}
         <div className='fixed right-0 flex justify-around items-center p-2 w-36 '>
-            <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={() => {setShowNotifications(!showNotifications)}}>
+            <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={(e) => {
+              e.stopPropagation()
+              setShowNotifications(!showNotifications)
+              setShowProfile(false)
+            }}>
               {notificationsNo>0&&(
                 <div className='absolute top-1 bg-red-500 left-1/4 w-4 h-4 border-2 border-red-500 rounded-full text-xs flex justify-center items-center'>{notificationsNo}</div>
               )}
               <FaBell />
             </div>
-            <div id='profile-btn' className="nav-bar-icon" title="Profile" onClick={()=> {setShowProfile(!showProfile)}}><FaQuestion /></div>
+            <div id='profile-btn' className="nav-bar-icon" title="Profile" onClick={(e)=> {
+              e.stopPropagation()
+              setShowProfile(!showProfile)
+              setShowNotifications(false)
+            }}><FaQuestion /></div>
             <div className="nav-bar-icon" title="Logout" onClick={logout}><FaSignOutAlt /></div>
         </div>
         {/* Notificatinos */}
         {showNotifications&&(
-          <div id="notifications" className='absolute top-[3.25rem] right-[6.75rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'>
+          <div id="notifications" className='absolute top-[3.25rem] right-[6.75rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
+          onClick={(e)=>{
+            e.stopPropagation()
+          }}>
 
           </div>
         )}
 
         {/* Profile */}
         {showProfile&&(
-          <div id="profile" className='absolute top-[3.25rem] right-[4.25rem] w-[15rem] h-[15rem] shadow-lg border border-gray-200 flex flex-col justify-center items-center'>
+          <div id="profile" className='absolute top-[3.25rem] right-[4.25rem] w-[15rem] h-[15rem]
+                                       shadow-lg border border-gray-200 flex flex-col justify-center items-center'
+                onClick={(e)=>{
+                  e.stopPropagation()
+                }}>
             <div className='bg-gray-100 h-1/3 w-full'></div>
             <div className='bg-gray-400 h-2/3 w-full flex flex-col pt-8 px-4'>
               <div>{user.name}</div>

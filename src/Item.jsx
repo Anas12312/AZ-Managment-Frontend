@@ -8,6 +8,7 @@ import TextResourceModal from './modals/NewTextResourceModal';
 import NewImageResourceModel from './modals/NewImageResourceModel';
 import DropDownButton from './components/DropDownButton';
 import ViewImage from './modals/ViewImage';
+import EditImageResourceModel from './modals/EditImageResourceModal';
 export default function Item(props) {
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ export default function Item(props) {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const [selectedResource, setSelectedResource] = useState(1);
+  const [selectedResource, setSelectedResource] = useState(null);
 
   const [isTextResAddModalOpen, setIsTextResAddModalOpen] = useState(false);
   const [isTextResEditModalOpen, setIsTextResEditModalOpen] = useState(false);
@@ -44,6 +45,11 @@ export default function Item(props) {
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
   const [isViewImageOpen, setIsViewImageOpen] = useState(false)
   const [viewedImage, setViewedImage] = useState("")
+  const [isEditImageResOpen, setIsEditImageResOpen] = useState(false)
+  useEffect(()=>{
+    
+  },[])
+
   const getNodeColor = () => {
     switch (props.color) {
       case "purple":
@@ -257,6 +263,9 @@ export default function Item(props) {
       />
       
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
+      <EditImageResourceModel getItemData={getItemData} isOpen={isEditImageResOpen} setIsOpen={setIsEditImageResOpen}
+                              {...selectedResource} imageUrl={selectedResource&&(selectedResource.data&&selectedResource.data.imageUrl)}
+                              oldName={selectedResource&&selectedResource.name} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
       <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} imgUrl={viewedImage}/>
       <div id={props._id} className={getNodeColor()}>
@@ -299,7 +308,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -332,7 +341,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -372,7 +381,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} />
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -388,7 +397,11 @@ export default function Item(props) {
                         </div>
                         <div className='flex relative -right-[4.5rem]'>
                           <div className='resource-option'><FaEye /></div>
-                          <div className='resource-option'><FaPencilAlt /></div>
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedResource(resource)
+                            setIsEditImageResOpen(true)
+                          }}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={(e) => {
                             e.stopPropagation()
                             setDeletingId(resource._id)

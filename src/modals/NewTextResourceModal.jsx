@@ -15,9 +15,6 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
     }, [oldName])
 
     const closeNewResModal = () => {
-      setName('')
-      setText('')
-      setError('')
       setIsOpen(false);
     }
 
