@@ -23,7 +23,7 @@ export default function DropDownButton({ innerText, options }) {
                     {
                         options.map((option, i) => {
                             return (
-                                <li id={i}>
+                                <li id={i} key={i}>
                                     <span 
                                         id={option.innerText}
                                         onClick={(e) => {
