@@ -10,7 +10,6 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
     const [error, setError] = useState('')
 
     useEffect(() => {
-      console.log("anas")
       setName(oldName)
       setText(oldText)
     }, [oldName])
@@ -63,10 +62,9 @@ export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getIt
                 }
               }
           )
-      }).then(res => res.json())
-      .then(result => {
-          getItemData()
-          closeNewResModal()
+      }).then(()=> {
+        getItemData()
+        closeNewResModal()
       }).catch(err => {
           console.log(err);
       })

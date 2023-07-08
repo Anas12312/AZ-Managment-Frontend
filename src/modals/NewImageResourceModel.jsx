@@ -20,8 +20,14 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
     const [isFilePicked, setIsFilePicked] = useState(false);
 
     const changeHandler = (event) => {
-      setSelectedFile(event.target.files[0]);
-      setIsFilePicked(true);
+      if(event.target.files[0].type === 'image/jpeg' || event.target.files[0].type === 'image/png' || event.target.files[0].type === 'image/jpg') {
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+        const output = document.getElementById('preview')
+        output.src = URL.createObjectURL(event.target.files[0]);
+      }else {
+        setError("Image Type must be JPG, JPEG or PNG")
+      }
     };
 
     const handleSubmission = () => {
@@ -101,13 +107,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
             onChange={changeHandler}/>
             {isFilePicked ? (
               <div>
-                <p>Filename: {selectedFile.name}</p>
-                <p>Filetype: {selectedFile.type}</p>
-                <p>Size in bytes: {selectedFile.size}</p>
-                <p>
-                  lastModifiedDate:{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
-                </p>
+                <img src='' />
               </div>
             ) : (
               <p>Select a file to show details</p>
