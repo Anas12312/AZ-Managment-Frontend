@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 
-export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItemData}) {
-
+export default function LinkResourceModal({isOpen, isEdit, setIsOpen, nodeId, getItemData, _id, link:oldlink, name:oldname}) {
 
     const [name, setName] = useState('')
     const [embedName, setEmbedName] = useState('')
@@ -13,6 +12,11 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItem
 
     const [input1, setInput1] = useState(true)
     const [input2, setInput2] = useState(false)
+
+    useEffect(() => {
+        setName(oldname)
+        setLink(oldlink)
+    }, [oldname])
 
     const closeNewResModal = () => {
         setEmbedName('')
@@ -67,6 +71,30 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItem
         })
     }
 
+    const editResource = (resId) => {
+        fetch(config.BASE_URL + '/resource/' + resId , {
+            method:"PUT",
+            headers:  { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            },
+            body: JSON.stringify(
+                {
+                  name: (!input1)?name:embedName,
+                  type: 'LINK',
+                  data: {
+                    link: link
+                  }
+                }
+            )
+        }).then(result => {
+            closeNewResModal()
+            getItemData()
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
   return (
     <div>
         <Modal
@@ -84,6 +112,7 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItem
             id='Res-Link'
              className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
              type='text'
+             value={link}
              onChange={(e) => {
                 const inputLink = e.target.value
 
@@ -103,12 +132,14 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItem
                         setInput1(!input1)
                         setInput2(!input2)
                     }}
+                    
                 />
                 <input  
                 id='Node-Name'
                     className='inline text-sm my-1 w-full h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
                     type='text'
                     disabled={input1}
+                    value={name}
                     onChange={(e) => {
                         setName(e.target.value)
                     }}
@@ -140,14 +171,14 @@ export default function NewLinkResourceModal({isOpen, setIsOpen, nodeId, getItem
             <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
               onClick={() => {
                 if((!input1 && name) || (!input2 && embedName)) {
-                    addResource(nodeId)
+                    isEdit ? editResource(_id) : addResource(nodeId) 
                 }
                 else {
                     setError('Please provide name for the resource')
                 }
 
               }}
-            >Create Resource</button>
+            >{isEdit? 'Save' : 'Create Resource'}</button>
         </div>
 
       </Modal>
