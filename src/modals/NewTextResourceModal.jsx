@@ -3,18 +3,17 @@ import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 import { useState } from 'react'
-export default function TextResourceModal({isOpen, setIsOpen, nodeId, getItemData, isEdit, res}) {
+export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getItemData, isEdit, name : oldName, text:oldText}) {
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [error, setError] = useState('')
 
     useEffect(() => {
-      if(isEdit && res) {
-        setName(res.name)
-        setText(res.text)
-      }
-    }, [])
+      console.log("anas")
+      setName(oldName)
+      setText(oldText)
+    }, [oldName])
 
     const closeNewResModal = () => {
       setName('')
@@ -82,7 +81,6 @@ export default function TextResourceModal({isOpen, setIsOpen, nodeId, getItemDat
         shouldFocusAfterRender={false}
         onRequestClose={closeNewResModal}
       >
-
         <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
         <div className='w-full'>
             <div><label htmlFor="Res-Name" id='Res-Name-Lable' className='text-sm ml-1'>Name</label></div>
@@ -113,14 +111,14 @@ export default function TextResourceModal({isOpen, setIsOpen, nodeId, getItemDat
             <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
               onClick={() => {
                 if(name && text) {
-                    isEdit ? editResource(res._id) : addResource(nodeId)
+                    isEdit ? editResource(_id) : addResource(nodeId)
                 }
                 else {
                     setError('Please provide name or text for the resource')
                 }
 
               }}
-            >Create Resource</button>
+            >{!isEdit?"Create Resource":"Save"}</button>
         </div>
 
       </Modal>
