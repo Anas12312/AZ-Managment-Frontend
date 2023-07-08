@@ -7,11 +7,10 @@ import { useForm } from 'react-hook-form';
 export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getItemData}) {
 
     const [name, setName] = useState('')
-    const [url, setUrl] = useState('')
-    const {register, handleSubmit} = useForm()
     const [error, setError] = useState('')
 
     const closeNewResModal = () => {
+      setName('')
       setSelectedFile(null)
       setIsFilePicked(false)  
       setIsOpen(false);
@@ -39,8 +38,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
         )
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
-          setUrl(result.message)
+          addResource(nodeId, result.message);
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -121,7 +119,6 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
               onClick={() => {
                 if(name) {
                     handleSubmission();
-                    addResource(nodeId, url);
                 }
                 else {
                     setError('Please provide name or image for the resource')

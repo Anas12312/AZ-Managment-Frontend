@@ -5,7 +5,6 @@ import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 import { useState } from 'react'
 export default function TextResourceModal({_id, isOpen, setIsOpen, nodeId, getItemData, isEdit, name : oldName, text:oldText}) {
 
-
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [error, setError] = useState('')
