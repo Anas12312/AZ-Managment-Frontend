@@ -4,7 +4,7 @@ import { FaPlug, FaPlus } from 'react-icons/fa';
 export default function DropDownButton({ innerText, options }) {
     const [dropDownHidden, setDropDownHidden] = useState(true)
 
-    const toggileDropDownHidden = () => {
+    const toggileDropDownHidden = (e) => {    
         setDropDownHidden(!dropDownHidden);
     }
 
@@ -20,12 +20,12 @@ export default function DropDownButton({ innerText, options }) {
             <div hidden={dropDownHidden} id="dropdown" className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
                 <ul className="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton">
                     {
-                        options.map(option => {
+                        options.map((option, i) => {
                             return (
-                                <li>
+                                <li id={i}>
                                     <span 
                                         id={option.innerText}
-                                        onClick={() => {
+                                        onClick={(e) => {
                                             toggileDropDownHidden()
                                             option.action()
                                         }}
