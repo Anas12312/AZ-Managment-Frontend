@@ -4,7 +4,8 @@ import { FaPlug, FaPlus } from 'react-icons/fa';
 export default function DropDownButton({ innerText, options }) {
     const [dropDownHidden, setDropDownHidden] = useState(true)
 
-    const toggileDropDownHidden = (e) => {    
+    const toggileDropDownHidden = (e) => {  
+        e.stopPropagation()
         setDropDownHidden(!dropDownHidden);
     }
 
@@ -12,7 +13,7 @@ export default function DropDownButton({ innerText, options }) {
         <div>
             <button
                 id="dropdownDefaultButton"
-                onClick={toggileDropDownHidden}
+                onClick={(toggileDropDownHidden)}
                 className="node-option"
                 type="button">{innerText}
                 <FaPlus />
