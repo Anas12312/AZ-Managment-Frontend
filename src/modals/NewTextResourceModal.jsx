@@ -5,15 +5,11 @@ import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
 import { useState } from 'react'
 export default function TextResourceModal({isOpen, setIsOpen, nodeId, getItemData, isEdit, res}) {
 
-
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [error, setError] = useState('')
 
     useEffect(() => {
-      console.log('a7a');
-      console.log(res);
-      
       if(isEdit && res) {
         setName(res.name)
         setText(res.text)
