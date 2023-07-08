@@ -34,7 +34,7 @@ export default function Card({_id:id, coverUrl, name, username, description, own
         fetch(config.BASE_URL + `/units/unstar/${id}`, {
             method: "PUT",
             headers:  
-            { 
+            {
               "Content-Type": "application/json",
               "Authorization": "Bearer " + localStorage.getItem('token')
             }
