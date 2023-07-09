@@ -87,7 +87,7 @@ export default function ViewImage({isOpen, setIsOpen, imgUrl, name}) {
       <Modal
         appElement={document.getElementById('root')}
         isOpen={isOpen}
-        className={'select-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 h-full w-full absolute flex justify-between items-center border  rounded-md text-black'}
+        className={'select-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 h-full w-full absolute flex justify-between items-center rounded-md text-black'}
         shouldFocusAfterRender={false}
         onRequestClose={closeViewImage}
       >

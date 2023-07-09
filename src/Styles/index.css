@@ -51,12 +51,14 @@ body {
     @apply w-8 h-8 bg-opacity-20 bg-white rounded-full p-1
           hover:cursor-pointer flex justify-center items-center
           hover:bg-opacity-30 text-white text-base border
+          transition-all ease-linear duration-200
   }
   .nav-bar-app {
     @apply w-20 h-10 bg-opacity-20 bg-transparent rounded-md p-1
           hover:cursor-pointer flex justify-center items-center
           hover:bg-white mx-2
           hover:bg-opacity-30 text-white text-lg
+          transition-all ease-linear duration-200
   }
   .nav-bar-app-selected {
     @apply font-bold
@@ -109,9 +111,11 @@ body {
    }
    .unstarred {
     @apply text-gray-400 flex justify-center items-center hover:text-yellow-400
+            transition-all ease-linear duration-75
    }
    .starred {
     @apply text-yellow-400 flex justify-center items-center hover:text-yellow-600
+            transition-all ease-linear duration-75
    }
    .node-purple {
     @apply bg-purple-3
