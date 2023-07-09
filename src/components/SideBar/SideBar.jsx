@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBarItem from './SideBarItem/SideBarItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaCube, FaStar, FaUser, FaFile, FaClock, FaPlus } from 'react-icons/fa'
@@ -8,12 +8,13 @@ import config from '../../../config'
 import { useNavigate } from 'react-router-dom';
 
 
-export default function SideBar() {
+export default function SideBar({selected}) {
   
   const nav = useNavigate();
 
   const rootEl = document.getElementById('root');
   
+
   //Modal Show State
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => {
@@ -109,10 +110,10 @@ export default function SideBar() {
         <FaPlus /> New
       </div>
       <div className='relative flex flex-col left-3 top-7'>
-        <SideBarItem id={"my-units"} text={"My Units"} icon={<FaFile />} link={"/resources"} />
-        <SideBarItem id={"shared"} text={"Shared With Me"} icon={<FaUser />} link={""} />
-        <SideBarItem id={"starred"} text={"Starred"} icon={<FaStar />} link={""} />
-        <SideBarItem id={"recent"} text={"Recents"} icon={<FaClock />} link={""} />
+        {selected === 'my-units'?(<SideBarItem id={"my-units"} text={"My Units"} icon={<FaFile />} link={"/resources"} selected={true} />):(<SideBarItem id={"my-units"} text={"My Units"} icon={<FaFile />} link={"/resources"} />)}
+        {selected === 'starred'?(<SideBarItem id={"starred"} text={"Starred"} icon={<FaStar />} link={"/resources/starred"} selected={true} />):(<SideBarItem id={"starred"} text={"Starred"} icon={<FaStar />} link={"/resources/starred"} />)}
+        {selected === 'shared'?(<SideBarItem id={"shared"} text={"Shared With Me"} icon={<FaUser />} link={""} selected={true} />):(<SideBarItem id={"shared"} text={"Shared With Me"} icon={<FaUser />} link={""} />)}
+        {selected === 'recent'?(<SideBarItem id={"recent"} text={"Recents"} icon={<FaClock />} link={""} selected={true} />):(<SideBarItem id={"recent"} text={"Recents"} icon={<FaClock />} link={""} />)}
       </div>
     </div>
   )

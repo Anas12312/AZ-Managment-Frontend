@@ -8,6 +8,7 @@ import Home from "../pages/Home/Home";
 import Resources from "../pages/Resources/Resources";
 import ViewUnit from "../pages/ViewUnit/ViewUnit";
 import Nodes from "../pages/Nodes/Nodes";
+import Starred from "../pages/Resources/Starred";
 
 
 export default function AppRouter() {
@@ -20,6 +21,7 @@ export default function AppRouter() {
         <Route path="/signup" Component= {Signup} />
         <Route path="/home" Component= {Home} />
         <Route path='/resources' Component={Resources} />
+        <Route path='/resources/starred' Component={Starred} />
         <Route path="/unit/:id" Component={Nodes} />
       </Routes>
     </BrowserRouter>

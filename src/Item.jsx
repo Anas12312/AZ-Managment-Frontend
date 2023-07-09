@@ -303,7 +303,7 @@ export default function Item(props) {
                               {...selectedResource} imageUrl={selectedResource&&(selectedResource.data&&selectedResource.data.imageUrl)}
                               oldName={selectedResource&&selectedResource.name} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
-      <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} imgUrl={viewedImage}/>
+      <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} {...viewedImage} />
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
           getItemData();
@@ -424,7 +424,10 @@ export default function Item(props) {
                   } else if (resource.type === "IMAGE") {
                     return (
                       <div key={index} id={resource._id} className={getResourceColor()} draggable onClick={() => {
-                        setViewedImage(resource.data.imageUrl)
+                        setViewedImage({
+                          name: resource.name,
+                          imgUrl: resource.data.imageUrl
+                        })
                         setIsViewImageOpen(true);
                       }}>
                         <div className='mx-3'><FaImage /></div>

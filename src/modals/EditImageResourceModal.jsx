@@ -71,7 +71,7 @@ export default function EditImageResourceModel({isOpen, setIsOpen, _id:id, oldNa
                       name: name,
                       type: 'IMAGE',
                       data: {
-                        imageUrl: config.BASE_URL + imageUrl
+                        imageUrl: imageUrl
                       }
                     }
                 )

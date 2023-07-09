@@ -11,6 +11,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
 
     const closeNewResModal = () => {
       setName('')
+      setError('')
       setSelectedFile(null)
       setIsFilePicked(false)  
       setIsOpen(false);
@@ -20,6 +21,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
     const [isFilePicked, setIsFilePicked] = useState(false);
 
     const changeHandler = (event) => {
+      console.log(event.target.files[0])
       if(event.target.files[0].type === 'image/jpeg' || event.target.files[0].type === 'image/png' || event.target.files[0].type === 'image/jpg') {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
@@ -63,7 +65,7 @@ export default function NewImageResourceModel({isOpen, setIsOpen, nodeId, getIte
                   name: name,
                   type: 'IMAGE',
                   data: {
-                    imageUrl: config.BASE_URL + imageUrl
+                    imageUrl: imageUrl
                   }
                 }
             )

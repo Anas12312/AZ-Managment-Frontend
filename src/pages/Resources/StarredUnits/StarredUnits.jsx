@@ -5,7 +5,7 @@ import Card from '../../../components/Card'
 import LoadingCard from '../../../components/LoadingCard'
 import config from '../../../../config'
 
-export default function MyUnits() {
+export default function StarredUnits() {
   const [units, setUnits] = useState([]);
   const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
@@ -13,7 +13,7 @@ export default function MyUnits() {
 
   const getAllUserUnits = async (page) => {
     setIsLoading(true);
-    fetch(config.BASE_URL + `/units?page=${page}&limit=6`, {
+    fetch(config.BASE_URL + `/units/starred?page=${page}&limit=6`, {
       method: "GET",
       headers:  
       { 
@@ -23,13 +23,8 @@ export default function MyUnits() {
     }).then((res) => res.json())
     .then((response)=>{
       setIsLoading(false)
-      const starredUnits = response.starred
       response.units.forEach((unit) => {
-        if(starredUnits.includes(unit._id)) {
-          unit.starred = true
-        }else {
-          unit.starred = false
-        }
+        unit.starred = true
       })
       setUnits(response.units);
       setCount(response.count);
@@ -46,7 +41,7 @@ export default function MyUnits() {
 
   return (
     <div className='flex flex-row h-screen'>  
-            <SideBar selected={"my-units"} />
+            <SideBar selected={"starred"} />
             {!isLoading?(
               <div className='w-full'>
                 <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
