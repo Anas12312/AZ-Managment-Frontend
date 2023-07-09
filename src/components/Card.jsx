@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FaStar } from 'react-icons/fa';
+import { FaArrowDown, FaEllipsisH, FaEllipsisV, FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
 import config from '../../config';
 export default function Card({_id:id, coverUrl, name, username, description, ownerName, starred}) {
@@ -87,6 +87,7 @@ export default function Card({_id:id, coverUrl, name, username, description, own
                     Created By: {ownerName}
                 </span>
             </div>
+            <div className='transition-all ease-linear duration-200 text-gray-700 absolute top-14 right-5 flex justify-center items-center text-lg rounded-full p-[0.5rem] hover:bg-black hover:bg-opacity-20 hover:cursor-pointer'><FaEllipsisV size={20} /></div>
         </div>
     </div>
   )
