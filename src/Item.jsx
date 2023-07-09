@@ -10,34 +10,35 @@ import DropDownButton from './components/DropDownButton';
 import ViewImage from './modals/ViewImage';
 import ViewText from './modals/ViewText';
 import EditImageResourceModel from './modals/EditImageResourceModal';
+import DeleteModal from './modals/DeleteModal';
 export default function Item(props) {
+
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [expand, setExpand] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modal2IsOpen, setModal2IsOpen] = useState(false);
-  const [deletingId, setDeletingId] = useState(null);
-  const [deleteResponse, setDeleteResponse] = useState('');
-  const [deleteStatus, setDeleteStatus] = useState(200);
-  const [deletingType, setDeletingType] = useState(1);
 
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  //Select
   const [selectedResource, setSelectedResource] = useState(null);
+
+  //Delete
+  const [isDeleteResModalOpen, setIsDeleteResModalOpen] = useState(false)
+  const [isDeleteNodeModalOpen, setIsDeleteNodeModalOpen] = useState(false)
 
   //Link
   const [isLinkResAddModalOpen, setIsLinkResAddModalOpen] = useState(false)
   const [isLinkResEditModalOpen, setIsLinkResEditModalOpen] = useState(false)
 
   const openLinkModal = (isEdit, res) => {
-    if(isEdit) {
+    if (isEdit) {
       setSelectedResource({
         ...res,
         link: res.data.link
       })
       setIsLinkResEditModalOpen(true);
-    }else {
+    } else {
       setIsLinkResAddModalOpen(true)
     }
   }
@@ -51,25 +52,25 @@ export default function Item(props) {
   const [isTextResEditModalOpen, setIsTextResEditModalOpen] = useState(false);
 
   const openTextModal = (isEdit, res) => {
-    if(isEdit) {
+    if (isEdit) {
       setSelectedResource({
         ...res,
         text: res.data.text
       })
       setIsTextResEditModalOpen(true);
-    }else {
+    } else {
       setIsTextResAddModalOpen(true)
     }
   }
 
-  
+
   const [isAddImageResModalOpen, setIsAddImageResModalOpen] = useState(false)
   const [isViewImageOpen, setIsViewImageOpen] = useState(false)
   const [viewedImage, setViewedImage] = useState("")
   const [isEditImageResOpen, setIsEditImageResOpen] = useState(false)
-  useEffect(()=>{
-    
-  },[])
+  useEffect(() => {
+
+  }, [])
 
   const getNodeColor = () => {
     switch (props.color) {
@@ -139,64 +140,10 @@ export default function Item(props) {
     }
     setModalIsOpen(true);
   }
-  const closeModal = () => {
-    setModalIsOpen(false);
-  }
-  const openModal2 = () => {
-    setModal2IsOpen(true);
-  }
-  const closeModal2 = () => {
-    setModal2IsOpen(false);
-  }
-  const deleteResource = async (deletingId) => {
-    fetch(config.BASE_URL + `/resource/${deletingId}`, {
-      method: "DELETE",
-      headers:
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem('token')
-      }
-    }).then((res) => {
-      setDeleteStatus(res.status)
-      return res.json()
-    })
-      .then((response) => {
-        setDeleteResponse(response)
-        getItemData()
-        closeModal();
-        openModal2();
-      }).catch((err) => {
-        setDeleteResponse(err)
-        getItemData()
-        closeModal();
-        openModal2();
-      });
-  }
-  const deleteNode = async (deletingId) => {
-    fetch(config.BASE_URL + `/nodes/${deletingId}`, {
-      method: "DELETE",
-      headers:
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem('token')
-      }
-    }).then((res) => {
-      setDeleteStatus(res.status)
-      return res.json()
-    })
-      .then((response) => {
-        setDeleteResponse(response)
-        closeModal();
-        openModal2();
-        props.update()
-      }).catch((err) => {
-        setDeleteResponse(err)
-        closeModal();
-        openModal2();
-      });
-  }
+
+
   let circleCommonClasses = 'h-2 w-2 bg-primary-1   rounded-full';
-  const rootEl = document.getElementById('root');
+
   const getItemData = async (e) => {
     setIsLoading(true)
     fetch(config.BASE_URL + `/nodes/${props._id}`, {
@@ -218,92 +165,63 @@ export default function Item(props) {
 
   return (
     <div>
-      <Modal
-        appElement={rootEl}
-        isOpen={modalIsOpen}
-        className={'h-1/4 w-1/4 left-1/3 top-1/3 absolute flex flex-col justify-between items-center border p-5 rounded-md bg-secondary-2 text-black'}
-        shouldFocusAfterRender={false}
-      >
-        <div className='font-bold mt-5'>
-          Are you sure you want to delete this?
-        </div>
-        <div className='flex justify-between w-[50%] mb-7 items-center'>
-          <div className='bg-primary-1 text-white p-2 hover:cursor-pointer hover:bg-primary-2 rounded-md shadow-lg'
-            onClick={() => {
-              if (deletingType === 1) {
-                deleteNode(deletingId)
-              } else if (deletingType === 2) {
-                deleteResource(deletingId)
-              }
-            }}>Delete</div>
-          <div className='bg-white text-black p-2 hover:cursor-pointer hover:bg-gray-300 rounded-md'
-            onClick={() => { closeModal() }}>Cancel</div>
-        </div>
-      </Modal>
-      <Modal
-        appElement={rootEl}
-        isOpen={modal2IsOpen}
-        className={'h-1/6 w-1/6 left-[40%] top-1/3 absolute flex flex-col justify-between items-center border rounded-md bg-secondary-2 text-black'}
-        shouldFocusAfterRender={false}
-        onRequestClose={closeModal2}
-      >
-        {deleteStatus == 200 ? (
-          <div className='w-full h-full bg-green-200 border border-green-400 flex justify-center items-center bg-opacity-50'>
-            Deleted Successfully!
-          </div>
-        ) : (
-          deleteResponse ? (
-            <div className='w-full h-full bg-red-200 border border-red-400 flex justify-center items-center bg-opacity-50'>
-              Resource Not Found!
-            </div>
-          ) : (
-            <div className='w-full h-full bg-red-200 border border-red-400 flex justify-center items-center bg-opacity-50'>
-              An Error Occured Try Again Later
-            </div>
-          )
-        )}
-
-      </Modal>
+      {/* Delete Modal */}
+      <DeleteModal
+        deleteType={'RESOURCE'}
+        {...selectedResource}
+        nodeId={props._id}
+        getItemData={getItemData}
+        isOpen={isDeleteResModalOpen}
+        setIsOpen={setIsDeleteResModalOpen}
+      />
+      <DeleteModal
+        deleteType={'NODE'}
+        _id={props._id}
+        isOpen={isDeleteNodeModalOpen}
+        setIsOpen={setIsDeleteNodeModalOpen}
+      />
 
       {/* Link Modals */}
-      <LinkResourceModal 
+      <LinkResourceModal
         isEdit={false}
-        nodeId={props._id} 
-        getItemData={getItemData} 
-        isOpen={isLinkResAddModalOpen} 
-        setIsOpen={setIsLinkResAddModalOpen} 
+        nodeId={props._id}
+        getItemData={getItemData}
+        isOpen={isLinkResAddModalOpen}
+        setIsOpen={setIsLinkResAddModalOpen}
       />
       <LinkResourceModal
         isEdit={true}
         {...selectedResource}
-        getItemData={getItemData} 
-        isOpen={isLinkResEditModalOpen} 
-        setIsOpen={setIsLinkResEditModalOpen} 
+        getItemData={getItemData}
+        isOpen={isLinkResEditModalOpen}
+        setIsOpen={setIsLinkResEditModalOpen}
       />
-      
+
       {/* Text Modals */}
-      <TextResourceModal 
-        isEdit={false} 
-        nodeId={props._id} 
-        getItemData={getItemData} 
-        isOpen={isTextResAddModalOpen} 
+      <TextResourceModal
+        isEdit={false}
+        nodeId={props._id}
+        getItemData={getItemData}
+        isOpen={isTextResAddModalOpen}
         setIsOpen={setIsTextResAddModalOpen}
       />
-      <TextResourceModal 
-        isEdit={true} 
+      <TextResourceModal
+        isEdit={true}
         {...selectedResource}
-        getItemData={getItemData} 
-        isOpen={isTextResEditModalOpen} 
-        setIsOpen={setIsTextResEditModalOpen} 
+        getItemData={getItemData}
+        isOpen={isTextResEditModalOpen}
+        setIsOpen={setIsTextResEditModalOpen}
       />
-      <ViewText isOpen={isViewTextOpen} setIsOpen={setIsViewTextOpen} text={viewedText}/>
-      
+      <ViewText isOpen={isViewTextOpen} setIsOpen={setIsViewTextOpen} text={viewedText} />
+
       <NewImageResourceModel getItemData={getItemData} isOpen={isAddImageResModalOpen} setIsOpen={setIsAddImageResModalOpen} nodeId={props._id} />
       <EditImageResourceModel getItemData={getItemData} isOpen={isEditImageResOpen} setIsOpen={setIsEditImageResOpen}
-                              {...selectedResource} imageUrl={selectedResource&&(selectedResource.data&&selectedResource.data.imageUrl)}
-                              oldName={selectedResource&&selectedResource.name} />
+        {...selectedResource} imageUrl={selectedResource && (selectedResource.data && selectedResource.data.imageUrl)}
+        oldName={selectedResource && selectedResource.name} />
       <EditNodeModal nodeId={props._id} nodeOldName={props.name} nodeOldColor={props.color} isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
       <ViewImage isOpen={isViewImageOpen} setIsOpen={setIsViewImageOpen} {...viewedImage} />
+
+
       <div id={props._id} className={getNodeColor()}>
         <div className={getItemColor()} onClick={() => {
           getItemData();
@@ -314,17 +232,20 @@ export default function Item(props) {
           <div className='flex'>
 
             <DropDownButton options={[
-              { innerText: 'Link',  action: ()=>{setIsLinkResAddModalOpen(true)}  },
-              { innerText: 'Text',  action: ()=>{openTextModal(false, null)}  },
-              { innerText: 'Image', action: ()=>{setIsAddImageResModalOpen(true)} }
+              { innerText: 'Link', action: () => { setIsLinkResAddModalOpen(true) } },
+              { innerText: 'Text', action: () => { openTextModal(false, null) } },
+              { innerText: 'Image', action: () => { setIsAddImageResModalOpen(true) } }
             ]} />
-            
-            <div className='node-option' onClick={() => {
-              setDeletingId(props._id)
-              openModal(1);
+
+            <div className='node-option' onClick={(e) => {
+              e.stopPropagation()
+              setIsDeleteNodeModalOpen(true)
             }}><FaTrash /></div>
             <div className='node-option'
-              onClick={() => { setIsEditModalOpen(true) }}><FaPencilAlt /></div>
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsEditModalOpen(true)
+              }}><FaPencilAlt /></div>
 
             <div className='node-option'>{expand ? (<FaArrowDown />) : (<FaArrowUp />)}</div>
           </div>
@@ -336,13 +257,13 @@ export default function Item(props) {
                 ItemData.map((resource, index) => {
                   if (resource.type === "LINK") {
                     return (
-                      <div 
+                      <div
                         onClick={() => {
                           window.open(resource.data.link)
                         }}
                         key={index}
-                        id={resource._id} 
-                        className={getResourceColor()} 
+                        id={resource._id}
+                        className={getResourceColor()}
                         draggable>
 
                         <div className='mx-3'><FaLink /></div>
@@ -352,7 +273,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -371,9 +292,10 @@ export default function Item(props) {
                             e.stopPropagation()
                             openLinkModal(true, resource);
                           }}><FaPencilAlt /></div>
-                          <div className='resource-option' onClick={() => {
-                            setDeletingId(resource._id)
-                            openModal(2)
+                          <div className='resource-option' onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedResource(resource)
+                            setIsDeleteResModalOpen(true)
                           }}><FaTrash /></div>
                         </div>
                       </div>
@@ -393,7 +315,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -415,8 +337,8 @@ export default function Item(props) {
                           }}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={(e) => {
                             e.stopPropagation()
-                            setDeletingId(resource._id)
-                            openModal(2)
+                            setSelectedResource(resource)
+                            setIsDeleteResModalOpen(true)
                           }}><FaTrash /></div>
                         </div>
                       </div>
@@ -437,7 +359,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={()=>{document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"}}/>
+                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -460,8 +382,8 @@ export default function Item(props) {
                           }}><FaPencilAlt /></div>
                           <div className='resource-option' onClick={(e) => {
                             e.stopPropagation()
-                            setDeletingId(resource._id)
-                            openModal(2)
+                            setSelectedResource(resource)
+                            setIsDeleteResModalOpen(true)
                           }}><FaTrash /></div>
                         </div>
                       </div>
