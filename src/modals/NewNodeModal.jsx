@@ -4,7 +4,7 @@ import config from '../../config'
 import { useParams } from 'react-router'
 
 
-export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
+export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
 
   const params = useParams();
 
@@ -12,22 +12,28 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
   const [nodeColor, setNodeColor] = useState('')
   const [error, setError] = useState('')
 
+  const finalCloseNewNodeModal = () => {
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 1000)
+  }
+
   const closeNewNodeModal = () => {
     setIsOpen(false);
   }
 
   const selectColor = (e) => {
-    
-    if(nodeColor) document.getElementById(nodeColor).classList.remove('border-2', 'border-black')
+
+    if (nodeColor) document.getElementById(nodeColor).classList.remove('border-2', 'border-black')
 
     setNodeColor(e.target.id)
 
     e.target.classList.add('border-2', 'border-black');
-    
+
   }
 
   const createNewNode = () => {
-    if(!nodeName) {
+    if (!nodeName) {
 
       setError('Please provide name for the node')
       const classList = document.getElementById('Node-Name').classList;
@@ -40,9 +46,11 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
       return
     }
 
-    fetch(config.BASE_URL + '/nodes/' + params.id , {
+    finalCloseNewNodeModal()
+
+    fetch(config.BASE_URL + '/nodes/' + params.id, {
       method: 'POST',
-      headers:  { 
+      headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       },
@@ -56,16 +64,15 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
 
       return res.json()
     })
-    .then(result => {
-      if(result.error) {
-        setError(result.error)
-        return
-      }
-      closeNewNodeModal()
-      loadNodes(params.id)
-    }).catch(error => {
-      console.log(error);
-    })
+      .then(result => {
+        if (result.error) {
+          setError(result.error)
+          return
+        }
+        loadNodes(params.id)
+      }).catch(error => {
+        console.log(error);
+      })
   }
 
   return (
@@ -79,36 +86,36 @@ export default function NewNodeModal({isOpen, setIsOpen, loadNodes}) {
       >
         <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
         <div className='w-full'>
-            <div><label htmlFor="Node-Name" id='Node-Name-Lable' className='text-sm ml-1'>Name</label></div>
-            <input  
+          <div><label htmlFor="Node-Name" id='Node-Name-Lable' className='text-sm ml-1'>Name</label></div>
+          <input
             id='Node-Name'
-             className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
-             type='text'
-              onChange={(e) => {
-                setNodeName(e.target.value)
-              }}
-            />
+            className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
+            type='text'
+            onChange={(e) => {
+              setNodeName(e.target.value)
+            }}
+          />
         </div>
 
         <div className='w-full'>
           <div><label htmlFor="Node-Color" className='text-sm ml-1'>Color</label></div>
           <div className='w-full flex justify-center items-center'>
-              <div className='flex justify-center items-center border-slate-600 border rounded-sm'>
-                <div id='yellow' onClick={selectColor} className='bg-yellow-3 hover:bg-opacity-80 h-10 w-10'></div>
-                <div id='green'  onClick={selectColor} className='bg-green-3 hover:bg-opacity-80 h-10 w-10'></div>
-                <div id='pink'   onClick={selectColor} className='bg-pink-3 hover:bg-opacity-80 h-10 w-10'></div>
-                <div id='purple' onClick={selectColor} className='bg-purple-3  hover:bg-opacity-80 h-10 w-10'></div>
-                <div id='blue'   onClick={selectColor} className='bg-blue-3 over:bg-opacity-80 h-10 w-10'></div>
-                <div id='gray'   onClick={selectColor} className='bg-gray-3 hover:bg-opacity-80 h-10 w-10'></div>
-                <div id='black'  onClick={selectColor} className='bg-black-3  hover:bg-opacity-80 h-10 w-10'></div>
-              </div>
+            <div className='flex justify-center items-center border-slate-600 border rounded-sm'>
+              <div id='yellow' onClick={selectColor} className='bg-yellow-3 hover:bg-opacity-80 h-10 w-10'></div>
+              <div id='green' onClick={selectColor} className='bg-green-3 hover:bg-opacity-80 h-10 w-10'></div>
+              <div id='pink' onClick={selectColor} className='bg-pink-3 hover:bg-opacity-80 h-10 w-10'></div>
+              <div id='purple' onClick={selectColor} className='bg-purple-3  hover:bg-opacity-80 h-10 w-10'></div>
+              <div id='blue' onClick={selectColor} className='bg-blue-3 over:bg-opacity-80 h-10 w-10'></div>
+              <div id='gray' onClick={selectColor} className='bg-gray-3 hover:bg-opacity-80 h-10 w-10'></div>
+              <div id='black' onClick={selectColor} className='bg-black-3  hover:bg-opacity-80 h-10 w-10'></div>
+            </div>
           </div>
         </div>
 
         <div className='w-full'>
-            <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
-              onClick={createNewNode}
-            >Create Node</button>
+          <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
+            onClick={createNewNode}
+          >Create Node</button>
         </div>
 
       </Modal>

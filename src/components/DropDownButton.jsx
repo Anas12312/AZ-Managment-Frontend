@@ -31,7 +31,7 @@ export default function DropDownButton({ innerText, options }) {
                                             option.action()
                                             e.stopPropagation()
                                         }}
-                                        className="block px-4 py-2 hover:bg-gray-100  "
+                                        className="block px-4 py-2 hover:bg-gray-100 cursor-pointer "
                                     >{option.innerText}</span>
                                 </li>
                             )
