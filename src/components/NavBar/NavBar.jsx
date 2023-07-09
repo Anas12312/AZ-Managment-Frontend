@@ -37,7 +37,7 @@ export default function NavBar({selected}) {
       })
     }, [])
   return (
-    <div className='z-50 flex h-14 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
+    <div className='z-50 flex h-14 py-2 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
         
         {/* LOGO */}
         <div className='hover:cursor-pointer fixed left-5 mb-5 text-xl flex flex-col justify-center items-center' onClick={() => {

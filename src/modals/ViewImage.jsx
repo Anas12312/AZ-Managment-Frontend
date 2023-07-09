@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
-import { FaArrowDown, FaMinus, FaMinusCircle, FaPlus, FaPlusCircle } from 'react-icons/fa'
-export default function ViewImage({isOpen, setIsOpen, imgUrl}) {
+import { FaArrowDown, FaArrowLeft, FaDownload, FaEllipsisV, FaImage, FaMinus, FaMinusCircle, FaOptinMonster, FaPlus, FaPlusCircle } from 'react-icons/fa'
+export default function ViewImage({isOpen, setIsOpen, imgUrl, name}) {
   const [imageStyle, setImageStyle] = useState("w-[50rem] max-h-[36rem] object-contain");
   const [scale, setScale] = useState(1)
   const [position, setPosition] = useState(null)
@@ -59,27 +59,27 @@ export default function ViewImage({isOpen, setIsOpen, imgUrl}) {
   }
   const image = document.getElementById("img")
   useEffect(()=> {
-    // if(move) {
-    //   image.style.objectPosition = `${move.x*-100}px ${move.y*-100}px`
-    // }
+    if(move) {
+      image.style.objectPosition = `${move.x*-100}px ${move.y*-100}px`
+    }
   },[move])
   const trackMouse = (e) => {
-    // e = e || window.event;
-    // setMove({
-    //   x: position.x - e.clientX,
-    //   y: position.y - e.clientY
-    // })
-    // setPosition({
-    //   x: e.clientX,
-    //   y: e.clientY
-    // })
+    e = e || window.event;
+    setMove({
+      x: position.x - e.clientX,
+      y: position.y - e.clientY
+    })
+    setPosition({
+      x: e.clientX,
+      y: e.clientY
+    })
 
   }
   const startDrag = (e) => {
-    // setPosition({
-    //   x: e.clientX,
-    //   y: e.clientY
-    // })
+    setPosition({
+      x: e.clientX,
+      y: e.clientY
+    })
   }
 
   return (
@@ -94,6 +94,18 @@ export default function ViewImage({isOpen, setIsOpen, imgUrl}) {
         <div className='bg-black w-full h-full bg-opacity-70 ' onClick={()=>{
           closeViewImage()
         }}>
+          <div className='relative top-[3.56rem] w-full h-14 z-10 bg-transparent flex justify-between items-center text-white hover:bg-black hover:bg-opacity-20' onClick={(e) => {e.stopPropagation()}}>
+            <div className='flex justify-around items-center w-1/6 ml-5'>
+              <div className='flex justify-center items-center text-lg rounded-full p-[0.4rem] hover:bg-white hover:bg-opacity-20 hover:cursor-pointer'
+                   onClick={(e)=>{closeViewImage()}}><FaArrowLeft size={25} /></div>
+              <div className='flex justify-center items-center text-lg ml-5 mr-2'><FaImage size={25} /></div>
+              <div className='flex justify-center items-center text-lg font-bold'>{name}</div>
+            </div>
+            <div className='flex justify-around items-center w-[8%] mr-4'>
+              <div className='flex justify-center items-center text-lg rounded-full p-[0.5rem] hover:bg-white hover:bg-opacity-20 hover:cursor-pointer'><a href={imgUrl} download><FaDownload size={20} /></a></div>
+              <div className='flex justify-center items-center text-lg rounded-full p-[0.5rem] hover:bg-white hover:bg-opacity-20 hover:cursor-pointer'><FaEllipsisV size={20} /></div>
+            </div>
+          </div>
           <div onClick={(e) => {e.stopPropagation()}} className='p-3   absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2  flex justify-between items-center  rounded-md'>
             <img id='img' className={imageStyle} src={imgUrl} alt=""  onDragStart={startDrag} onDragOver={trackMouse} />
           </div>
