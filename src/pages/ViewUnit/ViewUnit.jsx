@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import config from '../../../config';
 import SideBar from '../../components/SideBar/SideBar';
 import Item from '../../Item';
-import { FaPlus } from 'react-icons/fa';
+import { FaEllipsisV, FaPlus } from 'react-icons/fa';
 import NewNodeModal from '../../modals/NewNodeModal';
 import LoadingItem from '../../components/LoadingItem'
 
@@ -56,13 +56,23 @@ export default function ViewUnit(props) {
     }
 
   return (
-    <div className='flex flex-row h-screen'>
+    <div className='flex flex-row h-[99%] top-14'>
         <SideBar />
         <NewNodeModal isOpen={isOpenNewNode} setIsOpen={setIsOpenNewNode} loadNodes={loadNodes}/>
         
         
         {!isLoading?(
               <div className='w-full'>
+                <div className='h-24 w-[98.3%] p-5 flex items-center justify-between mt-4'>
+                    <div className='p-2 flex flex-col justify-center'>
+                      <div className='text-2xl font-bold'>{data.name}</div>
+                      <div className='text-base font-light'>{data.description}</div>
+                      <div className='text-base font-light'>Owner: <span onClick={()=>{nav('/profile/' + data.owner.username)}} className='text-blue-600 hover:underline hover:cursor-pointer'>{data.owner.name}</span></div>
+                    </div>
+                    <div className='p-2 flex flex-col justify-center rounded-full hover:bg-gray-300 hover:cursor-pointer'>
+                      <div className='text-primary-1' title='More Actions'><FaEllipsisV size={20}/></div>
+                    </div>
+                </div>
                 <div className="w-full h-24 flex items-center justify-between">
                <div className="relative left-5 w-1/3">
               <form>   
@@ -73,10 +83,10 @@ export default function ViewUnit(props) {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" id="default-search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Nodes or Resources" required />
-                        <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-primary-1
-                                                     hover:bg-primary-2 focus:ring-4 focus:outline-none
-                                                     focus:ring-primary-1 font-medium rounded-lg
+                        <input type="search" id="default-search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Nodes or Resources" />
+                        <button type="submit" className="text-white absolute right-2.5 bottom-2 bg-primary-1
+                                                     hover:bg-primary-2
+                                                      font-medium rounded-lg
                                                       text-sm px-4 py-2"
                                 onClick={(e) => {
                                   e.preventDefault()
@@ -95,7 +105,7 @@ export default function ViewUnit(props) {
                     <FaPlus /></div>
                   </div>
                 </div>
-                <div className='w-[97%] overflow max-h-screen pl-5 flex-col h-[75%]'>
+                <div className='w-[97%] overflow-hidden pl-5 h-[63%]'>
                     <div className='overflow-auto h-full'>
                         <LoadNodesContext.Provider value={rerenderNote}>
                           {data.nodes.map((node, i) => (
@@ -107,6 +117,16 @@ export default function ViewUnit(props) {
             </div>
             ):(
               <div className='w-full'>
+                <div className='h-24 w-[98.3%] p-5 flex items-center justify-between'>
+                    <div className='p-2 flex flex-col justify-center'>
+                      <div className='m-1 bg-gradient-to-r from-gray-50 to-primary-gray to-80% background-animate-1 h-5 w-40 bg-red-400'></div>
+                      <div className='m-1 bg-gradient-to-r from-gray-50 to-primary-gray to-80% background-animate-1 h-5 w-80 bg-red-400'></div>
+                      <div className='m-1 bg-gradient-to-r from-gray-50 to-primary-gray to-80% background-animate-1 h-5 w-24 bg-red-400'></div>
+                    </div>
+                    <div className='p-2 flex flex-col justify-center rounded-full hover:bg-gray-300 hover:cursor-pointer'>
+                      <div className='text-primary-1' title='More Actions'><FaEllipsisV size={20}/></div>
+                    </div>
+                </div>
                 <div className="w-full h-24 flex items-center justify-between">
                <div className="relative left-5 w-1/3">
               <form>   

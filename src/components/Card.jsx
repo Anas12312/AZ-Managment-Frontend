@@ -3,7 +3,7 @@ import { FaArrowDown, FaEllipsisH, FaEllipsisV, FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
 import config from '../../config';
 import DropDownButton from './DropDownButton';
-import DeleteModal from '../modals/DeleteModal';
+import DeleteModal from '../modals/DeleteModal'; 
 import UnitModal from '../modals/UnitModal';
 export default function Card({ _id: id, coverUrl, name, username, description, ownerName, starred }) {
     const nav = useNavigate();

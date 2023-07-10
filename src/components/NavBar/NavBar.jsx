@@ -6,6 +6,7 @@ export default function NavBar({selected}) {
     const [notificationsNo, setNotificationsNo] = useState(2);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [searchValue, setSearchValue] = useState("")
     const [user, setUser] = useState({});
     const nav = useNavigate(); 
     const logout = () => {
@@ -37,7 +38,7 @@ export default function NavBar({selected}) {
       })
     }, [])
   return (
-    <div className='z-50 flex h-14 py-2 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
+    <div className=' z-50 flex h-14 py-2 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
         
         {/* LOGO */}
         <div className='hover:cursor-pointer fixed left-5 mb-5 text-xl flex flex-col justify-center items-center' onClick={() => {
@@ -47,15 +48,24 @@ export default function NavBar({selected}) {
         </div>
         
         {/* Apps */}
-        <div className='flex items-center'>
+        <div className='-translate-x-1/2 flex items-center'>
             <div id="home"  className="nav-bar-app"  onClick={() => nav("/home")}>Home</div>
             <div id="files" className="nav-bar-app"  onClick={() => {nav("/resources");nav(0)}}>Files</div>
             <div id="notes" className="nav-bar-app" >Notes</div>
             <div id="tasks" className="nav-bar-app" >Tasks</div>
         </div>
 
+        {/* Search */}
+        <div className='fixed right-52'>
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input type="search" id="default-search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} className="block w-80 p-4 pl-10 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Users..." autoComplete='off' required />
+          </div>
         {/* Right Icons */}
-        <div className='fixed right-0 flex justify-around items-center p-2 w-36 '>
+        <div className='fixed right-0 flex justify-around items-center p-2 w-36'>
             <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={(e) => {
               e.stopPropagation()
               setShowNotifications(!showNotifications)
