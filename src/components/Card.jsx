@@ -5,6 +5,7 @@ import config from '../../config';
 import DropDownButton from './DropDownButton';
 import DeleteModal from '../modals/DeleteModal'; 
 import UnitModal from '../modals/UnitModal';
+
 export default function Card({ _id: id, coverUrl, name, username, description, ownerName, starred }) {
     const nav = useNavigate();
     const [starLoading, setStarLoading] = useState(false)
