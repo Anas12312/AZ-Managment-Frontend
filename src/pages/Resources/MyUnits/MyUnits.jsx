@@ -49,7 +49,7 @@ export default function MyUnits() {
               <div className='w-full'>
                 <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                     {units.map((unit, i) => (
-                      <Card key={i} {...unit}/>
+                      <Card key={i} {...unit} ownerName={unit.owner.name} />
                     ))}
                 </div>
               <div className=''>

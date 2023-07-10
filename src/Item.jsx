@@ -11,12 +11,13 @@ import ViewImage from './modals/ViewImage';
 import ViewText from './modals/ViewText';
 import EditImageResourceModel from './modals/EditImageResourceModal';
 import DeleteModal from './modals/DeleteModal';
+import { useNavigate } from 'react-router-dom';
 export default function Item(props) {
 
   const [ItemData, setItemData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [expand, setExpand] = useState(false);
-
+  const nav = useNavigate()
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -276,7 +277,12 @@ export default function Item(props) {
                           {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
-                                          text-white flex-shrink-0 flex-grow-0'>
+                                          text-white flex-shrink-0 flex-grow-0 group'
+                              onClick={(e)=>{
+                              e.stopPropagation()
+                              nav(`/profile/${resource.createdBy.username}`)
+                             }} >
+                              <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
                               <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
@@ -317,9 +323,14 @@ export default function Item(props) {
                         <div className='flex items-center justify-start w-[30%] relative'>
                           {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
-                                          bg-primary-1 rounded-full text-xl
-                                          text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                            bg-primary-1 rounded-full text-xl
+                            text-white flex-shrink-0 flex-grow-0 group'
+                                onClick={(e)=>{
+                                e.stopPropagation()
+                                nav(`/profile/${resource.createdBy.username}`)
+                              }} >
+                                <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
+                                <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -361,10 +372,15 @@ export default function Item(props) {
                         <div className='flex items-center justify-start w-[30%] relative'>
                           {resource.createdBy.imgUrl ? (
                             <div className='w-7 h-7 flex justify-center items-center
-                                          bg-primary-1 rounded-full text-xl
-                                          text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
-                            </div>
+                            bg-primary-1 rounded-full text-xl
+                            text-white flex-shrink-0 flex-grow-0 group'
+                                  onClick={(e)=>{
+                                  e.stopPropagation()
+                                  nav(`/profile/${resource.createdBy.username}`)
+                                }} >
+                                  <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
+                                  <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                                </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
                                             items-center bg-primary-1 rounded-full

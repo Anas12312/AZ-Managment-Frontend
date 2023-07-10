@@ -224,6 +224,13 @@ body {
                 text-xs font-bold hover:cursor-pointer
                 transition-all duration-100 scale-0
   }
+  .created-by-tooltip {
+    @apply absolute w-auto ml-2 p-2 min-w-max top-6 left-0
+            rounded-md shadow-md z-50
+            text-white bg-gray-900
+            text-xs font-bold hover:cursor-pointer
+            transition-all duration-100 scale-0 origin-left; 
+  }
   .trans {
     @apply transition-all ease-linear duration-200
   }
