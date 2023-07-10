@@ -286,10 +286,15 @@ export default function Item(props) {
                               <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
-                            <div className='w-full h-full flex justify-center
-                                            items-center bg-primary-1 rounded-full
-                                            text-xl text-white'>
-                              {resource.createdBy.name[0].toUpperCase()}
+                            <div className='w-7 h-7 flex justify-center items-center
+                                          bg-primary-1 rounded-full text-xl
+                                          text-white flex-shrink-0 flex-grow-0 group'
+                              onClick={(e)=>{
+                              e.stopPropagation()
+                              nav(`/profile/${resource.createdBy.username}`)
+                             }} >
+                              <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           )}
                           <div className='mx-2 text-sm font-bold'>
@@ -333,11 +338,15 @@ export default function Item(props) {
                                 <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
-                            <div className='w-full h-full flex justify-center
-                                            items-center bg-primary-1 rounded-full
-                                            text-xl 
-                                            text-white'>
-                              {resource.createdBy.name[0].toUpperCase()}
+                            <div className='w-7 h-7 flex justify-center items-center
+                                          bg-primary-1 rounded-full text-xl
+                                          text-white flex-shrink-0 flex-grow-0 group'
+                              onClick={(e)=>{
+                              e.stopPropagation()
+                              nav(`/profile/${resource.createdBy.username}`)
+                             }} >
+                              <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           )}
                           <div className='mx-2 text-sm font-bold'>
@@ -382,11 +391,15 @@ export default function Item(props) {
                                   <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                                 </div>
                           ) : (
-                            <div className='w-full h-full flex justify-center
-                                            items-center bg-primary-1 rounded-full
-                                            text-xl 
-                                            text-white'>
-                              {resource.createdBy.name[0].toUpperCase()}
+                            <div className='w-7 h-7 flex justify-center items-center
+                                          bg-primary-1 rounded-full text-xl
+                                          text-white flex-shrink-0 flex-grow-0 group'
+                              onClick={(e)=>{
+                              e.stopPropagation()
+                              nav(`/profile/${resource.createdBy.username}`)
+                            }} >
+                              <span className='created-by-tooltip group-hover:scale-100'>Created By {resource.createdBy.name}</span>
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={"https://cdn-icons-png.flaticon.com/512/149/149071.png"} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           )}
                           <div className='mx-2 text-sm font-bold'>

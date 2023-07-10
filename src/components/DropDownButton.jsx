@@ -8,13 +8,17 @@ export default function DropDownButton({ innerText, options, children }) {
         e.stopPropagation()
         setDropDownHidden(!dropDownHidden);
     }
-
+    useEffect(()=>{
+        document.addEventListener('click', ()=>{
+            setDropDownHidden(true)
+        })
+    })
     return (
-        <div>
+        <div className='relative'>
             <div onClick={(toggileDropDownHidden)}>
                 {children}
             </div>
-            <div hidden={dropDownHidden} id="dropdown" className="z-10 bg-secondary-3 divide-y divide-gray-100 rounded-lg shadow-md w-44 absolute">
+            <div hidden={dropDownHidden} id="dropdown" className="top-5 right-5 z-10 bg-secondary-3 divide-y divide-gray-100 rounded-lg shadow-md w-44 absolute">
                 <ul className="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton">
                     {
                         options.map((option, i) => {
