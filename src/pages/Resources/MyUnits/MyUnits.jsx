@@ -33,9 +33,7 @@ export default function MyUnits() {
       })
       setUnits(response.units);
       setCount(response.count);
-    }).catch((err)=>{
-      alert(err);
-    });
+    })
   }
   useEffect(() => {
     getAllUserUnits(page);

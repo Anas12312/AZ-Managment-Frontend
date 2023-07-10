@@ -49,7 +49,7 @@ export default function NavBar({selected}) {
         {/* Apps */}
         <div className='flex items-center'>
             <div id="home"  className="nav-bar-app"  onClick={() => nav("/home")}>Home</div>
-            <div id="files" className="nav-bar-app"  onClick={() => nav("/resources")}>Files</div>
+            <div id="files" className="nav-bar-app"  onClick={() => {nav("/resources");nav(0)}}>Files</div>
             <div id="notes" className="nav-bar-app" >Notes</div>
             <div id="tasks" className="nav-bar-app" >Tasks</div>
         </div>
@@ -97,6 +97,7 @@ export default function NavBar({selected}) {
             </div>
             <div className='absolute top-6 w-20 h-20 rounded-full hover:cursor-pointer' onClick={()=>{
               nav('/profile')
+              nav(0)
             }}>
               {user.imgUrl?(
               <div className='w-full h-full flex justify-center items-center
