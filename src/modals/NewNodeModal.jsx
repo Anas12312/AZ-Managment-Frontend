@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { useParams } from 'react-router'
+import LoadingDefault from '../components/LoadingDefault';
 
 
 export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
@@ -9,9 +10,9 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
   const params = useParams();
 
   const [nodeName, setNodeName] = useState('')
-  const [nodeColor, setNodeColor] = useState('')
+  const [nodeColor, setNodeColor] = useState('yellow')
   const [error, setError] = useState('')
-
+  const [isLoading, setIsLoading] = useState(false)
   const finalCloseNewNodeModal = () => {
     setTimeout(() => {
       setIsOpen(false);
@@ -19,6 +20,7 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
   }
 
   const closeNewNodeModal = () => {
+    setIsLoading(false)
     setIsOpen(false);
   }
 
@@ -33,8 +35,9 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
   }
 
   const createNewNode = () => {
+    setIsLoading(true)
     if (!nodeName) {
-
+      setIsLoading(false)
       setError('Please provide name for the node')
       const classList = document.getElementById('Node-Name').classList;
       classList.replace('border-primary-1', 'border-red-700')
@@ -61,7 +64,7 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
         }
       )
     }).then(res => {
-
+      setIsLoading(false)
       return res.json()
     })
       .then(result => {
@@ -84,6 +87,7 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
         shouldFocusAfterRender={false}
         onRequestClose={closeNewNodeModal}
       >
+        {isLoading&&<LoadingDefault />}
         <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
         <div className='w-full'>
           <div><label htmlFor="Node-Name" id='Node-Name-Lable' className='text-sm ml-1'>Name</label></div>

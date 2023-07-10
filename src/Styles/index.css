@@ -217,6 +217,16 @@ body {
                 text-xs font-bold hover:cursor-pointer
                 transition-all duration-100 scale-0 origin-left; 
   }
+  .image-tooltip {
+    @apply absolute w-auto ml-2 p-2 min-w-max bottom-5 right-5
+                rounded-md shadow-md
+                text-white bg-gray-900
+                text-xs font-bold hover:cursor-pointer
+                transition-all duration-100 scale-0
+  }
+  .trans {
+    @apply transition-all ease-linear duration-200
+  }
 }
   @keyframes AnimationName-1 {
     0%,

@@ -25,12 +25,13 @@ export default function SignupForm(props) {
                 password
             })
         }).then(res => res.json())
-            .then(respone => {
-                if (respone.error) {
-                    props.setError(respone.error);
+            .then(response => {
+                if (response.error) {
+                    props.setError(response.error);
                 }
                 else {
-                    localStorage.setItem('token', respone.token);
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem("user", JSON.stringify(response.user))
                     nav('/home', { replace: true });
                 }
             })

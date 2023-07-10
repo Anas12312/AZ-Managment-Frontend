@@ -23,7 +23,7 @@ export default function AppRouter() {
         <Route path="/home" Component= {Home} />
         <Route path='/resources' Component={Resources} />
         <Route path='/resources/starred' Component={Starred} />
-        <Route path="/unit/:id" Component={Nodes} />
+        <Route path="/unit/:id" Component={Nodes}  />
         <Route path="/profile" Component={Profile} />
         <Route path="/profile/:username" Component={Profile} />
       </Routes>

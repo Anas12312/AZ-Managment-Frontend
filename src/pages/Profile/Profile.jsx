@@ -8,7 +8,7 @@ import ProfileData from './ProfileData/ProfileData'
 export default function Profile() {
     const params = useParams()
     const nav = useNavigate()
-    const [authorized, setAuthorized] = useState(false)
+    const [authorized, setAuthorized] = useState(true)
     const [userData, setUserData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
@@ -16,6 +16,7 @@ export default function Profile() {
         if(!params.username) {
             setAuthorized(true)
             nav('/profile/' + user.username)
+            nav(0)
             loadProfile(user.username)
         }
         params.username&&loadProfile(params.username)
@@ -38,7 +39,6 @@ export default function Profile() {
             }
         })
         .then((response) => {
-            console.log("anas")
             setUserData(response)
             setIsLoading(false)
         }).catch(() => {
