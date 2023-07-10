@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import SideBarItem from './SideBarItem/SideBarItem'
 import { FaStar, FaUser, FaFile, FaClock, FaPlus } from 'react-icons/fa'
