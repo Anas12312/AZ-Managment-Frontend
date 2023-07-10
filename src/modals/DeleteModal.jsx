@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit';
+import { useNavigate } from 'react-router-dom';
 
 export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, deleteType, _id: id }) {
+
+    const nav = useNavigate()
 
     const [message, setMessage] = useState(false)
 
@@ -34,14 +37,30 @@ export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, de
             }).catch((e) => {
                 console.log(e);
             })
+        } else if( deleteType === 'UNIT') {
+            fetch(config.BASE_URL + '/units/' + id, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem('token')
+                }
+            }).then(res => {
+                setMessage(true)
+            }).catch((e) => {
+                console.log(e);
+            })
         }
     }
 
     const closeModal = () => {
-        if(deleteType === 'RESOURCE') {
-            getItemData(nodeId)
-        }else if(deleteType === 'NODE') {
-            rerenderNote()
+        if(message) {
+            if(deleteType === 'RESOURCE') {
+                getItemData(nodeId)
+            }else if(deleteType === 'NODE') {
+                rerenderNote()
+            }else if(deleteType === 'UNIT') {
+                nav('/resources')
+            }
         }
         setMessage(false)
         setIsOpen(false);
@@ -56,6 +75,7 @@ export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, de
                 shouldFocusAfterRender={false}
                 onRequestClose={closeModal}
             >
+                <div onClick={(e) => {e.stopPropagation()}}>
                 {!message ? (
                     <div>
                         <div className='font-bold text-center'>
@@ -75,6 +95,7 @@ export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, de
                         </div>
                     </div>
                 )}
+                </div>
             </Modal>
         </div>
     )

@@ -235,7 +235,11 @@ export default function Item(props) {
               { innerText: 'Link', action: () => { setIsLinkResAddModalOpen(true) } },
               { innerText: 'Text', action: () => { openTextModal(false, null) } },
               { innerText: 'Image', action: () => { setIsAddImageResModalOpen(true) } }
-            ]} />
+            ]} >
+              <div className='node-option'>
+                <FaPlus className='' />
+              </div>
+            </DropDownButton>
 
             <div className='node-option' onClick={(e) => {
               e.stopPropagation()
