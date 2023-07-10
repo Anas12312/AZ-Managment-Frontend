@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaPlug, FaPlus } from 'react-icons/fa';
 
-export default function DropDownButton({ innerText, options }) {
+export default function DropDownButton({ innerText, options, children }) {
     const [dropDownHidden, setDropDownHidden] = useState(true)
 
     const toggileDropDownHidden = (e) => {  
@@ -11,14 +11,10 @@ export default function DropDownButton({ innerText, options }) {
 
     return (
         <div>
-            <button
-                id="dropdownDefaultButton"
-                onClick={(toggileDropDownHidden)}
-                className="node-option"
-                type="button">{innerText}
-                <FaPlus />
-            </button>
-            <div hidden={dropDownHidden} id="dropdown" className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
+            <div onClick={(toggileDropDownHidden)}>
+                {children}
+            </div>
+            <div hidden={dropDownHidden} id="dropdown" className="z-10 bg-secondary-3 divide-y divide-gray-100 rounded-lg shadow-md w-44 absolute">
                 <ul className="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton">
                     {
                         options.map((option, i) => {
@@ -28,10 +24,10 @@ export default function DropDownButton({ innerText, options }) {
                                         id={option.innerText}
                                         onClick={(e) => {
                                             setDropDownHidden(!dropDownHidden);
-                                            option.action()
+                                            option.action(e)
                                             e.stopPropagation()
                                         }}
-                                        className="block px-4 py-2 hover:bg-gray-100 cursor-pointer "
+                                        className="select-none block bg-secondary-2 px-4 py-2 hover:bg-gray-100 cursor-pointer "
                                     >{option.innerText}</span>
                                 </li>
                             )
