@@ -273,7 +273,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -315,7 +315,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center
@@ -359,7 +359,7 @@ export default function Item(props) {
                             <div className='w-7 h-7 flex justify-center items-center
                                           bg-primary-1 rounded-full text-xl
                                           text-white flex-shrink-0 flex-grow-0'>
-                              <img id={`${index}-img`} className="object-contain w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                              <img id={`${index}-img`} className="object-cover w-full h-full rounded-full" src={resource.createdBy.imgUrl} onError={() => { document.getElementById(`${index}-img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
                             </div>
                           ) : (
                             <div className='w-full h-full flex justify-center

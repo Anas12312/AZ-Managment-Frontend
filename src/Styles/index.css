@@ -210,7 +210,13 @@ body {
     @apply flex justify-center items-center p-2 text-base rounded-full
           hover:bg-gray-400 hover:cursor-pointer  transition-all duration-200 ease-linear
    }
-
+  .name-tooltip {
+    @apply absolute w-auto ml-2 p-2 min-w-max
+                rounded-md shadow-md
+                text-white bg-gray-900
+                text-xs font-bold hover:cursor-pointer
+                transition-all duration-100 scale-0 origin-left; 
+  }
 }
   @keyframes AnimationName-1 {
     0%,
