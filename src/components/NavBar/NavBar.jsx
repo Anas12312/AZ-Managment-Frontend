@@ -95,11 +95,14 @@ export default function NavBar({selected}) {
               <div>{user.name}</div>
               <div></div>
             </div>
-            <div className='absolute top-6 w-20 h-20 rounded-full'>
+            <div className='absolute top-6 w-20 h-20 rounded-full hover:cursor-pointer' onClick={()=>{
+              nav('/profile')
+            }}>
               {user.imgUrl?(
               <div className='w-full h-full flex justify-center items-center
                              bg-primary-1 rounded-full text-2xl border-4
-                             border-gray-100 text-white flex-shrink-0 flex-grow-0'><img className="object-contain w-full h-full rounded-full" src={user.imgUrl} />
+                             border-gray-100 text-white flex-shrink-0 flex-grow-0'><img className="object-cover w-full h-full rounded-full" src={user.imgUrl} />
+
               </div>):(
               <div className='w-full h-full flex justify-center
                              items-center bg-primary-1 rounded-full
