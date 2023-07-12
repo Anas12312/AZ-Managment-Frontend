@@ -7,9 +7,11 @@ import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import Resources from "../pages/Resources/Resources";
 import ViewUnit from "../pages/ViewUnit/ViewUnit";
-import Nodes from "../pages/Nodes/Nodes";
+import Nodes from "../pages/ViewUnit/Nodes/Nodes";
 import Starred from "../pages/Resources/Starred";
 import Profile from "../pages/Profile/Profile";
+import Members from "../pages/ViewUnit/Members/Members";
+import Settings from "../pages/ViewUnit/Settings/Settings";
 
 
 export default function AppRouter() {
@@ -24,8 +26,8 @@ export default function AppRouter() {
         <Route path='/resources' Component={Resources} />
         <Route path='/resources/starred' Component={Starred} />
         <Route path="/unit/:id" Component={Nodes}  />
-        <Route path="/unit/members/:id" Component={Nodes}  />
-        <Route path="/unit/settings/:id" Component={Nodes}  />
+        <Route path="/unit/members/:id" Component={Members}  />
+        <Route path="/unit/settings/:id" Component={Settings}  />
         <Route path="/profile" Component={Profile} />
         <Route path="/profile/:username" Component={Profile} />
       </Routes>

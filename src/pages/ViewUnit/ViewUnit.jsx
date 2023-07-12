@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
 import config from '../../../config';
-import SideBar from './SideBar/SideBar';
+import UnitSideBar from './UnitSideBar/SideBar';
 import Item from '../../Item';
 import { FaEllipsisV, FaPlus } from 'react-icons/fa';
 import NewNodeModal from '../../modals/NewNodeModal';
@@ -50,7 +50,6 @@ export default function ViewUnit(props) {
           setIsOwner(true)
         }
       }).catch((err) => {
-        alert(err);
         setSearchValue("")
         setData(null)
         nav(-1)
@@ -72,7 +71,7 @@ export default function ViewUnit(props) {
 
   return (
     <div className='flex flex-row h-[99%] top-14'>
-      <SideBar selected={'resources'} unitId={params.id} />
+      <UnitSideBar selected={'resources'} unitId={params.id} />
       <NewNodeModal
         isOpen={isOpenNewNode}
         setIsOpen={setIsOpenNewNode}
