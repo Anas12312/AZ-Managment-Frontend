@@ -81,20 +81,20 @@ export default function ViewUnit(props) {
       {!isLoading ? (
         <div className='w-full'>
           <DeleteModal
-              isOpen={unitDeleteModal}
-              setIsOpen={setUnitDeleteModal}
-              deleteType={'UNIT'}
-              _id={data._id}
-            />
-            <UnitModal
-              isEdit={true}
-              _id={data._id}
-              name={data.name}
-              description={data.description}
-              coverUrl={data.coverUrl}
-              isOpen={unitEditModal}
-              setIsOpen={setUnitEditModal}
-            />
+            isOpen={unitDeleteModal}
+            setIsOpen={setUnitDeleteModal}
+            deleteType={'UNIT'}
+            _id={data._id}
+          />
+          <UnitModal
+            isEdit={true}
+            _id={data._id}
+            name={data.name}
+            description={data.description}
+            coverUrl={data.coverUrl}
+            isOpen={unitEditModal}
+            setIsOpen={setUnitEditModal}
+          />
 
           <div className='h-24 w-[98.3%] p-5 flex items-center justify-between mt-4'>
             <div className='p-2 flex flex-col justify-center'>
@@ -105,7 +105,7 @@ export default function ViewUnit(props) {
             {isOwner && (
               <div className='p-2 flex flex-col justify-center rounded-full hover:bg-gray-300 hover:cursor-pointer'>
                 <DropDownButton
-                  options={[{ innerText: 'Edit', action: () => {setUnitEditModal(true) } }, { innerText: 'Delete', action: () => {setUnitDeleteModal(true) } }]}
+                  options={[{ innerText: 'Edit', action: () => { setUnitEditModal(true) } }, { innerText: 'Delete', action: () => { setUnitDeleteModal(true) } }]}
                 >
                   <div className='text-primary-1' title='More Actions'><FaEllipsisV size={20} /></div>
                 </DropDownButton>
