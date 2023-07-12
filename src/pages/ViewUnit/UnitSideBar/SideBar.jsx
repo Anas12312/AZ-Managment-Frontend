@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SideBarItem from '../../../components/SideBar/SideBarItem/SideBarItem'
 import { FaStar, FaUser, FaFile, FaClock, FaPlus, FaCog } from 'react-icons/fa'
 
-export default function SideBar({selected, unitId}) {
+export default function UnitSideBar({selected, unitId}) {
   
     return (
   
