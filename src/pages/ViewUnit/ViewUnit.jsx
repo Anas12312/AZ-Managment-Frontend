@@ -31,7 +31,7 @@ export default function ViewUnit(props) {
   const nav = useNavigate()
 
   const update = () => {
-    loadNodes(params.id)
+    loadNodes(params.id) 
   }
   const loadNodes = (id, search) => {
     setIsLoading(true);
