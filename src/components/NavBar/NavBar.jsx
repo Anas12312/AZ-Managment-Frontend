@@ -2,13 +2,35 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaBell, FaQuestion, FaSignOutAlt } from 'react-icons/fa'
 import config from '../../../config';
+import SearchResult from './SearchResult/SearchResult';
+import LoadingSearchResult from './SearchResult/LoadingSearchResult';
+import NoResults from './SearchResult/NoResults';
 export default function NavBar({selected}) {
     const [notificationsNo, setNotificationsNo] = useState(2);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [showSearchResults, setShowSearchResults] = useState(false);
+    const [isSearchLoading, setIsSearchLoading] = useState(false)
+    const [searchResults, setSearchResults] = useState([])
     const [searchValue, setSearchValue] = useState("")
     const [user, setUser] = useState({});
     const nav = useNavigate(); 
+    const searchUsers = (search)=> {
+      if(search !== undefined && search !== null) {
+        if(search) {
+          setIsSearchLoading(true)
+          fetch(config.BASE_URL + '/users?search=' + search)
+          .then((res) => res.json())
+          .then((response) => {
+            setSearchResults(response)
+            setIsSearchLoading(false)
+          })
+        }else {
+          setIsSearchLoading(true)
+          setSearchResults([])
+        }
+      }
+    }
     const logout = () => {
       const url = config.BASE_URL + "/account/logout"
       fetch(url, {
@@ -35,6 +57,8 @@ export default function NavBar({selected}) {
       document.addEventListener("click", (e)=> {
         setShowNotifications(false)
         setShowProfile(false)
+        setShowSearchResults(false)
+        setSearchValue("")
       })
     }, [])
   return (
@@ -56,14 +80,32 @@ export default function NavBar({selected}) {
         </div>
 
         {/* Search */}
-        <div className='fixed right-52'>
+        <div className='fixed right-52' onClick={(e)=>e.stopPropagation()}>
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input type="search" id="default-search" value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} className="block w-80 p-4 pl-10 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Users..." autoComplete='off' required />
-          </div>
+            <input type="search" id="default-search" value={searchValue} onChange={(e) => {
+              console.log(e.target.value)
+              setSearchValue(e.target.value)
+              setShowSearchResults(true)
+              searchUsers(e.target.value)
+              }} className="block w-80 p-4 pl-10 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Users..." autoComplete='off' required />
+          {/* Search Results */}
+          {showSearchResults&&(!isSearchLoading?(searchResults.length>0?(
+            <div className='absolute border border-gray-600 w-80 left-0 top-14 px-1 rounded-md bg-gray-200 shadow'>
+              {searchResults.map((result, index)=><SearchResult key={index} {...result} setShowSearchResults={setShowSearchResults} />)}
+            </div>
+          ):(
+            <div className='absolute border border-gray-600 w-80 left-0 top-14 px-1 rounded-md bg-gray-200 shadow'>
+              <NoResults />
+            </div>)):(
+              <div className='absolute border border-gray-600 w-80 left-0 top-14 px-1 rounded-md bg-gray-200 shadow'>
+                <LoadingSearchResult />
+              </div>
+            ))}  
+        </div>
         {/* Right Icons */}
         <div className='fixed right-0 flex justify-around items-center p-2 w-36'>
             <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={(e) => {
