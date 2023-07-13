@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import SideBarItem from '../../../components/SideBar/SideBarItem/SideBarItem'
 import { FaStar, FaUser, FaFile, FaClock, FaPlus, FaCog } from 'react-icons/fa'
+import InviteFromUnitModal from '../../../modals/InviteFromUnitModal'
 
 export default function UnitSideBar({selected, unitId}) {
-  
+    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false)
     return (
   
       <div className='flex flex-col h-full max-h-screen flex-grow w-72 pt-3 bg-gray-400 bg-opacity-10'>
-
-        <div className='new-button' onClick={() => {}}>
+        <InviteFromUnitModal isOpen={isInviteModalOpen} setIsOpen={setIsInviteModalOpen} />
+        <div className='new-button' onClick={() => {setIsInviteModalOpen(true)}}
+             title={"Invite Users"}
+        >
           <FaPlus /> Invite
         </div>
         <div className='relative flex flex-col left-3 top-7'>
