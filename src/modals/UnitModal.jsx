@@ -186,7 +186,13 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
 
                 <div className='w-full'>
                     <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
-                        onClick={handleSubmission}
+                        onClick={() => {
+                            if(isEdit) {
+                                !selectedFile ?  editUnit(coverUrl) : handleSubmission()
+                            }else {
+                                !selectedFile ?  createNewUnit('') : handleSubmission()
+                            }   
+                        }}
                     >{isEdit ? 'Save' : 'Create'}</button>
                 </div>
 

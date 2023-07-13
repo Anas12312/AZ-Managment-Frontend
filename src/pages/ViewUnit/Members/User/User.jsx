@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import config from '../../../../../config'
 
-export default function User({ _id, name, email, username, imgUrl, status, invetationId, isOnwer, unitId }) {
+export default function User({ _id, name, email, username, imgUrl, status, invetationId: invitationId, isOnwer, unitId }) {
     const nav = useNavigate()
 
     const statusEl = useRef()
@@ -19,8 +19,23 @@ export default function User({ _id, name, email, username, imgUrl, status, invet
         }
     })
 
-    const removeUser = () => {
-        fetch(config.BASE_URL + `/units/users/${unitId}/${invetationId}`, {
+    const removeMember = () => {
+        fetch(config.BASE_URL + `/units/users/${unitId}/${_id}`, {
+            method:'DELETE',
+            headers:
+            {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then(async res => {
+            if(res.status === 200) nav(0)
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    const removePendingMember = () => {
+        fetch(config.BASE_URL + `/units/users/${invitationId}`, {
             method:'DELETE',
             headers:
             {
@@ -68,7 +83,13 @@ export default function User({ _id, name, email, username, imgUrl, status, invet
             {isOnwer && (
                 <div className='absolute left-[90%]'>{
                     (status !== 'OWNER') && (
-                        <div onClick={removeUser} className='cursor-pointer select-none text-white bg-red-600 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 text-center'>
+                        <div onClick={() => {
+                            if(status === 'PENDING') {
+                                removePendingMember()
+                            }else {
+                                removeMember()
+                            }
+                        }} className='cursor-pointer select-none text-white bg-red-600 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 text-center'>
                             Remove
                         </div>
                     )
