@@ -67,7 +67,7 @@ export default function User({ _id, name, email, username, imgUrl, status, invet
                 }}
             >
                 <div>
-                    <span className='text-base font-bold'>{name}</span>
+                    <span className='text-base font-bold'>{name} </span>
                     <span className='text-base font-light'>({username})</span>
                 </div>
             </div>

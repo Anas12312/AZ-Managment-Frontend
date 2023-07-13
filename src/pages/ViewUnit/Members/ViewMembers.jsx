@@ -6,13 +6,14 @@ import config from '../../../../config';
 import User from './User/User';
 import LoadingUser from './User/LoadingUser';
 import { FaPlus } from 'react-icons/fa';
+import InviteFromUnitModal from '../../../modals/InviteFromUnitModal'
 
 export default function ViewMembers() {
     const params = useParams()
 
     const [isLoading, setIsLoading] = useState(true);
     const [isOwner, setIsOwner] = useState(false);
-
+    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false)
     const [unit, setUnit] = useState(null)
     const [users, setUsers] = useState([])
 
@@ -52,6 +53,7 @@ export default function ViewMembers() {
     }, [])
     return (
         <div className='flex flex-row h-[99%] top-14'>
+            <InviteFromUnitModal isOpen={isInviteModalOpen} setIsOpen={setIsInviteModalOpen} />
             <UnitSideBar selected={'members'} unitId={params.id} />
             {!isLoading ? (
                 <div className='w-full'>
@@ -75,7 +77,7 @@ export default function ViewMembers() {
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                         </svg>
                                     </div>
-                                    <input type="search" id="default-search" value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Nodes or Resources" />
+                                    <input type="search" id="default-search" value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Members" />
                                     <button type="submit" className="text-white absolute right-2.5 bottom-2 bg-primary-1
                                                      hover:bg-primary-2
                                                       font-medium rounded-lg
@@ -92,6 +94,8 @@ export default function ViewMembers() {
                             <div className='w-10 h-10 hover:bg-primary-2 flex
                                   justify-center items-center rounded-md border-2 text-white bg-primary-1 
                                   hover:cursor-pointer transition-all transtion duration-400 ease-linear'
+                                 onClick={()=>{setIsInviteModalOpen(true)}}
+                                 title={"Invite Users"}
                             >
                                 <FaPlus /></div>
                         </div>
