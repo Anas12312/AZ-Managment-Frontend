@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import config from '../../../../config'
 import { FaEdit, FaUber, FaUpload } from 'react-icons/fa'
 import UpdatePhotoModal from '../../../modals/updatePhotoModal'
+import InviteFromProfile from '../../../modals/InviteFromProfile'
 export default function ProfileData({data, isAuthorized}) {
     const [editName, setEditName] = useState(false)
     const [name, setName] = useState(data.name)
     const [editPhoto, setEditPhoto] = useState(false)
+    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false)
     const [photo, setPhoto] = useState(data.imgUrl)
     const nav = useNavigate()
     const doneEditing = () => {
@@ -38,6 +40,11 @@ export default function ProfileData({data, isAuthorized}) {
     }
   return (
     <div className='flex w-full h-full'>
+        <InviteFromProfile
+            isOpen={isInviteModalOpen}
+            setIsOpen={setIsInviteModalOpen}
+            {...data}
+        />
         <UpdatePhotoModal
             isOpen={editPhoto}
             setIsOpen={setEditPhoto}
@@ -77,9 +84,14 @@ export default function ProfileData({data, isAuthorized}) {
                         <div className='m-3 text-xl font-light'>{data&&data.email}</div>
                     </div>
                 </div>
-                <div className='w-5/6 flex justify-center items-center h-full'>
+                <div className='w-5/6 flex justify-center items-center h-full relative'>
                     {!isAuthorized&&(
-                        <div>Invite</div>
+                        <div className='absolute top-[10%] right-[10%] w-20 p-2 bg-primary-1 text-white
+                                        rounded-md flex justify-center items-center shadow-lg
+                                        hover:bg-primary-2 hover:cursor-pointer'
+                             onClick={(e)=>{
+                                setIsInviteModalOpen(true)
+                             }}>Invite</div>
                     )}
                 </div>
             </div>

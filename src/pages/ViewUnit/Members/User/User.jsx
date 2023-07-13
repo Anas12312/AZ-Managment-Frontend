@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import config from '../../../../../config'
 
-export default function User({ _id, name, email, username, imgUrl, status, invetationId: invitationId, isOnwer, unitId }) {
+export default function User({ _id, name, email, username, imgUrl, status, invitationId, isOnwer, unitId }) {
     const nav = useNavigate()
 
     const statusEl = useRef()
