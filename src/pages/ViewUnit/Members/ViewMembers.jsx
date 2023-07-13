@@ -53,7 +53,9 @@ export default function ViewMembers() {
     }, [])
     return (
         <div className='flex flex-row h-[99%] top-14'>
-            <InviteFromUnitModal isOpen={isInviteModalOpen} setIsOpen={setIsInviteModalOpen} />
+            {!isLoading && (
+                <InviteFromUnitModal unitId={unit._id} isOpen={isInviteModalOpen} unitUsers={users} setIsOpen={setIsInviteModalOpen} />
+            )}
             <UnitSideBar selected={'members'} unitId={params.id} />
             {!isLoading ? (
                 <div className='w-full'>
