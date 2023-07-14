@@ -118,10 +118,10 @@ export default function InviteFromProfile({setIsOpen, isOpen, _id:id, name, user
                     </svg>
                 </div>
                 <input type="search" id="default-search" value={searchValue} onChange={(e) => {
-                setSearchValue(e.target.value)
-                searchUsers(e.target.value)
-                }} className="block w-80 p-4 pl-10 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Your Units..." autoComplete='off' required />
-            </div>
+                    setSearchValue(e.target.value)
+                    searchUsers(e.target.value)
+                    }} className="block w-80 p-4 pl-10 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-1 focus:primary-1 " placeholder="Search Your Units..." autoComplete='off' required />
+                </div>
             {!isSearchLoading?(
                     <div className='w-full p-2 border-2 rounded-md h-full overflow grid grid-cols-2 overflow-y-scroll ml-1'>
                         {searchResults.map((unit, index)=>{

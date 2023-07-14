@@ -23,7 +23,7 @@ export default function SideBar({selected}) {
       <div className='relative flex flex-col left-3 top-7'>
         {selected === 'my-units'?(<SideBarItem id={"my-units"} text={"My Units"} icon={<FaFile />} link={"/resources"} selected={true} />):(<SideBarItem id={"my-units"} text={"My Units"} icon={<FaFile />} link={"/resources"} />)}
         {selected === 'starred'?(<SideBarItem id={"starred"} text={"Starred"} icon={<FaStar />} link={"/resources/starred"} selected={true} />):(<SideBarItem id={"starred"} text={"Starred"} icon={<FaStar />} link={"/resources/starred"} />)}
-        {selected === 'shared'?(<SideBarItem id={"shared"} text={"Shared With Me"} icon={<FaUser />} link={""} selected={true} />):(<SideBarItem id={"shared"} text={"Shared With Me"} icon={<FaUser />} link={""} />)}
+        {selected === 'invitations'?(<SideBarItem id={"invitations"} text={"Invitations"} icon={<FaUser />} link={"/resources/invitations"} selected={true} />):(<SideBarItem id={"Invitations"} text={"Invitations"} icon={<FaUser />} link={"/resources/invitations"} />)}
         {selected === 'recent'?(<SideBarItem id={"recent"} text={"Recents"} icon={<FaClock />} link={""} selected={true} />):(<SideBarItem id={"recent"} text={"Recents"} icon={<FaClock />} link={""} />)}
       </div>
     </div>
