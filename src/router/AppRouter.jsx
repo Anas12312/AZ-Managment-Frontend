@@ -12,6 +12,7 @@ import Starred from "../pages/Resources/Starred";
 import Profile from "../pages/Profile/Profile";
 import Members from "../pages/ViewUnit/Members/Members";
 import Settings from "../pages/ViewUnit/Settings/Settings";
+import Invitations from "../pages/Resources/Invitations";
 
 
 export default function AppRouter() {
@@ -25,6 +26,7 @@ export default function AppRouter() {
         <Route path="/home" Component= {Home} />
         <Route path='/resources' Component={Resources} />
         <Route path='/resources/starred' Component={Starred} />
+        <Route path='/resources/invitations' Component={Invitations} />
         <Route path="/unit/:id" Component={Nodes}  />
         <Route path="/unit/members/:id" Component={Members}  />
         <Route path="/unit/settings/:id" Component={Settings}  />
