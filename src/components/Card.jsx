@@ -81,9 +81,15 @@ export default function Card({ _id: id, coverUrl, name, description, ownerName, 
             }}>
                 <div
                     id={id}
-                    className=' w-full  h-1/2 rounded-t-lg'
-                    style={!(coverUrl == '') && coverUrl ? { backgroundImage: `url(${coverUrl})`, backgroundSize: '100% auto' } : { background: '#513069' }}
+                    className='w-full  h-1/2 flex justify-center 
+                               items-center text-xl flex-shrink-0
+                               flex-grow-0 group rounded-t-md'
                 >
+                    {coverUrl?(
+                        <img id={"img"} className="object-cover h-full w-full rounded-t-md" src={coverUrl} onError={() => { document.getElementById(`img`).src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }} />
+                    ):(
+                        <div className='bg-primary-1 w-full h-full rounded-t-md'></div>
+                    )}
                 </div>
                 <div className='relative left-3 h-1/3 flex flex-col align-middle top-2'>
                     <div className='w-11/12 mt-2 flex justify-between'>

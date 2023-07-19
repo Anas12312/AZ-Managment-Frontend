@@ -38,7 +38,7 @@ export default function InvitationCard(props) {
     },[])
   return (
     <div className='ml-10 w-[95%] border-2 rounded-md p-2 flex items-center m-1 relative'>
-        <div className='w-16 h-full flex justify-center items-center
+        <div className='w-16 h-16 flex justify-center items-center
                     bg-primary-1 text-xl rounded-full m-2 mr-4 hover:cursor-pointer
                     text-white flex-shrink-0 flex-grow-0 group'
              onClick={()=>{

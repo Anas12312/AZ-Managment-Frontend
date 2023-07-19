@@ -39,6 +39,10 @@ export default function LoginForm(props) {
             <div><span className='text-sm ml-1'>Email</span></div>
             <input  className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 'type='text' name='email' value={email} onChange={(e) => {
                 setEmail(e.target.value)
+            }} onKeyPress = {(e)=>{
+                if(e.key === 'Enter'){
+                    login()
+                }
             }}></input>
         </div>
         
@@ -46,6 +50,10 @@ export default function LoginForm(props) {
             <div><span className='text-sm ml-1'>Password</span></div>
             <input className='text-sm w-full my-1 h-8 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3' type='password' name='password' value={password} onChange={(e) => {
                 setPassword(e.target.value)
+            }} onKeyPress = {(e)=>{
+                if(e.key === 'Enter'){
+                    login()
+                }
             }}></input>
         </div>
         

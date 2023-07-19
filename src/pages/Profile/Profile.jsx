@@ -54,7 +54,7 @@ export default function Profile() {
                 <ProfileData isAuthorized={authorized} data={userData} />
             </div>
         ):(
-            <div>Loading</div>
+            <div></div>
         )}
     </div>
   )
