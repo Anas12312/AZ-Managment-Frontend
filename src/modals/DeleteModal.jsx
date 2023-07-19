@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
-import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit';
+import { LoadNodesContext } from '../pages/ViewUnit/Nodes/ViewUnit';
 import { useNavigate } from 'react-router-dom';
 
 export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, deleteType, _id: id }) {

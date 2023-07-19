@@ -59,8 +59,9 @@ export default function MyUnits() {
               ))}
             </div>
           ):(
-            <div className='w-full h-[37rem] flex justify-center items-center text-2xl'>
-              No Units Found!
+            <div className='w-full overflow h-[37rem] pt-4 pb-10 flex justify-center items-center text-2xl flex-col'>
+              <div className=' mb-5'><img src='../../../../images/no-results.png' className='w-20'/></div>
+              <div>No Units Found!</div>
             </div>
           )}
           <div className=''>

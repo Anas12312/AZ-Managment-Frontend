@@ -1,15 +1,15 @@
 import React, { createContext, useEffect, useState } from 'react'
-import NavBar from '../../components/NavBar/NavBar'
+import NavBar from '../../../components/NavBar/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
-import config from '../../../config';
-import UnitSideBar from './UnitSideBar/SideBar';
-import Item from '../../Item';
+import config from '../../../../config';
+import UnitSideBar from '../UnitSideBar/SideBar';
+import Item from '../../../Item';
 import { FaEllipsisV, FaPlus } from 'react-icons/fa';
-import NewNodeModal from '../../modals/NewNodeModal';
-import LoadingItem from '../../components/LoadingItem'
-import DropDownButton from '../../components/DropDownButton';
-import DeleteModal from '../../modals/DeleteModal';
-import UnitModal from '../../modals/UnitModal';
+import NewNodeModal from '../../../modals/NewNodeModal';
+import LoadingItem from '../../../components/LoadingItem'
+import DropDownButton from '../../../components/DropDownButton';
+import DeleteModal from '../../../modals/DeleteModal';
+import UnitModal from '../../../modals/UnitModal';
 import { toast } from 'react-toastify';
 
 const LoadNodesContext = createContext(null);
@@ -146,13 +146,20 @@ export default function ViewUnit(props) {
             </div>
           </div>
           <div className='w-[97%] overflow-hidden pl-5 h-[63%]'>
-            <div className='overflow-auto h-full'>
-              <LoadNodesContext.Provider value={rerenderNote}>
-                {data.nodes.map((node, i) => (
-                  <Item key={i} {...node} />
-                ))}
-              </LoadNodesContext.Provider>
-            </div>
+            {data.nodes.length>0?(
+              <div className='overflow-auto h-full'>
+                <LoadNodesContext.Provider value={rerenderNote}>
+                  {data.nodes.map((node, i) => (
+                    <Item key={i} {...node} />
+                  ))}
+                </LoadNodesContext.Provider>
+              </div>
+            ):(
+              <div className='w-full overflow h-[20rem] pt-4 pb-10 flex justify-center items-center text-2xl flex-col'>
+                <div className=' mb-5'><img src='../../../../images/no-results.png' className='w-20'/></div>
+                <div>No Nodes Found!</div>
+              </div>
+            )}
           </div>
         </div>
       ) : (

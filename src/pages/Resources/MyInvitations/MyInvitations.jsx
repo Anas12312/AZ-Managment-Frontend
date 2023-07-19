@@ -67,8 +67,9 @@ export default function MyInvitations() {
                         ))}
                     </div>
                 ):(
-                    <div className='w-full overflow max-h-screen pt-4 pb-10 flex h-1/4 justify-center items-center text-xl'>
-                        No Invitaions Found!
+                    <div className='w-full overflow max-h-screen pt-4 pb-10 flex h-1/4 justify-center items-center text-2xl flex-col'>
+                        <div className='mt-60 mb-5'><img src='../../../../images/no-results.png' className='w-20'/></div>
+                        <div>No Invitaions Found!</div>
                     </div>
                 )}
             </div>
