@@ -56,7 +56,7 @@ export default function ViewMembers() {
             {!isLoading && (
                 <InviteFromUnitModal unitId={unit._id} isOpen={isInviteModalOpen} unitUsers={users} setIsOpen={setIsInviteModalOpen} />
             )}
-            <UnitSideBar selected={'members'} unitId={params.id} />
+            <UnitSideBar selected={'members'} unitId={params.id} unitUsers={users} />
             {!isLoading ? (
                 <div className='w-full'>
                     <div className='h-24 w-[98.3%] p-5 flex items-center justify-between mt-4'>

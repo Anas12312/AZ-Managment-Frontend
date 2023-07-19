@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 const errorToast = { type: 'error', isLoading: false, autoClose: true, closeButton: true };
 const successToast = { type: 'success', isLoading: false, autoClose: true, closeButton: true };
 
-export default function UnitSideBar({ selected, unitId, isOwner, isLoading }) {
+export default function UnitSideBar({ selected, unitId, isOwner, isLoading, unitUsers }) {
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false)
 
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
@@ -73,7 +73,7 @@ export default function UnitSideBar({ selected, unitId, isOwner, isLoading }) {
         </div>
       </Modal>
 
-      <InviteFromUnitModal isOpen={isInviteModalOpen} setIsOpen={setIsInviteModalOpen} />
+      <InviteFromUnitModal isOpen={isInviteModalOpen} unitUsers={unitUsers} unitId={unitId} setIsOpen={setIsInviteModalOpen} />
       <div className='new-button' onClick={() => { setIsInviteModalOpen(true) }}
         title={"Invite Users"}
       >
