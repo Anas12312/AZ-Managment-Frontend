@@ -184,9 +184,10 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name: oldName, de
             <Modal
                 appElement={document.getElementById('root')}
                 isOpen={isOpen}
-                className={'h-fit w-1/3 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 absolute flex flex-col justify-center items-center border p-5 rounded-md bg-secondary-2 text-black'}
+                className={'shadow-xl shadow-slate-300 h-fit w-1/3 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 absolute flex flex-col justify-center items-center border p-5 rounded-md bg-secondary-2 text-black'}
                 onRequestClose={closeModal}
                 shouldFocusAfterRender={false}
+                closeTimeoutMS={200}
             >
                 <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
                 <div className='w-full'>

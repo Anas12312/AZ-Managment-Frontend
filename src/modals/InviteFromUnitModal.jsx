@@ -76,9 +76,10 @@ export default function InviteFromUnitModal({ setIsOpen, isOpen, unitId, unitUse
             <Modal
                 appElement={document.getElementById('root')}
                 isOpen={isOpen}
-                className={'-translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/3 absolute flex flex-col justify-around items-center border p-5 rounded-md bg-secondary-2 text-black'}
+                className={'shadow-xl shadow-slate-300 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-1/3 absolute flex flex-col justify-around items-center border p-5 rounded-md bg-secondary-2 text-black'}
                 shouldFocusAfterRender={false}
                 onRequestClose={closeModal}
+                closeTimeoutMS={200}
             >
                 <div className='text-2xl font-light'>
                     <span>Invite Users</span>
