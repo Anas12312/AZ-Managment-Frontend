@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import SideBar from '../../../components/SideBar/SideBar'
 import Pagination from '../../../components/Pagination'
 import Card from '../../../components/Card'
@@ -11,29 +11,34 @@ export default function MyUnits() {
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
+
+
+  const { username } = JSON.parse(localStorage.getItem("user"));
+
+
   const getAllUserUnits = async (page) => {
     setIsLoading(true);
     fetch(config.BASE_URL + `/units?page=${page}&limit=6`, {
       method: "GET",
-      headers:  
-      { 
+      headers:
+      {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
     }).then((res) => res.json())
-    .then((response)=>{
-      setIsLoading(false)
-      const starredUnits = response.starred
-      response.units.forEach((unit) => {
-        if(starredUnits.includes(unit._id)) {
-          unit.starred = true
-        }else {
-          unit.starred = false
-        }
+      .then((response) => {
+        setIsLoading(false)
+        const starredUnits = response.starred
+        response.units.forEach((unit) => {
+          if (starredUnits.includes(unit._id)) {
+            unit.starred = true
+          } else {
+            unit.starred = false
+          }
+        })
+        setUnits(response.units);
+        setCount(response.count);
       })
-      setUnits(response.units);
-      setCount(response.count);
-    })
   }
   useEffect(() => {
     getAllUserUnits(page);
@@ -43,34 +48,34 @@ export default function MyUnits() {
   }, [page])
 
   return (
-    <div className='flex flex-row h-screen'>  
-            <SideBar selected={"my-units"} />
-            {!isLoading?(
-              <div className='w-full'>
-                <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
-                    {units.map((unit, i) => (
-                      <Card key={i} {...unit} ownerName={unit.owner.name} />
-                    ))}
-                </div>
-              <div className=''>
-                <Pagination page={page} count={count} setPage={setPage} />
-              </div>
-            </div>
-            ):(
-              <div className='w-full'>
-                <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
-                    <LoadingCard />
-                    <LoadingCard />
-                    <LoadingCard />
-                    <LoadingCard />
-                    <LoadingCard />
-                    <LoadingCard />
-                </div>
-              </div>
-            )}
-
-            
-            
+    <div className='flex flex-row h-screen'>
+      <SideBar selected={"my-units"} />
+      {!isLoading ? (
+        <div className='w-full'>
+          <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+            {units.map((unit, i) => (
+              <Card key={i} {...unit} ownerName={unit.owner.name} isOwner={(username === unit.owner.username)} />
+            ))}
+          </div>
+          <div className=''>
+            <Pagination page={page} count={count} setPage={setPage} />
+          </div>
         </div>
+      ) : (
+        <div className='w-full'>
+          <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+          </div>
+        </div>
+      )}
+
+
+
+    </div>
   )
 }

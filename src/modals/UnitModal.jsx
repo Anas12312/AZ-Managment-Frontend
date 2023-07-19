@@ -2,16 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import config from '../../config';
+import { toast } from 'react-toastify';
 
-export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, description:oldDescription, coverUrl, _id }) {
+const errorToast = { render: 'Failed!', type: 'error', isLoading: false, autoClose: true, closeButton: true };
+const successToast = { render: 'Added Successfully!', type: 'success', isLoading: false, autoClose: true, closeButton: true };
+const successEditToast = { render: 'Edited Successfully!', type: 'success', isLoading: false, autoClose: true, closeButton: true };
+
+
+export default function UnitModal({ isOpen, setIsOpen, isEdit, name: oldName, description: oldDescription, coverUrl, _id }) {
     const nav = useNavigate();
 
     const [unitName, setUnitName] = useState('')
     const [unitDescription, setUnitDescription] = useState('')
     const [error, setError] = useState(' ')
+    const [coverURL, setCoverURL] = useState(coverUrl);
+
 
     useEffect(() => {
-        if(isEdit) {
+        if (isEdit) {
             setUnitName(oldName)
             setUnitDescription(oldDescription)
             setSelectedFile(null)
@@ -20,6 +28,15 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
 
     const closeModal = () => {
         setError(' ')
+        setIsOpen(false);
+    }
+
+    const finalCloseModal = () => {
+        setUnitDescription('')
+        setUnitName('')
+        setError(' ')
+        setSelectedFile(undefined)
+        setIsFilePicked(false)
         setIsOpen(false);
     }
 
@@ -33,38 +50,40 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
             setSelectedFile(event.target.files[0]);
             setIsFilePicked(true);
             const output = document.getElementById('preview1')
-            output.src = URL.createObjectURL(event.target.files[0]);
+            const newURL = URL.createObjectURL(event.target.files[0]);
+            // output.src = newURL;
+            setCoverURL(newURL);
         } else {
             setError("Image Type must be JPG, JPEG or PNG")
         }
     };
 
     const handleSubmission = () => {
-        if(selectedFile) {
+        if (selectedFile) {
             const formData = new FormData();
 
-        formData.append('file', selectedFile);
+            formData.append('file', selectedFile);
 
-        fetch(
-            config.BASE_URL + '/upload',
-            {
-                method: 'POST',
-                body: formData,
-            }
-        )
-        .then((response) => response.json())
-        .then((result) => {
-            if(isEdit) {
-                editUnit(result.message)
-            }else {
-                createNewUnit(result.message);
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        }else if(isEdit) {
-            editUnit(coverUrl)
+            fetch(
+                config.BASE_URL + '/upload',
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            )
+                .then((response) => response.json())
+                .then((result) => {
+                    if (isEdit) {
+                        editUnit(result.message)
+                    } else {
+                        createNewUnit(result.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        } else if (isEdit) {
+            editUnit(coverURL)
         }
     };
 
@@ -80,6 +99,10 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
 
             return
         }
+
+        finalCloseModal();
+
+        const toastId = toast.loading('Editing Unit...');
 
         fetch(config.BASE_URL + '/units/' + _id, {
             method: 'PUT',
@@ -97,10 +120,13 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
         }).then(result => {
             if (result.error) {
                 setError(result.error)
+                toast.update(toastId, errorToast)
                 return
             }
-            nav(0)
+            toast.update(toastId, successEditToast)
+            nav(0) // Todo to be loading not refresh
         }).catch(error => {
+            toast.update(toastId, errorToast)
             console.log(error);
         })
     }
@@ -117,6 +143,10 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
 
             return
         }
+
+        finalCloseModal();
+
+        const toastId = toast.loading('Adding Unit...')
 
         fetch(config.BASE_URL + '/units', {
             method: 'POST',
@@ -137,11 +167,14 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
         })
             .then(result => {
                 if (result.error) {
+                    toast.update(toastId, errorToast)
                     setError(result.error)
                     return
                 }
+                toast.update(toastId, successToast)
                 nav(`/unit/${result._id}`)
             }).catch(error => {
+                toast.update(toastId, errorToast)
                 console.log(error);
             })
     }
@@ -178,20 +211,33 @@ export default function UnitModal({ isOpen, setIsOpen, isEdit, name:oldName, des
                     <input id='Res-Text' className='resize-none text-sm w-full max-h-md my-1 h-16 py-1 px-2 border border-primary-1 rounded-md bg-secondary-3 '
                         type='file'
                         accept='.jpg, .jpeg, .png'
-                        onChange={changeHandler} />
-                    <div className='w-full flex justify-center bg-secondary-3 rounded-md border border-primary-1 p-2 mb-1'>
-                        <img className='w-96 border-2 rounded-md max-h-80 ' id='preview1' src={coverUrl} />
+                        onChange={changeHandler} 
+                        onClick={(e) => {
+                            e.target.value = ''
+                        }}/>
+                    <div className='relative w-full flex pt-4 justify-center bg-secondary-3 rounded-md border border-primary-1 p-2 mb-1'>
+                        <div className='absolute top-1 right-1 rounded-full text-red-500 hover:text-red-700 h-6 w-6 cursor-pointer'
+                            onClick={() => {
+                                setCoverURL('')
+                                setSelectedFile(undefined)
+                                setIsFilePicked(false)
+                            }}>
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
+                            </svg>
+                        </div>
+                        <img className='w-96 border-2 rounded-md max-h-80 ' id='preview1' src={coverURL} />
                     </div>
                 </div>
 
                 <div className='w-full'>
                     <button className="w-full  h-9 rounded-md border text-sm bg-primary-2 text-white hover:bg-primary-1"
                         onClick={() => {
-                            if(isEdit) {
-                                !selectedFile ?  editUnit(coverUrl) : handleSubmission()
-                            }else {
-                                !selectedFile ?  createNewUnit('') : handleSubmission()
-                            }   
+                            if (isEdit) {
+                                !selectedFile ? editUnit(coverURL) : handleSubmission()
+                            } else {
+                                !selectedFile ? createNewUnit('') : handleSubmission()
+                            }
                         }}
                     >{isEdit ? 'Save' : 'Create'}</button>
                 </div>

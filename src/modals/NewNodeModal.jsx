@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
 import { useParams } from 'react-router'
 import LoadingDefault from '../components/LoadingDefault';
+import { toast } from 'react-toastify';
 
+const errorToast = { render: 'Failed!', type: 'error', isLoading: false, autoClose: true, closeButton: true };
+const successToast = { render: 'Added Successfully!', type: 'success', isLoading: false, autoClose: true, closeButton: true };
 
 export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
 
@@ -51,6 +54,8 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
 
     finalCloseNewNodeModal()
 
+    const toastId = toast.loading("Adding Node...")
+
     fetch(config.BASE_URL + '/nodes/' + params.id, {
       method: 'POST',
       headers: {
@@ -70,10 +75,13 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
       .then(result => {
         if (result.error) {
           setError(result.error)
+          toast.update(toastId, errorToast)
           return
         }
+        toast.update(toastId, successToast)
         loadNodes(params.id)
       }).catch(error => {
+        toast.update(toastId, errorToast)
         console.log(error);
       })
   }
@@ -87,7 +95,7 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
         shouldFocusAfterRender={false}
         onRequestClose={closeNewNodeModal}
       >
-        {isLoading&&<LoadingDefault />}
+        {isLoading && <LoadingDefault />}
         <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
         <div className='w-full'>
           <div><label htmlFor="Node-Name" id='Node-Name-Lable' className='text-sm ml-1'>Name</label></div>

@@ -19,17 +19,17 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" Component ={NotFound} />
-        <Route path="/" Component= {Welcome} />
-        <Route path="/login" Component= {Login} />
-        <Route path="/signup" Component= {Signup} />
-        <Route path="/home" Component= {Home} />
+        <Route path="*" Component={NotFound} />
+        <Route path="/" Component={Welcome} />
+        <Route path="/login" Component={Login} />
+        <Route path="/signup" Component={Signup} />
+        <Route path="/home" Component={Home} />
         <Route path='/resources' Component={Resources} />
         <Route path='/resources/starred' Component={Starred} />
         <Route path='/resources/invitations' Component={Invitations} />
-        <Route path="/unit/:id" Component={Nodes}  />
-        <Route path="/unit/members/:id" Component={Members}  />
-        <Route path="/unit/settings/:id" Component={Settings}  />
+        <Route path="/unit/:id" Component={Nodes} />
+        <Route path="/unit/members/:id" Component={Members} />
+        <Route path="/unit/settings/:id" Component={Settings} />
         <Route path="/profile" Component={Profile} />
         <Route path="/profile/:username" Component={Profile} />
       </Routes>
