@@ -3,10 +3,10 @@ import { FaArrowDown, FaEllipsisH, FaEllipsisV, FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
 import config from '../../config';
 import DropDownButton from './DropDownButton';
-import DeleteModal from '../modals/DeleteModal'; 
+import DeleteModal from '../modals/DeleteModal';
 import UnitModal from '../modals/UnitModal';
 
-export default function Card({ _id: id, coverUrl, name, username, description, ownerName, starred }) {
+export default function Card({ _id: id, coverUrl, name, description, ownerName, starred, isOwner }) {
     const nav = useNavigate();
     const [starLoading, setStarLoading] = useState(false)
     const [starredd, setStarredd] = useState(starred)
@@ -112,13 +112,19 @@ export default function Card({ _id: id, coverUrl, name, username, description, o
                             Created By: {ownerName}
                         </span>
                     </div>
-                    <div
-                        onClick={(e) => { e.stopPropagation() }}
-                        className='absolute top-14 right-5 mr-0.5 flex justify-center items-center text-lg rounded-full p-[0.5rem] hover:bg-black hover:bg-opacity-20 cursor-pointer transition-all ease-linear duration-200 text-gray-700 '>
-                        <DropDownButton innerText={''} options={[{ innerText: 'Edit', action: (e) => { e.stopPropagation(); setUnitEditModal(true) } }, { innerText: 'Delete', action: (e) => { e.stopPropagation(); setUnitDeleteModal(true) } }]}  >
-                            <FaEllipsisV />
-                        </DropDownButton>
-                    </div>
+                    {
+                        isOwner && (
+                            <div
+                                onClick={(e) => { e.stopPropagation() }}
+                                className='absolute top-14 right-5 mr-0.5 flex justify-center items-center text-lg rounded-full p-[0.5rem] hover:bg-black hover:bg-opacity-20 cursor-pointer transition-all ease-linear duration-200 text-gray-700 '>
+
+                                <DropDownButton innerText={''} options={[{ innerText: 'Edit', action: (e) => { e.stopPropagation(); setUnitEditModal(true) } }, { innerText: 'Delete', action: (e) => { e.stopPropagation(); setUnitDeleteModal(true) } }]}  >
+                                    <FaEllipsisV />
+                                </DropDownButton>
+
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
