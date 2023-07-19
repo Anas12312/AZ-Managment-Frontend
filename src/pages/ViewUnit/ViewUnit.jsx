@@ -72,7 +72,7 @@ export default function ViewUnit(props) {
 
   return (
     <div className='flex flex-row h-[99%] top-14'>
-      <UnitSideBar selected={'resources'} unitId={params.id} />
+      <UnitSideBar selected={'resources'} unitId={params.id} isOwner={isOwner} isLoading={isLoading} />
       <NewNodeModal
         isOpen={isOpenNewNode}
         setIsOpen={setIsOpenNewNode}
