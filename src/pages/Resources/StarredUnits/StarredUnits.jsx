@@ -44,11 +44,17 @@ export default function StarredUnits() {
             <SideBar selected={"starred"} />
             {!isLoading?(
               <div className='w-full'>
-                <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+                {units.length>0?(
+                  <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                     {units.map((unit, i) => (
                       <Card key={i} {...unit} ownerName={unit.owner.name}/>
                     ))}
-                </div>
+                  </div>
+                ):(
+                  <div className='w-full h-[37rem] flex justify-center items-center text-2xl'>
+                    No Starred Units Found!
+                  </div>
+                )}
               <div className=''>
                 <Pagination page={page} count={count} setPage={setPage} />
               </div>

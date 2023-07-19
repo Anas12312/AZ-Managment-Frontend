@@ -9,6 +9,7 @@ export default function InviteFromProfile({setIsOpen, isOpen, _id:id, name, user
         setError("")
         setSelected(undefined)
         setIsOpen(false)
+        select(0)
     }
     const [isLoading, setIsLoading] = useState(false)
     const [searchResults, setSearchResults] = useState()
@@ -45,7 +46,7 @@ export default function InviteFromProfile({setIsOpen, isOpen, _id:id, name, user
             })
             .then(res => {
                 setIsLoading(false)
-                setIsOpen(false)
+                closeModal()
                 res.json()
             })
             .catch((e) => {

@@ -132,7 +132,7 @@ export default function NavBar({ selected }) {
       </div>
       {/* Notificatinos */}
       {showNotifications && (
-        <div id="notifications" className='absolute top-[3.25rem] right-[6.75rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
+        <div id="notifications" className='absolute top-[3.75rem] right-[6.75rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
           onClick={(e) => {
             e.stopPropagation()
           }}>
@@ -142,7 +142,7 @@ export default function NavBar({ selected }) {
 
       {/* Profile */}
       {showProfile && (
-        <div id="profile" className='absolute top-[3.25rem] right-[4.25rem] w-[15rem] h-[15rem]
+        <div id="profile" className='absolute top-[3.75rem] right-[4.25rem] w-[15rem] h-[15rem]
                                        shadow-lg border border-gray-200 flex flex-col justify-center items-center'
           onClick={(e) => {
             e.stopPropagation()
