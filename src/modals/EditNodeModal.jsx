@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 
 import Modal from 'react-modal'
 import config from '../../config'
 import { useParams } from 'react-router'
-import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit';
-
+import { LoadNodesContext } from '../pages/ViewUnit/Nodes/ViewUnit'
 export default function EditNodeModal({isOpen, setIsOpen, nodeId, nodeOldName, nodeOldColor}) {
     const params = useParams();
 

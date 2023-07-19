@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
-import { LoadNodesContext } from '../pages/ViewUnit/ViewUnit'
-
+import { LoadNodesContext } from '../pages/ViewUnit/Nodes/ViewUnit'
 export default function LinkResourceModal({ isOpen, isEdit, setIsOpen, nodeId, getItemData, _id, link: oldlink, name: oldname }) {
 
     const [name, setName] = useState('')

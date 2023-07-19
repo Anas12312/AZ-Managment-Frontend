@@ -6,7 +6,7 @@ import Signup from "../pages/Signup/Signup";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import Resources from "../pages/Resources/Resources";
-import ViewUnit from "../pages/ViewUnit/ViewUnit";
+import ViewUnit from "../pages/ViewUnit/Nodes/ViewUnit";
 import Nodes from "../pages/ViewUnit/Nodes/Nodes";
 import Starred from "../pages/Resources/Starred";
 import Profile from "../pages/Profile/Profile";
