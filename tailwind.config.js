@@ -10,13 +10,20 @@ export default {
       colors: {
         'text': '#f9f1fe',
         'background': '#1c0826',
-        'primary-1': '#513069',
-        'primary-2': '#412357',
+        //Zyad Blue
+        // 'primary-1': '#164B60',
+        // 'primary-2': '#164B60',
+        // 'accent': '#0E2954',
+        // 'accent-2': '#1B6B93',
+        //Anas Pink
+        'primary-1': '#1D267D',
+        'primary-2': '#5C469C',
+        'accent': '#0C134F',
+        'accent-2': '#1D267D',
+
         'primary-gray': '#c5bfc9',
         'secondary-2': '#ffffff',
-        'secondary-3': '#efedf0',
-        'accent': '#0d0321',
-        'accent-2': '#1d0a42',
+        'secondary-3': '#DDE6ED',
         'yellow-1': '#FFF2AB',
         'yellow-2': '#FFF7D1',
         'yellow-3': '#FFE66E',
