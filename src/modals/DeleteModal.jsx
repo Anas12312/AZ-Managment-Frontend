@@ -71,9 +71,10 @@ export default function DeleteModal({ isOpen, setIsOpen, getItemData, nodeId, de
             <Modal
                 appElement={document.getElementById('root')}
                 isOpen={isOpen}
-                className={'-translate-x-1/3 -translate-y-1/3 left-1/2 top-1/2 h-40 w-72 absolute flex flex-col justify-around items-center border p-5 rounded-md bg-secondary-2 text-black'}
+                className={'-translate-x-1/3 shadow-xl shadow-slate-300 -translate-y-1/3 left-1/2 top-1/2 h-40 w-72 absolute flex flex-col justify-around items-center border p-5 rounded-md bg-secondary-2 text-black'}
                 shouldFocusAfterRender={false}
                 onRequestClose={closeModal}
+                closeTimeoutMS={200}
             >
                 <div onClick={(e) => {e.stopPropagation()}}>
                 {!message ? (

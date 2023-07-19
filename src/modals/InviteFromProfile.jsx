@@ -105,9 +105,10 @@ export default function InviteFromProfile({setIsOpen, isOpen, _id:id, name, user
         <Modal
             appElement={document.getElementById('root')}
             isOpen={isOpen}
-            className={'-translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 h-[30rem] w-[40rem] absolute flex flex-col justify-start items-center border p-5 rounded-md bg-secondary-2 text-black'}
+            className={'shadow-xl shadow-slate-300 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 h-[30rem] w-[40rem] absolute flex flex-col justify-start items-center border p-5 rounded-md bg-secondary-2 text-black'}
             shouldFocusAfterRender={false}
             onRequestClose={closeModal}
+            closeTimeoutMS={200}
         >
             {isLoading&&<LoadingDefault />}
             <div className='w-full pl-2 pt-2 text-lg'>Invite: <span className='font-bold'>{name}</span> <span className='font-light'>({username})</span></div>

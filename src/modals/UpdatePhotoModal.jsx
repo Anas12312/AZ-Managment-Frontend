@@ -79,9 +79,10 @@ export default function UpdatePhotoModal({isOpen, setIsOpen, photo}) {
         <Modal
             appElement={document.getElementById('root')}
             isOpen={isOpen}
-            className={'h-fit w-1/3 left-1/2 top-1/3 -translate-y-1/4 -translate-x-1/2 absolute flex flex-col justify-center items-center border p-5 rounded-md bg-secondary-2 text-black'}
+            className={'shadow-xl shadow-slate-300 h-fit w-1/3 left-1/2 top-1/3 -translate-y-1/4 -translate-x-1/2 absolute flex flex-col justify-center items-center border p-5 rounded-md bg-secondary-2 text-black'}
             onRequestClose={closeModal}
             shouldFocusAfterRender={false}
+            closeTimeoutMS={200}
         >
             {isLoading&&(
                 <LoadingDefault />

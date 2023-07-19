@@ -91,9 +91,10 @@ export default function NewNodeModal({ isOpen, setIsOpen, loadNodes }) {
       <Modal
         appElement={document.getElementById('root')}
         isOpen={isOpen}
-        className={'h-1/3 w-1/3 left-1/3 top-1/3 absolute flex flex-col justify-between items-center border p-5 rounded-md bg-secondary-2 text-black'}
+        className={'shadow-xl shadow-slate-300 h-1/3 w-1/3 left-1/3 top-1/3 absolute flex flex-col justify-between items-center border p-5 rounded-md bg-secondary-2 text-black'}
         shouldFocusAfterRender={false}
         onRequestClose={closeNewNodeModal}
+        closeTimeoutMS={200}
       >
         {isLoading && <LoadingDefault />}
         <div><span className='text-sm ml-1 text-red-600 font-bold'>{error}</span></div>
