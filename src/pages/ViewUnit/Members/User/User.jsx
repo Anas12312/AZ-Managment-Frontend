@@ -20,7 +20,7 @@ export default function User({ _id, name, email, username, imgUrl, status, invit
     })
 
     const removeMember = () => {
-        fetch(config.BASE_URL + `/units/users/${unitId}/${_id}`, {
+        fetch(config.BASE_URL + `/units/users/${_id}/${unitId}`, {
             method:'DELETE',
             headers:
             {
