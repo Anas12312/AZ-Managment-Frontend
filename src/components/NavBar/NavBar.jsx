@@ -6,7 +6,7 @@ import SearchResult from './SearchResult/SearchResult';
 import LoadingSearchResult from './SearchResult/LoadingSearchResult';
 import NoResults from './SearchResult/NoResults';
 export default function NavBar({ selected }) {
-  const [notificationsNo, setNotificationsNo] = useState(2);
+  const [notificationsNo, setNotificationsNo] = useState('.');
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -16,6 +16,23 @@ export default function NavBar({ selected }) {
   const [user, setUser] = useState({});
   const nav = useNavigate();
 
+  const getNotificationsCount = () => {
+    fetch(config.BASE_URL + `/notifications/count`, {
+      method: "GET",
+      headers:
+      {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    }).then((res) => res.json())
+      .then((response) => {
+        if(response.count > 9) {
+          setNotificationsNo('+9')
+        }else {
+          setNotificationsNo(response.count)
+        }
+      })
+  }
   const searchUsers = (search) => {
     if (search !== undefined && search !== null) {
       if (search) {
@@ -61,6 +78,8 @@ export default function NavBar({ selected }) {
       setShowSearchResults(false)
       setSearchValue("")
     })
+    getNotificationsCount()
+
   }, [])
   return (
     <div className=' z-50 flex h-14 py-2 w-screen bg-gradient-to-l from-primary-2 to-50% to-accent-2 shadow-md justify-around items-center'>
@@ -113,26 +132,39 @@ export default function NavBar({ selected }) {
       </div>
       {/* Right Icons */}
       <div className='fixed right-0 flex justify-around items-center p-2 w-36'>
+        
+        <div id='profile-btn' className="nav-bar-photo" title="Profile" onClick={(e) => {
+          e.stopPropagation()
+          setShowProfile(!showProfile)
+          setShowNotifications(false)
+        }}>
+          {user.imgUrl ? (
+            <div className='w-full h-full flex justify-center items-center
+                            bg-primary-1 rounded-full
+                            flex-shrink-0 flex-grow-0'><img className="object-cover w-full h-full rounded-full" src={user.imgUrl} />
+
+            </div>) : (
+            <div className='w-full h-full flex justify-center
+                            items-center bg-transparent rounded-full
+                            text-lg
+                            text-white'>{user.name&&user.name[0].toUpperCase()}
+            </div>)}
+        </div>
         <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={(e) => {
           e.stopPropagation()
           setShowNotifications(!showNotifications)
           setShowProfile(false)
         }}>
           {notificationsNo > 0 && (
-            <div className='absolute top-1 bg-red-500 left-1/4 w-4 h-4 border-2 border-red-500 rounded-full text-xs flex justify-center items-center'>{notificationsNo}</div>
+            <div className='absolute top-1 bg-red-500 left-[53%] w-5 h-5 font-bold border-2 border-red-500 rounded-full text-xs flex justify-center items-start'>{notificationsNo}</div>
           )}
           <FaBell />
         </div>
-        <div id='profile-btn' className="nav-bar-icon" title="Profile" onClick={(e) => {
-          e.stopPropagation()
-          setShowProfile(!showProfile)
-          setShowNotifications(false)
-        }}><FaQuestion /></div>
         <div className="nav-bar-icon" title="Logout" onClick={logout}><FaSignOutAlt /></div>
       </div>
       {/* Notificatinos */}
       {showNotifications && (
-        <div id="notifications" className='absolute top-[3.75rem] right-[6.75rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
+        <div id="notifications" className='absolute top-[3.75rem] right-[4.25rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
           onClick={(e) => {
             e.stopPropagation()
           }}>
@@ -142,7 +174,7 @@ export default function NavBar({ selected }) {
 
       {/* Profile */}
       {showProfile && (
-        <div id="profile" className='absolute top-[3.75rem] right-[4.25rem] w-[15rem] h-[15rem]
+        <div id="profile" className='absolute top-[3.75rem] right-[6.75rem] w-[15rem] h-[15rem]
                                        shadow-lg border border-gray-200 flex flex-col justify-center items-center'
           onClick={(e) => {
             e.stopPropagation()

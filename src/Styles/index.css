@@ -61,9 +61,15 @@ body {
 }
 @layer components {
   .nav-bar-icon {
-    @apply w-8 h-8 bg-opacity-20 bg-white rounded-full p-1
+    @apply w-8 h-8 bg-opacity-40 bg-white rounded-full p-1
           hover:cursor-pointer flex justify-center items-center
-          hover:bg-opacity-30 text-white text-base border
+          hover:bg-opacity-20 text-white text-base 
+          transition-all ease-linear duration-200
+  }
+  .nav-bar-photo {
+    @apply w-8 h-8 bg-opacity-40 bg-white rounded-full
+          hover:cursor-pointer flex justify-center items-center
+          hover:bg-opacity-20 text-white text-base 
           transition-all ease-linear duration-200
   }
   .nav-bar-app {
