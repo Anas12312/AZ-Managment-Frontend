@@ -60,6 +60,11 @@ body {
   background: #3b1656;
 }
 @layer components {
+   .notification {
+      @apply w-full flex items-center
+      rounded-md my-1 p-1 bg-white 
+      hover:bg-gray-200 hover:cursor-pointer 
+    }
   .nav-bar-icon {
     @apply w-8 h-8 bg-opacity-40 bg-white rounded-full p-1
           hover:cursor-pointer flex justify-center items-center

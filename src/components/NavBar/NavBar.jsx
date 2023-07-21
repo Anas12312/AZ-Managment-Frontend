@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaQuestion, FaSignOutAlt } from 'react-icons/fa'
+import { FaBell, FaQuestion, FaSignOutAlt, FaWrench } from 'react-icons/fa'
 import config from '../../../config';
 import SearchResult from './SearchResult/SearchResult';
 import LoadingSearchResult from './SearchResult/LoadingSearchResult';
 import NoResults from './SearchResult/NoResults';
+import Notification from './Notifications/Notification';
 export default function NavBar({ selected }) {
+  const [notifications, setNotifications] = useState([])
   const [notificationsNo, setNotificationsNo] = useState('.');
+  const [notificationsPageNo, setNotificationsPageNo] = useState(0)
+  const [notificationsLoading, setNotificationsLoading] = useState(true)
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -16,6 +20,22 @@ export default function NavBar({ selected }) {
   const [user, setUser] = useState({});
   const nav = useNavigate();
 
+  const getNotifications = (page) => {
+    setNotificationsLoading(true)
+    fetch(config.BASE_URL + `/notifications?page=${page}&limit=7`, {
+      method: "GET",
+      headers:
+      {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    })
+    .then((res) => res.json())
+    .then((response) => {
+      setNotifications(response)
+      setNotificationsLoading(false)
+    })
+  }
   const getNotificationsCount = () => {
     fetch(config.BASE_URL + `/notifications/count`, {
       method: "GET",
@@ -24,14 +44,15 @@ export default function NavBar({ selected }) {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
-    }).then((res) => res.json())
-      .then((response) => {
-        if(response.count > 9) {
-          setNotificationsNo('+9')
-        }else {
-          setNotificationsNo(response.count)
-        }
-      })
+    })
+    .then((res) => res.json())
+    .then((response) => {
+      if(response.count > 9) {
+        setNotificationsNo('+9')
+      }else {
+        setNotificationsNo(response.count)
+      }
+    })
   }
   const searchUsers = (search) => {
     if (search !== undefined && search !== null) {
@@ -154,6 +175,7 @@ export default function NavBar({ selected }) {
           e.stopPropagation()
           setShowNotifications(!showNotifications)
           setShowProfile(false)
+          getNotifications(notificationsPageNo)
         }}>
           {notificationsNo > 0 && (
             <div className='absolute top-1 bg-red-500 left-[53%] w-5 h-5 font-bold border-2 border-red-500 rounded-full text-xs flex justify-center items-start'>{notificationsNo}</div>
@@ -164,11 +186,23 @@ export default function NavBar({ selected }) {
       </div>
       {/* Notificatinos */}
       {showNotifications && (
-        <div id="notifications" className='absolute top-[3.75rem] right-[4.25rem] w-[20rem] h-[20rem] shadow-lg border border-gray-200 bg-gray-100'
+        <div id="notifications" className='absolute top-[3.75rem] right-[4.25rem] w-[20rem] h-[24rem] shadow-lg border border-gray-200 bg-gray-100 rounded-lg pt-2 px-1 overflow-y-auto'
           onClick={(e) => {
             e.stopPropagation()
           }}>
-
+            {!notificationsLoading?(
+              <div className='px-1'>
+                <div className='w-full flex justify-between items-center h-10 border-b-2 mb-2'>
+                  <div>Notifications</div>
+                  <div className='w-7 h-7 rounded-full flex justify-center items-center bg-black bg-opacity-0 hover:cursor-pointer hover:bg-opacity-20'><FaWrench /></div>
+                </div>
+                {notifications.map((notification, index) => {
+                  return <Notification key={index} {...notification} />
+                })}
+              </div>
+            ):(
+              <div>Loading</div>
+            )}
         </div>
       )}
 
