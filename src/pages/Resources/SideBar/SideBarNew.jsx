@@ -22,8 +22,8 @@ export default function SideBarNew({ selected }) {
                 </div>
             </div>
             
-            <div className='relative flex flex-col left-3 top-20'>
-                <NavLink to={'/resources/'} className={({isActive, isPending}) => isActive ? 'side-bar-item side-bar-item-selected': 'side-bar-item'}>
+            <div className='absolute w-60 flex flex-col left-3 top-40'>
+                <NavLink end to={'/resources'} className={({isActive, isPending}) => isActive ? 'side-bar-item side-bar-item-selected': 'side-bar-item'}>
                     <div className='fixed left-6'><FaFile/></div>
                     <div className='fixed left-12'>Units</div>
                 </NavLink>

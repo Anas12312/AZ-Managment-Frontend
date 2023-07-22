@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import NavBar from '../../../components/NavBar/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
 import config from '../../../../config';
-import UnitSideBar from '../UnitSideBar/SideBar';
+import UnitSideBar from '../SideBar/SideBar';
 import Item from '../../../Item';
 import { FaEllipsisV, FaPlus } from 'react-icons/fa';
 import NewNodeModal from '../../../modals/NewNodeModal';
@@ -16,7 +16,7 @@ const LoadNodesContext = createContext(null);
 
 export { LoadNodesContext };
 
-export default function ViewUnit(props) {
+export default function ViewUnit() {
   const params = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -72,7 +72,6 @@ export default function ViewUnit(props) {
 
   return (
     <div className='flex flex-row h-[99%] top-14'>
-      <UnitSideBar selected={'resources'} unitId={params.id} isOwner={isOwner} isLoading={isLoading} />
       <NewNodeModal
         isOpen={isOpenNewNode}
         setIsOpen={setIsOpenNewNode}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import UnitSideBar from '../UnitSideBar/SideBar'
+import UnitSideBar from '../SideBar/SideBar'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import config from '../../../../config';
@@ -56,7 +56,6 @@ export default function ViewMembers() {
             {!isLoading && (
                 <InviteFromUnitModal unitId={unit._id} isOpen={isInviteModalOpen} unitUsers={users} setIsOpen={setIsInviteModalOpen} />
             )}
-            <UnitSideBar selected={'members'} unitId={params.id} unitUsers={users}  isOwner={isOwner} isLoading={isLoading} />
             {!isLoading ? (
                 <div className='w-full'>
                     <div className='h-24 w-[98.3%] p-5 flex items-center justify-between mt-4'>
