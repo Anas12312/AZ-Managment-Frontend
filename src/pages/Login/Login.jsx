@@ -12,6 +12,7 @@ export default function Login() {
     if(localStorage.getItem("token")) {
         setIsAuth(true)
         nav("/home", { replace: true })
+        nav(0)
     }else {
       setIsAuth(false)
     }
