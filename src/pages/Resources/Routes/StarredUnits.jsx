@@ -40,10 +40,9 @@ export default function StarredUnits() {
   }, [page])
 
   return (
-    <div className='flex flex-row h-screen'>  
-            <SideBar selected={"starred"} />
+    <div>  
             {!isLoading?(
-              <div className='w-full'>
+              <div className='flex flex-col h-full'>
                 {units.length>0?(
                   <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                     {units.map((unit, i) => (
@@ -62,7 +61,7 @@ export default function StarredUnits() {
             </div>
             ):(
               <div className='w-full'>
-                <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+                <div className='w-full overflow pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
                     <LoadingCard />
                     <LoadingCard />
                     <LoadingCard />
@@ -71,10 +70,7 @@ export default function StarredUnits() {
                     <LoadingCard />
                 </div>
               </div>
-            )}
-
-            
-            
+            )}  
         </div>
   )
 }

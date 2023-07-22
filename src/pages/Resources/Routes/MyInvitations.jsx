@@ -44,10 +44,9 @@ export default function MyInvitations() {
         setSearchedInvitations(results)
     }
   return (
-    <div className='flex flex-row h-screen'>  
-        <SideBar selected={"invitations"} />
+    <div>  
         {!isLoading?(
-            <div className='w-full relative'>
+            <div className='flex flex-col h-full'>
                 <div className='p-5 text-4xl font-bold ml-6'>Invitations</div>
                 <div className='relative ml-10'>
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
