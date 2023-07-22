@@ -16,6 +16,7 @@ export default function Signup() {
     {
       setIsAuth(localStorage.getItem('token'));
       nav('/home', {replace: true});
+      nav(0)
     }
   }, [])
 

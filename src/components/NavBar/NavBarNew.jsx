@@ -8,10 +8,14 @@ import NoResults from './SearchResult/NoResults';
 import LoadingSearchResult from './SearchResult/LoadingSearchResult';
 import { FaBell, FaSignOutAlt, FaWrench } from 'react-icons/fa';
 import Notification from './Notifications/Notification';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadingNotification from './Notifications/LoadingNotification';
 import LoadingMoreNotifications from './Notifications/LoadingMoreNotifications';
-export default function NavBarNew() {
+
+
+export default function NavBarNew({reloadNavBar}) {
+
 
     const [notifications, setNotifications] = useState([])
     const [notificationsNo, setNotificationsNo] = useState('.');
@@ -140,7 +144,8 @@ export default function NavBarNew() {
             setSearchValue("")
         })
         getNotificationsCount()
-    }, [])
+
+    }, [reloadNavBar])
 
     return (
         <div className='z-50'>
