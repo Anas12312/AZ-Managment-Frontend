@@ -18,10 +18,8 @@ export default function Home() {
   },[])
   return (
     <>
-      <div className='flex h-screen w-screen flex-col'>
-        <NavBar selected={"home"}/>
+      <div className='flex w-screen flex-col'>
         <div className='flex flex-row h-full'>  
-            
           <div className='w-full'>Home</div>
         </div>
       </div>

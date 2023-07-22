@@ -48,12 +48,11 @@ export default function MyUnits() {
   }, [page])
 
   return (
-    <div className='flex flex-row h-screen'>
-      <SideBar selected={"my-units"} />
+    <div>
       {!isLoading ? (
-        <div className='w-full'>
+        <div className='flex flex-col h-full'>
           {units.length>0?(
-            <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+            <div className='w-full overflow pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
               {units.map((unit, i) => (
                 <Card key={i} {...unit} ownerName={unit.owner.name} isOwner={(username === unit.owner.username)} />
               ))}
@@ -64,13 +63,11 @@ export default function MyUnits() {
               <div>No Units Found!</div>
             </div>
           )}
-          <div className=''>
-            <Pagination page={page} count={count} setPage={setPage} />
-          </div>
+          <Pagination page={page} count={count} setPage={setPage} />
         </div>
       ) : (
         <div className='w-full'>
-          <div className='w-full overflow max-h-screen pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
+          <div className='w-full overflow pt-4 pb-10 grid grid-cols-3 grid-rows-2'>
             <LoadingCard />
             <LoadingCard />
             <LoadingCard />
@@ -80,9 +77,6 @@ export default function MyUnits() {
           </div>
         </div>
       )}
-
-
-
     </div>
   )
 }

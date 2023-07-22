@@ -10,8 +10,8 @@ export default function ({count, page, setPage}) {
         
     },[page])
   return (
-    <div className='w-full justify-around'>
-        <nav aria-label="Page navigation example" className='flex justify-center'>
+    <div className='w-full h-10'>
+        <nav aria-label="Page navigation example" className='flex justify-center items-center'>
             <ul className="inline-flex -space-x-px">
                 {page==0?(
                     <li>
