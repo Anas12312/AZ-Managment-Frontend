@@ -15,13 +15,13 @@ export default function Resources() {
 
 
   return (
-    <div className='h-[93%] grid grid-cols-6 justify-items-stretch overflow-x-hidden'>
+    <div className='h-[92%] w-full grid grid-cols-6 justify-items-stretch overflow-x-hidden'>
 
-      <div className='border col-span-1'>
+      <div className='border w-full h-full col-span-1'>
         <SideBarNew />
       </div>
 
-      <div className='border col-span-5'>
+      <div className='border w-full h-full col-span-5'>
         <Routes> 
           <Route path='/' element={<MyUnits/>} />
           <Route path='/starred' element={<StarredUnits/>} />

@@ -7,8 +7,9 @@ import SearchResult from './SearchResult/SearchResult';
 import NoResults from './SearchResult/NoResults';
 import LoadingSearchResult from './SearchResult/LoadingSearchResult';
 import { FaBell, FaSignOutAlt, FaWrench } from 'react-icons/fa';
+import Notification from './Notifications/Notification';
 
-export default function NavBarNew() {
+export default function NavBarNew({reloadNavBar}) {
 
     const [notifications, setNotifications] = useState([])
     const [notificationsNo, setNotificationsNo] = useState('.');
@@ -114,7 +115,7 @@ export default function NavBarNew() {
         })
         getNotificationsCount()
 
-    }, [])
+    }, [reloadNavBar])
 
     return (
         <div>
