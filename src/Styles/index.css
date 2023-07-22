@@ -283,7 +283,20 @@ body {
     -moz-animation: AnimationName-1 9s ease infinite;
     animation: AnimationName-1 3s ease infinite;
   }
-
+  .spinner {
+    width: 3em;
+    height: 3em;
+    border: 0.3em solid rgba(0, 0, 0, 0.1);
+    border-left-color: #7983ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
   @keyframes AnimationName-2 {
     0%,
     50% {

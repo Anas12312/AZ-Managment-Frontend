@@ -11,7 +11,7 @@ export default function Login() {
   useEffect(()=>{
     if(localStorage.getItem("token")) {
         setIsAuth(true)
-        nav('/home', {replace: true});
+        nav("/home", { replace: true })
         nav(0)
     }else {
       setIsAuth(false)
