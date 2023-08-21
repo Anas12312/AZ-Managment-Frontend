@@ -23,7 +23,7 @@ export default function AppRouter() {
         <NavBarNew reloadNavBar={reloadNavBar} />
         <Routes>
           <Route path="*" Component={NotFound} />
-          <Route path="/" Component={Welcome} />
+          <Route path="/" element={<Welcome setReloadNavBar={setReloadNavBar} />} />
           <Route path="/login" element={<Login setReloadNavBar={setReloadNavBar}/>} />
           <Route path="/signup" element={<Signup setReloadNavBar={setReloadNavBar}/>} />
           <Route path="/home" Component={Home} />

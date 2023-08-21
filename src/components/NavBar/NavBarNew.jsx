@@ -132,7 +132,7 @@ export default function NavBarNew({reloadNavBar}) {
 
         if(!localUser) {
             setIsLogedId(false);
-            nav('/login')
+            nav('/')
         }
         
         setUser(localUser)
@@ -361,7 +361,9 @@ export default function NavBarNew({reloadNavBar}) {
                                 <div className='text-sm hover:underline hover:cursor-pointer'>
                                     Help
                                 </div>
-                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                <div className='text-sm hover:underline hover:cursor-pointer'
+                                onClick={logout}
+                                >
                                     Sign Out
                                 </div>
                             </div>
