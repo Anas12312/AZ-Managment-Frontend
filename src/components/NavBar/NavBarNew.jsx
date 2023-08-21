@@ -301,7 +301,11 @@ export default function NavBarNew({reloadNavBar}) {
                                     text-white'>{user.name[0].toUpperCase()}</div>)}
                                     </div>
                             <div className='mt-2 h-16 flex flex-col justify-start pt-2 '>
-                                <div className='text-sm font-bold'>
+                                <div className='text-sm font-bold hover:cursor-pointer'
+                                    onClick={() => {
+                                        nav('/profile')
+                                        nav(0)
+                                    }}>
                                     {user.name}
                                 </div>
                                 <div className='text-xs'>
@@ -314,7 +318,11 @@ export default function NavBarNew({reloadNavBar}) {
                             <div className='w-[95%] border border-blue-600 h-6 flex
                                             justify-center items-center rounded-full
                                             text-sm text-blue-600 hover:border-2
-                                            hover:bg-blue-400 hover:text-white hover:cursor-pointer trans'>
+                                            hover:bg-blue-400 hover:text-white hover:cursor-pointer trans'
+                                  onClick={() => {
+                                    nav('/profile')
+                                    nav(0)
+                                  }}>
                                 View Profile
                             </div>
                         </div>
@@ -325,11 +333,18 @@ export default function NavBarNew({reloadNavBar}) {
                             </div>
                             {/* List */}
                             <div className='w-full flex flex-col justify-left m-1'>
-                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                <div className='text-sm hover:underline hover:cursor-pointer'
+                                        onClick={() => {
+                                            nav('/resources/invitations')
+                                            nav(0)
+                                        }}>
                                     Invitations
                                 </div>
-                                <div className='text-sm hover:underline hover:cursor-pointer'>
-                                    My Units
+                                <div className='text-sm hover:underline hover:cursor-pointer'onClick={() => {
+                                            nav('/resources')
+                                            nav(0)
+                                        }}>
+                                        My Units
                                 </div>
                                 <div className='text-sm hover:underline hover:cursor-pointer'>
                                     Notes
