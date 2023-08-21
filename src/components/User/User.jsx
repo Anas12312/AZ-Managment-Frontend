@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import config from '../../../../../config'
+import config from '../../../config'
 
 export default function User({ _id, name, email, username, imgUrl, status, invitationId, isOnwer, unitId }) {
     const nav = useNavigate()

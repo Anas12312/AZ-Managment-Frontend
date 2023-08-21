@@ -1,61 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import Card from '../../components/Card'
-import { useNavigate, useParams } from 'react-router-dom'
-import NavBar from '../../components/NavBar/NavBar'
-import config from '../../../config'
-import ProfileData from './ProfileData/ProfileData'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom';
+import SideBar from './SideBar/SideBar';
+import ViewProfile from './ViewProfile';
 
 export default function Profile() {
-    const params = useParams()
-    const nav = useNavigate()
-    const [authorized, setAuthorized] = useState(true)
-    const [userData, setUserData] = useState()
-    const [isLoading, setIsLoading] = useState(true)
-    useEffect(()=>{
-        const user = JSON.parse(localStorage.getItem('user'))
-        if(!params.username) {
-            setAuthorized(true)
-            nav('/profile/' + user.username)
-            nav(0)
-            loadProfile(user.username)
-        }
-        params.username&&loadProfile(params.username)
-        if(user.username === params.username) {
-            setAuthorized(true)
-        }else {
-            setAuthorized(false)
-        }
-    },[])
-    const loadProfile = (username) => {
-        setIsLoading(true)
-        fetch(config.BASE_URL + '/users/' + username)
-        .then((res) => {
-            if(res.status === 404) {
-                console.log("first")
-                nav('/notfound')
-                return
-            }else {
-                return res.json()
-            }
-        })
-        .then((response) => {
-            setUserData(response)
-            setIsLoading(false)
-        }).catch(() => {
-            console.log("second")
-            nav('/notfound')
-        }) 
-    }
   return (
-    <div className='flex h-screen w-screen flex-col overflow-hidden'>
-        <NavBar />
-        {!isLoading?(
-            <div className='w-full h-full'>
-                <ProfileData isAuthorized={authorized} data={userData} />
-            </div>
-        ):(
-            <div></div>
-        )}
+    <div className='h-[92%] w-full grid grid-cols-6 justify-items-stretch overflow-x-hidden'>
+
+      <div className='border w-full h-full col-span-1'>
+        <SideBar />
+      </div>
+
+      <div className='border w-full h-full col-span-5'>
+        <Routes> 
+          <Route path='/' element={<ViewProfile/>} />
+        </Routes>
+      </div>
     </div>
   )
 }

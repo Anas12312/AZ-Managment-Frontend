@@ -5,7 +5,7 @@ import SideBarItem from '../../../components/SideBar/SideBarItem/SideBarItem'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function SideBarNew({ selected }) {
+export default function SideBar({ selected }) {
     const [newUnitModalIsOpen, setNewUnitModalIsOpen] = useState(false);
 
     return (

@@ -1,8 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
-import NavBar from '../../../components/NavBar/NavBar'
 import { useNavigate, useParams } from 'react-router-dom'
 import config from '../../../../config';
-import UnitSideBar from '../SideBar/SideBar';
 import Item from '../../../Item';
 import { FaEllipsisV, FaPlus } from 'react-icons/fa';
 import NewNodeModal from '../../../modals/NewNodeModal';
@@ -10,13 +8,12 @@ import LoadingItem from '../../../components/LoadingItem'
 import DropDownButton from '../../../components/DropDownButton';
 import DeleteModal from '../../../modals/DeleteModal';
 import UnitModal from '../../../modals/UnitModal';
-import { toast } from 'react-toastify';
 
 const LoadNodesContext = createContext(null);
 
 export { LoadNodesContext };
 
-export default function ViewUnit() {
+export default function ViewNodes() {
   const params = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);

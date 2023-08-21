@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../../components/NavBar/NavBar'
-import SideBar from '../../components/SideBar/SideBar'
-import Card from '../../components/Card'
-import config from '../../../config';
-import Pagination from '../../components/Pagination';
-import LoadingCard from '../../components/LoadingCard';
+import React from 'react'
 import MyUnits from './Routes/MyUnits';
 import StarredUnits from './Routes/StarredUnits';
-import SideBarNew from './SideBar/SideBarNew';
+import SideBar from './SideBar/SideBar';
 import { Route, Routes } from 'react-router-dom';
 import MyInvitations from './Routes/MyInvitations';
 
@@ -18,7 +12,7 @@ export default function Resources() {
     <div className='h-[92%] w-full grid grid-cols-6 justify-items-stretch overflow-x-hidden'>
 
       <div className='border w-full h-full col-span-1'>
-        <SideBarNew />
+        <SideBar />
       </div>
 
       <div className='border w-full h-full col-span-5'>
