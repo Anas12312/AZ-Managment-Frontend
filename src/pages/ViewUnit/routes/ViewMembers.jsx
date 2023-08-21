@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import UnitSideBar from '../SideBar/SideBar'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import config from '../../../../config';
-import User from './User/User';
-import LoadingUser from './User/LoadingUser';
+import User from '../../../components/User/User';
+import LoadingUser from '../../../components/User/LoadingUser';
 import { FaPlus } from 'react-icons/fa';
 import InviteFromUnitModal from '../../../modals/InviteFromUnitModal'
 

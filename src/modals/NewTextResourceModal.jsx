@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Modal from 'react-modal'
 import config from '../../config'
-import { LoadNodesContext } from '../pages/ViewUnit/Nodes/ViewUnit'
+import { LoadNodesContext } from '../pages/ViewUnit/routes/ViewNodes'
 import { useState } from 'react'
 export default function TextResourceModal({ _id, isOpen, setIsOpen, nodeId, getItemData, isEdit, name: oldName, text: oldText }) {
 

@@ -39,7 +39,7 @@ export default function ProfileData({data, isAuthorized}) {
           })
     }
   return (
-    <div className='flex w-full h-full'>
+    <div className='flex h-full'>
         <InviteFromProfile
             isOpen={isInviteModalOpen}
             setIsOpen={setIsInviteModalOpen}
@@ -50,7 +50,6 @@ export default function ProfileData({data, isAuthorized}) {
             setIsOpen={setEditPhoto}
             photo={data&&data.imgUrl}
         />
-        <SideBar />
         <div className='w-full h-full'>
             {/* Profile Info */}
             <div className='h-1/2 flex items-center bg-slate-300 font-bold shadow'>

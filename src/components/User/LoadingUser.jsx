@@ -1,5 +1,5 @@
 import React from 'react'
-import LoadingItem from '../../../../components/LoadingItem'
+import LoadingItem from '../LoadingItem'
 import { FaEllipsisV, FaPlus } from 'react-icons/fa'
 
 export default function LoadingUser() {

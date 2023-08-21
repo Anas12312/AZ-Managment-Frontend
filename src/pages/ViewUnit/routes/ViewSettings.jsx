@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import UnitSideBar from '../SideBar/SideBar'
 
 export default function ViewSettings() {
     const params = useParams()

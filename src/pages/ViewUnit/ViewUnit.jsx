@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import NavBar from '../../../components/NavBar/NavBar'
-import ViewUnit from './ViewUnit'
-import SideBarNew from '../SideBar/SideBarNew'
+import ViewNodes from './routes/ViewNodes'
+import SideBarNew from './SideBar/SideBarNew'
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import config from '../../../../config'
-import Members from '../Members/Members'
-import ViewMembers from '../Members/ViewMembers'
-import ViewSettings from '../Settings/ViewSettings'
+import config from '../../../config'
+import ViewMembers from './routes/ViewMembers'
+import ViewSettings from './routes/ViewSettings'
 
-export default function Nodes() {
+export default function ViewUnit() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
@@ -54,7 +52,7 @@ export default function Nodes() {
 
       <div className='border w-full h-full col-span-5'>
         <Routes> 
-          <Route path='/' element={<ViewUnit/>} />
+          <Route path='/' element={<ViewNodes/>} />
           <Route path="/members" element={<ViewMembers/>} />
           <Route path="/settings" element={<ViewSettings/>} />
         </Routes>

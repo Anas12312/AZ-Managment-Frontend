@@ -6,13 +6,11 @@ import Signup from "../pages/Signup/Signup";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import Resources from "../pages/Resources/Resources";
-import Nodes from "../pages/ViewUnit/Nodes/Nodes";
-import Profile from "../pages/Profile/Profile";
-import Members from "../pages/ViewUnit/Members/Members";
-import Settings from "../pages/ViewUnit/Settings/Settings";
+import ViewUnit from "../pages/ViewUnit/ViewUnit";
+import ViewProfile from "../pages/Profile/ViewProfile";
 import NavBarNew from "../components/NavBar/NavBarNew";
 import { useState } from "react";
-import ViewUnit from "../pages/ViewUnit/Nodes/ViewUnit";
+import Profile from "../pages/Profile/Profile";
 
 
 export default function AppRouter() {
@@ -30,7 +28,7 @@ export default function AppRouter() {
           <Route path="/signup" element={<Signup setReloadNavBar={setReloadNavBar}/>} />
           <Route path="/home" Component={Home} />
           <Route path='/resources/*' Component={Resources} />
-          <Route path="/unit/:id/*" Component={Nodes} />
+          <Route path="/unit/:id/*" Component={ViewUnit} />
           <Route path="/profile" Component={Profile} />
           <Route path="/profile/:username" Component={Profile} />
         </Routes>
