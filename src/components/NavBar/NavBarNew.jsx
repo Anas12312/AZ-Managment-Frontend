@@ -34,7 +34,7 @@ export default function NavBarNew({reloadNavBar}) {
     const [nextNotificationsLoading, setNextNotificationsLoading] = useState(false)
     const nav = useNavigate();
 
-    const [isLogedIn, setIsLogedId] = useState(true);
+    const [isLogedIn, setIsLogedIn] = useState(true);
 
 
     const getNotifications = () => {
@@ -119,7 +119,7 @@ export default function NavBarNew({reloadNavBar}) {
             if (response.status === 200) {
                 localStorage.removeItem("token")
                 localStorage.removeItem("user")
-                setIsLogedId(false)
+                setIsLogedIn(false)
                 nav("/login")
             } else {
                 alert("An Error Has Occured!")
@@ -131,7 +131,7 @@ export default function NavBarNew({reloadNavBar}) {
         const localUser = JSON.parse(localStorage.getItem('user'));
 
         if(!localUser) {
-            setIsLogedId(false);
+            setIsLogedIn(false);
             nav('/')
         }
         
@@ -314,7 +314,9 @@ export default function NavBarNew({reloadNavBar}) {
                             <div className='w-[95%] border border-blue-600 h-6 flex
                                             justify-center items-center rounded-full
                                             text-sm text-blue-600 hover:border-2
-                                            hover:bg-blue-400 hover:text-white hover:cursor-pointer trans'>
+                                            hover:bg-blue-400 hover:text-white hover:cursor-pointer trans select-none'
+                                onClick={() => {nav('/profile');nav(0)}}
+                                            >
                                 View Profile
                             </div>
                         </div>
