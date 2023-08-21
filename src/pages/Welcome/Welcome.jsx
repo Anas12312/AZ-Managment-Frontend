@@ -27,7 +27,7 @@ export default function Welcome() {
   return (
     <>
       {render?(
-        <div className='flex justify-center items-center overflow-hidden'>
+        <div className='flex justify-center items-center overflow-hidden '>
           <div className='top-0 left-0 absolute flex flex-col w-full h-full'>
             <div className='z-30 absolute top-9 right-64 flex justify-center items-center w-[4.5rem] h-11 text-white
                                 hover:cursor-pointer hover:text-gray-300 hover:text-opacity-75 trans'>Sign In</div>
@@ -52,6 +52,7 @@ export default function Welcome() {
                 Get Started
               </div>
             </div>
+
           </div>
           <div className='absolute bottom-0 w-full h-20 bg-gray-600 
                           bg-opacity-40 flex justify-center text-white
@@ -129,6 +130,8 @@ export default function Welcome() {
             <div class="star"></div>
             <div class="star"></div>
           </div>
+         
+          
         </div>
       ):(<></>)}
     </>
