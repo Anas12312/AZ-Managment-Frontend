@@ -7,8 +7,9 @@ export default function Welcome() {
   const [render, setRender] = useState(false)
   useEffect(()=>{
     if(localStorage.getItem("token")) {
+      console.log(localStorage.getItem('token'));
       setRender(false)
-        nav("/home", { replace: true })
+      nav("/home", { replace: true })
     }else {
       setRender(true)
     }
