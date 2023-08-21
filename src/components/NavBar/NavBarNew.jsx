@@ -277,32 +277,81 @@ export default function NavBarNew({reloadNavBar}) {
 
             {/* Profile */}
             {showProfile && (
-                <div id="profile" className='z-50 absolute top-[3.75rem] right-[6.75rem] w-[15rem] h-[15rem]
+                <div id="profile" className='z-50 absolute top-[3.75rem] right-[6.75rem] w-[15rem] h-[18rem] rounded-2xl
                                        shadow-lg border border-gray-200 flex flex-col justify-center items-center'
                     onClick={(e) => {
                         e.stopPropagation()
                     }}>
-                    <div className='bg-gray-100 h-1/3 w-full'></div>
-                    <div className='bg-gray-400 h-2/3 w-full flex flex-col pt-8 px-4'>
-                        <div>{user.name}</div>
-                        <div></div>
-                    </div>
-                    <div className='absolute top-6 w-20 h-20 rounded-full hover:cursor-pointer' onClick={() => {
-                        nav('/profile')
-                        nav(0)
-                    }}>
-                        {user.imgUrl ? (
-                            <div className='w-full h-full flex justify-center items-center
-                             bg-primary-1 rounded-full text-2xl border-4
-                             border-gray-100 text-white flex-shrink-0 flex-grow-0'><img className="object-cover w-full h-full rounded-full" src={user.imgUrl} />
+                    <div className='bg-slate-50 h-full w-full flex flex-col rounded-xl' >
+                        {/* Image and Name */}
+                        <div className='flex flex-row'>
+                            <div className='top-2 left-1 w-16 h-16 rounded-full hover:cursor-pointer m-2' onClick={() => {
+                                nav('/profile')
+                                nav(0)
+                            }}>
+                                {user.imgUrl ? (
+                                    <div className='w-full h-full flex justify-center items-center
+                                    bg-primary-1 rounded-full text-2xl border-4
+                                    border-gray-100 text-white flex-shrink-0 flex-grow-0'><img className="object-cover w-full h-full rounded-full" src={user.imgUrl} />
 
-                            </div>) : (
-                            <div className='w-full h-full flex justify-center
-                             items-center bg-primary-1 rounded-full
-                             text-2xl border-4 border-gray-100 
-                             text-white'>{user.name[0].toUpperCase()}</div>)}
+                                    </div>) : (
+                                    <div className='w-full h-full flex justify-center
+                                    items-center bg-primary-1 rounded-full
+                                    text-2xl border-4 border-gray-100 
+                                    text-white'>{user.name[0].toUpperCase()}</div>)}
+                                    </div>
+                            <div className='mt-2 h-16 flex flex-col justify-start pt-2 '>
+                                <div className='text-sm font-bold'>
+                                    {user.name}
+                                </div>
+                                <div className='text-xs'>
+                                    {user.email}
+                                </div>
+                            </div>
+                        </div>
+                        {/* Profile Button */}
+                        <div className='w-full flex justify-center border-b-2 pb-3'>
+                            <div className='w-[95%] border border-blue-600 h-6 flex
+                                            justify-center items-center rounded-full
+                                            text-sm text-blue-600 hover:border-2
+                                            hover:bg-blue-400 hover:text-white hover:cursor-pointer trans'>
+                                View Profile
+                            </div>
+                        </div>
+                        {/* Services */}
+                        <div className='w-full flex flex-col justify-left m-1 border-b-2'>
+                            <div className='text-sm font-bold'>
+                                Services
+                            </div>
+                            {/* List */}
+                            <div className='w-full flex flex-col justify-left m-1'>
+                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                    Invitations
+                                </div>
+                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                    My Units
+                                </div>
+                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                    Notes
+                                </div>
+                            </div>
+                        </div>
+                        {/* Account */}
+                        <div className='w-full flex flex-col justify-left mx-1'>
+                            <div className='text-sm font-bold'>
+                                Account
+                            </div>
+                            {/* List */}
+                            <div className='w-full flex flex-col justify-left m-1'>
+                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                    Help
+                                </div>
+                                <div className='text-sm hover:underline hover:cursor-pointer'>
+                                    Sign Out
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             )}
         </div>

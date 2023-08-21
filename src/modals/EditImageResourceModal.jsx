@@ -30,7 +30,7 @@ export default function EditImageResourceModel({isOpen, setIsOpen, _id:id, oldNa
       }else {
         setError("Image Type must be JPG, JPEG or PNG")
       }
-    };
+    }; 
 
     const handleSubmission = () => {
     if(selectedFile){
