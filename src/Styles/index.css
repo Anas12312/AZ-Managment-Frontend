@@ -318,13 +318,17 @@ body {
   
 
 /*  */
-body {
+.anas {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0C134F 100%);
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .stars {
   position: fixed;
