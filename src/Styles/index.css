@@ -105,7 +105,7 @@ body {
             hover:shadow-slate-700
    }
    .card {
-    @apply h-72 w-[480px] rounded-lg bg-secondary-2 m-4 border-2 border-slate-300 hover:shadow-md trans
+    @apply h-72 w-11/12 rounded-lg bg-secondary-2 m-2 border-2 border-slate-300 hover:shadow-md trans
    }
    .loading-card {
     @apply h-60 w-[370px] rounded-lg bg-secondary-2 m-4 border border-slate-300 shadow-sm
