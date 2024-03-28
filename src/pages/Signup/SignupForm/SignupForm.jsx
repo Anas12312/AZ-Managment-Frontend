@@ -13,7 +13,7 @@ export default function SignupForm(props) {
     const nav = useNavigate();
 
     const signup = () => {
-        fetch(`${config.BASE_URL}/signup`, {
+        fetch(`${config.BASE_URL}/account/signup`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
