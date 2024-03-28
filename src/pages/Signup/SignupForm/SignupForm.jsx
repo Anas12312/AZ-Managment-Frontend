@@ -19,8 +19,8 @@ export default function SignupForm(props) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                firstName: username,
-                lastName: "Hesham",
+                username,
+                name,
                 email,
                 password
             })
