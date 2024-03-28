@@ -10,7 +10,7 @@ export default function LoginForm({ setError }) {
     const nav = useNavigate();
 
     const login = () => {
-        fetch(config.BASE_URL + "/account/login", {
+        fetch(config.BASE_URL + "/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -20,18 +20,20 @@ export default function LoginForm({ setError }) {
         })
             .then((res) => res.json())
             .then((response) => {
-                if (response.error) {
-                    setError(response.error)
+                if (response.message) {
+                    setError(response.message)
                 } else {
-                    localStorage.setItem("token", response.token)
-                    localStorage.setItem("user", JSON.stringify(response.user))
-
-                    setError("")
-                    nav('/home', { replace: true });
+                    setError("logged in")
+                    nav('/home', {replace:true})
                     nav(0)
+                    localStorage.setItem("token", response.token)
+                    localStorage.setItem("user", JSON.stringify(response))
+
+                    // setError("")
+                    // nav('/home', { replace: true });
                 }
             }).catch(err => {
-                props.setError("error")
+                setError("error")
             })
     }
     return (

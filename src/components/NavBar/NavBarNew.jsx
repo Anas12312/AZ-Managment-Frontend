@@ -109,22 +109,10 @@ export default function NavBarNew({reloadNavBar}) {
         }
     }
     const logout = () => {
-        const url = config.BASE_URL + "/account/logout"
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then((response) => {
-            if (response.status === 200) {
-                localStorage.removeItem("token")
-                localStorage.removeItem("user")
-                setIsLogedIn(false)
-                nav("/login")
-            } else {
-                alert("An Error Has Occured!")
-            }
-        })
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        setIsLogedIn(false)
+        nav("/login")
     }
     useEffect(() => {
         

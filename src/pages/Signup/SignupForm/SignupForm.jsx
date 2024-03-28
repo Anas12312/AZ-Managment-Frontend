@@ -13,28 +13,29 @@ export default function SignupForm(props) {
     const nav = useNavigate();
 
     const signup = () => {
-        fetch(`${config.BASE_URL}/account/signup`, {
+        fetch(`${config.BASE_URL}/signup`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name,
-                username,
+                firstName: username,
+                lastName: "Hesham",
                 email,
                 password
             })
         }).then(res => res.json())
             .then(response => {
-                if (response.error) {
+                if (response.message    ) {
                     props.setError(response.error);
                 }
                 else {
-                    localStorage.setItem('token', response.token);
-                    localStorage.setItem("user", JSON.stringify(response.user))
-                    nav('/home')
-                    nav(0);
-                    props.setError('');
+                    props.setError("signed up")
+                    // localStorage.setItem('token', response.token);
+                    // localStorage.setItem("user", JSON.stringify(response.user))
+                    // nav('/home')
+                    // nav(0);
+                    // props.setError('');
                 }
             })
             .catch(err => {
