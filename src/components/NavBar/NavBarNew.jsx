@@ -36,7 +36,11 @@ export default function NavBarNew({reloadNavBar}) {
 
     const [isLogedIn, setIsLogedIn] = useState(true);
 
-
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"))
+        console.log(user.user)
+        setUser(user.user)
+    }, [])
     const getNotifications = () => {
         setNotificationsLoading(true)
         fetch(config.BASE_URL + `/notifications?page=0&limit=7`, {
@@ -123,7 +127,7 @@ export default function NavBarNew({reloadNavBar}) {
             nav('/')
         }
         
-        setUser(localUser)
+        setUser(localUser.user)
 
         document.addEventListener("click", (e) => {
             setShowNotifications(false)
@@ -286,7 +290,7 @@ export default function NavBarNew({reloadNavBar}) {
                                     <div className='w-full h-full flex justify-center
                                     items-center bg-primary-1 rounded-full
                                     text-2xl border-4 border-gray-100 
-                                    text-white'>{user.name[0].toUpperCase()}</div>)}
+                                    text-white'>{user.name && user.name[0].toUpperCase()}</div>)}
                                     </div>
                             <div className='mt-2 h-16 flex flex-col justify-start pt-2 '>
                                 <div className='text-sm font-bold hover:cursor-pointer'

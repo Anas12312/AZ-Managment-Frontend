@@ -10,7 +10,7 @@ export default function LoginForm({ setError }) {
     const nav = useNavigate();
 
     const login = () => {
-        fetch(config.BASE_URL + "/login", {
+        fetch(config.BASE_URL + "/account/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

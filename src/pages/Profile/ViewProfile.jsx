@@ -12,7 +12,7 @@ export default function ViewProfile() {
     const [userData, setUserData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
-        const user = JSON.parse(localStorage.getItem('user'))
+        const user = JSON.parse(localStorage.getItem('user')).user
         if(!params.username) {
             setAuthorized(true)
             nav('/profile/' + user.username)
