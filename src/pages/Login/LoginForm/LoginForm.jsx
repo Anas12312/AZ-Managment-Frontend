@@ -20,8 +20,8 @@ export default function LoginForm({ setError }) {
         })
             .then((res) => res.json())
             .then((response) => {
-                if (response.message) {
-                    setError(response.message)
+                if (response.error) {
+                    setError(response.error)
                 } else {
                     setError("logged in")
                     nav('/home', {replace:true})
