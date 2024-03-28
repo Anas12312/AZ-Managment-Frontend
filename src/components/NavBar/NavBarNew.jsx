@@ -203,7 +203,7 @@ export default function NavBarNew({ reloadNavBar }) {
                                 setShowProfile(!showProfile)
                                 setShowNotifications(false)
                             }}>
-                                {user.imgUrl ? (
+                                {user?.imgUrl ? (
                                     <div className='w-full h-full flex justify-center items-center
                             bg-primary-1 rounded-full
                             flex-shrink-0 flex-grow-0'><img className="object-cover w-full h-full rounded-full" src={user.imgUrl} />
@@ -212,7 +212,7 @@ export default function NavBarNew({ reloadNavBar }) {
                                     <div className='w-full h-full flex justify-center
                             items-center bg-transparent rounded-full
                             text-lg
-                            text-white'>{user.name && user.name[0].toUpperCase()}
+                            text-white'>{user?.name && user?.name[0].toUpperCase()}
                                     </div>)}
                             </div>
                             <div id='notifications-btn' className="nav-bar-icon" title="Notifications" onClick={(e) => {

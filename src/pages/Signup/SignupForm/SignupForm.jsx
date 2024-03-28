@@ -32,7 +32,9 @@ export default function SignupForm(props) {
                 else {
                     props.setError("signed up")
                     localStorage.setItem('token', response.token);
-                    localStorage.setItem("user", JSON.stringify(response.user))
+                    localStorage.setItem("user", JSON.stringify({
+                        user: response.user
+                    }))
                     nav('/home')
                     nav(0);
                     props.setError('');
