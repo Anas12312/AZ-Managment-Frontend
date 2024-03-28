@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 export default function LoadingCard() {
   return (
     <div> <div className='loading-card'>

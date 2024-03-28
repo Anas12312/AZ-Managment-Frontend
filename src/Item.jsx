@@ -12,7 +12,6 @@ import ViewText from './modals/ViewText';
 import EditImageResourceModel from './modals/EditImageResourceModal';
 import DeleteModal from './modals/DeleteModal';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 export default function Item(props) {
 
   const [ItemData, setItemData] = useState(null);

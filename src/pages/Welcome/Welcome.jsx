@@ -61,11 +61,11 @@ export default function Welcome() {
                     }}>
                 Get Started
               </div>
-              <div className='mt-4 text-white hover:cursor-pointer hover:underline'
+              <div className='mt-4 text-white'>
+                Already have an account? <span className='hover:cursor-pointer hover:underline'
                 onClick={() => {
                   nav('/login')
-                }}>
-                Already have an account? Sign In now.
+                }}>Sign In</span>
               </div>
             </div>
 
