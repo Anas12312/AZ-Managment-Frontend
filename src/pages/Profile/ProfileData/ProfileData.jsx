@@ -3,7 +3,7 @@ import SideBar from '../SideBar/SideBar'
 import { useNavigate } from 'react-router-dom'
 import config from '../../../../config'
 import { FaEdit, FaUber, FaUpload } from 'react-icons/fa'
-import UpdatePhotoModal from '../../../modals/updatePhotoModal'
+import UpdatePhotoModal from '../../../modals/UpdatePhotoModal'
 import InviteFromProfile from '../../../modals/InviteFromProfile'
 export default function ProfileData({data, isAuthorized}) {
     const [editName, setEditName] = useState(false)
