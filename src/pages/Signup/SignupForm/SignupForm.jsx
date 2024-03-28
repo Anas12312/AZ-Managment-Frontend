@@ -31,11 +31,11 @@ export default function SignupForm(props) {
                 }
                 else {
                     props.setError("signed up")
-                    // localStorage.setItem('token', response.token);
-                    // localStorage.setItem("user", JSON.stringify(response.user))
-                    // nav('/home')
-                    // nav(0);
-                    // props.setError('');
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem("user", JSON.stringify(response.user))
+                    nav('/home')
+                    nav(0);
+                    props.setError('');
                 }
             })
             .catch(err => {

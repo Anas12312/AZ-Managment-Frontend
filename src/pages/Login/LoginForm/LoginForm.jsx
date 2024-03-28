@@ -21,6 +21,7 @@ export default function LoginForm({ setError }) {
             .then((res) => res.json())
             .then((response) => {
                 if (response.error) {
+                    console.log("error")
                     setError(response.error)
                 } else {
                     setError("logged in")
