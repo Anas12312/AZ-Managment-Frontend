@@ -26,7 +26,7 @@ export default function SignupForm(props) {
             })
         }).then(res => res.json())
             .then(response => {
-                if (response.message    ) {
+                if (response.error) {
                     props.setError(response.error);
                 }
                 else {
